@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servis & Pemeliharaan AC Gedung Lama | RS Hermina Solo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a; 
+            --primary-hover: #172554;
+            --accent: #d97706; 
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --danger: #ef4444;
+            --success: #10b981;
+            --shadow-premium: 0 20px 40px -10px rgba(30, 58, 138, 0.08), 0 8px 16px -8px rgba(0, 0, 0, 0.05);
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-color); 
+            margin: 0; 
+            padding: 20px 12px; 
+            color: var(--text-main); 
+            line-height: 1.5;
+        }
+
+        .container { 
+            max-width: 760px; 
+            margin: auto; 
+            background: var(--card-bg); 
+            padding: 20px 16px; 
+            border-radius: 16px; 
+            box-shadow: var(--shadow-premium); 
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .header-brand { text-align: center; margin-bottom: 20px; }
+        .header-brand h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin: 0 0 4px 0; font-weight: 700; }
+        h2 { text-align: center; color: var(--primary); margin: 0 0 12px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+
+        .status-koneksi { 
+            text-align: center; 
+            font-size: 12px; 
+            margin-bottom: 20px; 
+            color: var(--success); 
+            font-weight: 600;
+            background: #f0fdf4;
+            padding: 8px 12px;
+            border-radius: 9999px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #bbf7d0;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: #f8fafc;
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            gap: 4px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 8px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .form-group { margin-bottom: 16px; }
+        label { font-weight: 600; display: block; margin-bottom: 6px; font-size: 12px; color: #334155; }
+
+        input[type="text"], input[type="date"], input[type="time"], input[type="month"], select, textarea { 
+            width: 100%; 
+            padding: 10px 12px; 
+            border: 1.5px solid var(--border-color); 
+            border-radius: 10px; 
+            box-sizing: border-box; 
+            font-size: 13px; 
+            font-family: inherit;
+            background: #f8fafc;
+            color: var(--text-main);
+        }
+        
+        .catatan-khusus-container { display: flex; flex-direction: column; gap: 4px; }
+        .input-catatan-khusus {
+            display: none; width: 100%; padding: 8px 12px;
+            border: 1.5px dashed var(--danger) !important; border-radius: 8px;
+            font-size: 12px !important; background: #fff5f5 !important; color: #991b1b !important;
+            box-sizing: border-box; margin-bottom: 4px; margin-top: -4px;
+        }
+        .input-catatan-khusus:focus { outline: none; border-color: var(--danger) !important; background: #fff !important; }
+        .input-catatan-khusus::placeholder { color: #f87171; font-style: italic; }
+
+        .row-group { display: flex; gap: 12px; }
+        .row-group > div { flex: 1; }
+
+        .photo-options { display: flex; gap: 8px; margin-bottom: 6px; }
+        .btn-photo-opt {
+            flex: 1; padding: 10px; background: #fff; color: var(--primary);
+            border: 1.5px solid var(--primary); border-radius: 8px;
+            font-size: 12px; font-weight: 600; cursor: pointer; text-align: center;
+        }
+
+        .file-info { font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 4px; }
+
+        .target-box { 
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); 
+            border: 1px solid #bbf7d0; padding: 16px; border-radius: 12px; 
+            margin-bottom: 20px; text-align: center; 
+        }
+        .target-box h4 { margin: 0 0 4px 0; color: var(--primary); font-size: 13px; text-transform: uppercase; }
+        .target-status { font-size: 15px; font-weight: 800; color: #065f46; }
+
+        .ac-selection-box { 
+            background: #fff; padding: 12px; border-radius: 10px; 
+            border: 1.5px solid var(--border-color); margin-bottom: 10px; 
+            max-height: 250px; overflow-y: auto; 
+        }
+        
+        .scrollable-history { max-height: 600px; overflow-y: auto; padding-right: 4px; }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        .ac-item-row { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 6px; }
+        .ac-label { font-weight: 600; color: var(--text-main); font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1; }
+        
+        .badge-status { font-size: 10px; padding: 4px 8px; border-radius: 9999px; font-weight: 700; }
+        .badge-belum { background: #fef2f2; color: var(--danger); border: 1px solid #fecaca; }
+        .badge-sisa { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .badge-clear { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+
+        .reopen-box { background: #fffbeb; border: 1px solid #fde68a; padding: 10px 12px; border-radius: 8px; margin-bottom: 16px; font-size: 12px; color: #92400e; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+
+        .servis-section { background: #fff; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 16px; }
+        .servis-section h4 { margin: 0 0 10px 0; color: var(--primary); font-size: 13px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; font-weight: 700; }
+        .check-grid { display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 12px; }
+        .check-item { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); color: #475569; }
+
+        #btnSubmit { 
+            width: 100%; padding: 12px; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%); 
+            color: white; border: none; border-radius: 10px; font-size: 14px; 
+            cursor: pointer; font-weight: 700; margin-top: 12px; 
+        }
+
+        .action-box { background: #f8fafc; padding: 16px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color); }
+        .btn-pdf { 
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); 
+            margin-top: 10px; border: none; color: white; padding: 10px; 
+            border-radius: 8px; font-weight: 600; width: 100%; cursor: pointer; font-size: 12px;
+        }
+
+        .lantai-group-header { 
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-hover) 100%); 
+            color: white; 
+            padding: 10px 14px; 
+            border-radius: 10px; 
+            font-weight: 700; 
+            margin-top: 12px; 
+            margin-bottom: 8px; 
+            font-size: 13px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            cursor: pointer;
+        }
+        .toggle-btn-badge { background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+        .lantai-content-collapsible { display: none; }
+
+        .history-card { 
+            border: 1px solid var(--border-color); 
+            padding: 10px 12px; 
+            border-radius: 12px; 
+            margin-bottom: 8px; 
+            background: #fff; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
+        }
+        
+        .history-header { 
+            font-weight: 700; 
+            border-bottom: 1px solid var(--border-color); 
+            padding-bottom: 6px; 
+            margin-bottom: 8px; 
+            color: var(--primary); 
+            font-size: 13px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        
+        .log-section { margin-bottom: 6px; font-size: 11px; line-height: 1.4; color: #334155; }
+        .loading-text { text-align: center; color: var(--text-muted); font-style: italic; padding: 16px; font-size: 12px; }
+
+        .section-divider-title {
+            color: var(--primary); margin-top: 24px; margin-bottom: 10px; font-size: 15px; 
+            font-weight: 800; border-bottom: 2px dashed var(--border-color); padding-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        
+        .modal-overlay {
+            display: none; position: fixed; z-index: 9999; padding-top: 60px;
+            left: 0; top: 0; width: 100%; height: 100%; overflow: auto;
+            background-color: rgba(0,0,0,0.85); backdrop-filter: blur(3px);
+        }
+        .modal-content-img {
+            margin: auto; display: block; max-width: 90%; max-height: 80vh;
+            border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); object-fit: contain;
+        }
+        .modal-close-btn {
+            position: absolute; top: 15px; right: 20px; color: #fff; font-size: 30px;
+            font-weight: bold; cursor: pointer; background: rgba(0,0,0,0.5);
+            width: 40px; height: 40px; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; line-height: 1;
+        }
+
+        .problem-card-item { transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+        .problem-card-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15); border-color: #ef4444 !important; }
+
+        #printArea { display: none; }
+        
+        /* ---------- CSS KHUSUS PRINT PDF (SUDAH DIKOMPRES AGAR PAS 1 HALAMAN) ---------- */
+        @media print {
+            body { background: white; padding: 0; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+            .container { display: none; }
+            #printArea { display: block; width: 100%; color: #000; }
+            
+            #printArea * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            @page { size: A4 landscape; margin: 5mm 8mm; } /* Margin kertas diperkecil */
+
+            .pdf-page-container {
+                page-break-after: always; /* 1 Kertas 1 Lantai */
+                page-break-inside: avoid;
+                display: flex;
+                flex-direction: column;
+                height: 100%; 
+            }
+            .pdf-page-container:last-child {
+                page-break-after: auto;
+            }
+
+            .pdf-header {
+                text-align: center;
+                border-bottom: 1.5px solid var(--primary);
+                padding-bottom: 2px;
+                margin-bottom: 6px; /* Spasi Header dikurangi */
+            }
+            .pdf-header h2 { margin: 0; font-size: 11px; color: var(--primary); font-weight: 900; }
+            .pdf-header p { margin: 1px 0 0 0; font-size: 8px; font-weight: 600; color: #334155; }
+
+            .pdf-floor-title {
+                background: var(--primary) !important;
+                color: white !important;
+                padding: 4px 8px;
+                font-weight: bold;
+                font-size: 9px;
+                margin-bottom: 6px;
+                border-radius: 4px;
+                text-align: left;
+                letter-spacing: 1px;
+            }
+
+            .pdf-content-wrapper {
+                display: flex;
+                gap: 8px; /* Gap antar kolom rekap dan grid diperkecil */
+                flex: 1;
+                align-items: flex-start;
+            }
+
+            /* Kolom Kiri Tabel Rekap (Lebar diturunkan ke 22%) */
+            .pdf-sidebar {
+                width: 22%; 
+                border-right: 1.5px dashed #cbd5e1;
+                padding-right: 6px;
+            }
+
+            /* Kolom Kanan Grid Detail (Lebar dinaikkan ke 78%) */
+            .pdf-main {
+                width: 78%;
+            }
+
+            .pdf-summary-box { background: #f0fdf4 !important; border: 1px solid #bbf7d0; padding: 4px; margin-bottom: 6px; text-align: center; font-weight: bold; font-size: 7.5px; color: #065f46; border-radius: 4px; line-height: 1.2; }
+            
+            .pdf-rekap-table { width: 100%; border-collapse: collapse; margin-bottom: 6px; font-size: 6px; } /* Font tabel direduksi */
+            .pdf-rekap-table th, .pdf-rekap-table td { border: 1px solid #94a3b8; padding: 1px 2px; text-align: center; line-height: 1.1; }
+            .pdf-rekap-table th { background-color: var(--primary) !important; color: white; font-weight: bold; }
+            .pdf-rekap-table td:first-child { text-align: left; font-weight: 600; color: #1e293b; }
+
+            .pdf-grid-container {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr); /* DIUBAH JADI 5 KOLOM AGAR BARIS KEBAWAH LEBIH SEDIKIT */
+                gap: 4px; /* Gap antar box diperkecil */
+                align-content: start;
+            }
+            
+            .pdf-grid-box { border: 1px solid #cbd5e1; padding: 3px; border-radius: 4px; background: #fff; font-size: 5px; line-height: 1.1; break-inside: avoid; }
+            .pdf-grid-header { font-weight: bold; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px; margin-bottom: 2px; color: var(--primary); font-size: 6px; display: flex; justify-content: space-between; align-items: center; }
+            
+            .pdf-foto-container { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-start; margin-top: 2px; }
+            #printArea img { width: 20px; height: 20px; object-fit: cover; border-radius: 2px; border: 1px solid #cbd5e1; } /* Foto diperkecil */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-brand">
+        <h4>Manajemen Fasilitas</h4>
+        <h2>Laporan Servis AC Gedung Lama</h2>
+        <h3> RS Hermina Solo</h3>
+    </div>
+    
+    <div class="status-koneksi" id="statusInfo">Mengambil data dari server... 🔄</div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab(event, 'tabInput')">📝 Input Servis</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tabRiwayat')">📊 Riwayat & Rekap</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tabCariUnit')">🔍 Cari Data Unit</button>
+    </div>
+
+    <!-- TAB 1: INPUT DATA -->
+    <div id="tabInput" class="tab-content active">
+        <form id="formAc">
+            <div class="row-group">
+                <div class="form-group">
+                    <label>Tanggal Pengerjaan</label>
+                    <input type="date" id="tanggal" required onchange="renderFormDanRiwayat()">
+                </div>
+                <div class="form-group">
+                    <label>Jam Pengerjaan</label>
+                    <input type="time" id="jam" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Pilih Lantai / Area Gedung</label>
+                <select id="pilihLantai" required onchange="renderDaftarAcLantai()">
+                    <option value="Lantai 1">Lantai 1 (28 Unit)</option>
+                    <option value="Lantai 2">Lantai 2 (33 Unit)</option>
+                    <option value="Lantai 3">Lantai 3 (39 Unit)</option>
+                    <option value="Lantai 4">Lantai 4 (32 Unit)</option>
+                    <option value="Lantai 5">Lantai 5 (38 Unit)</option>
+                    <option value="Lantai 6">Lantai 6 (27 Unit)</option>
+                    <option value="Lantai 7">Lantai 7 (33 Unit)</option>
+                    <option value="Rooftop">Rooftop (3 Unit)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Pilih Unit AC yang Diservis:</label>
+                <div class="ac-selection-box" id="listUnitAcContainer">
+                    <p class="loading-text">Memuat daftar unit...</p>
+                </div>
+                
+                <label class="reopen-box">
+                    <input type="checkbox" id="chkReopen" onchange="renderDaftarAcLantai()"> 
+                    ⚠️ Tampilkan kembali AC yang sudah Clear (Untuk Servis Ulang / Susulan)
+                </label>
+            </div>
+
+            <div class="servis-section" id="sectionIndoor">
+                <h4>🔵 Pengecekan Indoor (Pilih Sesuai Kebutuhan)</h4>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="optIndoor" value="Pembersihan Filter"> Pembersihan Filter</label>
+                    <label class="check-item"><input type="checkbox" name="optIndoor" value="Pembersihan Unit"> Pembersihan Unit</label>
+                    
+                    <div class="catatan-khusus-container">
+                        <label class="check-item"><input type="checkbox" name="optIndoor" value="Servis Turun" onchange="toggleCatatanKhusus(this, 'catatanIndoorTurun')"> Servis Turun</label>
+                        <input type="text" id="catatanIndoorTurun" class="input-catatan-khusus" placeholder="Wajib: Tulis detail / alasan servis turun...">
+                    </div>
+                    
+                    <div class="catatan-khusus-container">
+                        <label class="check-item"><input type="checkbox" name="optIndoor" value="Servis Error" onchange="toggleCatatanKhusus(this, 'catatanIndoorError')"> Servis Error (Perbaikan)</label>
+                        <input type="text" id="catatanIndoorError" class="input-catatan-khusus" placeholder="Wajib: Tulis rincian error & perbaikan...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="servis-section" id="sectionOutdoor">
+                <h4>🟠 Pengecekan Outdoor (Pilih Sesuai Kebutuhan)</h4>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="optOutdoor" value="Pembersihan Unit"> Pembersihan Unit</label>
+                    
+                    <div class="catatan-khusus-container">
+                        <label class="check-item"><input type="checkbox" name="optOutdoor" value="Tambah Freon" onchange="toggleCatatanKhusus(this, 'catatanOutdoorFreon')"> Tambah Freon</label>
+                        <input type="text" id="catatanOutdoorFreon" class="input-catatan-khusus" placeholder="Wajib: Tulis keterangan / tekanan psi...">
+                    </div>
+
+                    <div class="catatan-khusus-container">
+                        <label class="check-item"><input type="checkbox" name="optOutdoor" value="Servis Error" onchange="toggleCatatanKhusus(this, 'catatanOutdoorError')"> Servis Error (Perbaikan)</label>
+                        <input type="text" id="catatanOutdoorError" class="input-catatan-khusus" placeholder="Wajib: Tulis rincian perbaikan error...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan Umum <small style="color: var(--text-muted); font-weight: normal;">(Opsional)</small></label>
+                <textarea id="keterangan" rows="2" placeholder="Tuliskan catatan umum atau kendala tambahan jika ada..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label id="labelFoto">Bukti Foto Servis / Perbaikan AC <small style="color: var(--danger);" id="noteFotoWajib">(Wajib diunggah)</small></label>
+                <div class="photo-options">
+                    <button type="button" class="btn-photo-opt" onclick="triggerCamera()">📸 Ambil Foto</button>
+                    <button type="button" class="btn-photo-opt" onclick="triggerGallery()">🖼️ Pilih Galeri</button>
+                </div>
+                <input type="file" id="fotoKamera" accept="image/*" capture="environment" style="display: none;" onchange="handleFileSelect(this)">
+                <input type="file" id="fotoGaleri" accept="image/*" style="display: none;" onchange="handleFileSelect(this)">
+                
+                <div class="file-info" id="fileInfoText">Belum ada foto yang dipilih.</div>
+            </div>
+            
+            <button type="submit" id="btnSubmit">🚀 Simpan & Submit Servis AC</button>
+        </form>
+    </div>
+
+    <!-- TAB 2: RIWAYAT & REKAP -->
+    <div id="tabRiwayat" class="tab-content">
+        <div class="action-box">
+            <label style="color: var(--primary); font-size: 13px;">Tampilkan Rekap Laporan Bulanan</label>
+            <input type="month" id="filterBulan" onchange="renderFormDanRiwayat()">
+            <button class="btn-pdf" onclick="printPDF()">🖨️ Cetak Laporan PDF (Otomatis Tertata)</button>
+        </div>
+
+        <div class="target-box" id="targetBoxContainer">
+            <h4>🎯 Status Target Servis Bulanan</h4>
+            <div class="target-status" id="targetStatusText">Menghitung target...</div>
+        </div>
+
+        <div class="section-divider-title">
+            📊 <span>1. Rekap Status Pengerjaan (Atas)</span>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: -6px; margin-bottom: 12px;">Klik nama lantai untuk membuka/menyembunyikan tabel status.</p>
+        
+        <div id="rekapContainer">
+            <p class="loading-text">Sedang memuat data rekap...</p>
+        </div>
+
+        <div class="section-divider-title" style="margin-top: 28px;">
+            📋 <span>2. Riwayat Detail & Catatan Unit AC (Bawah)</span>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: -6px; margin-bottom: 12px;">Klik lantai di bawah ini untuk melihat detail tindakan & foto pengerjaan.</p>
+        
+        <div class="scrollable-history">
+            <div id="historyContainer">
+                <p class="loading-text">Sedang memuat data riwayat...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: PENCARIAN DATA PER UNIT -->
+    <div id="tabCariUnit" class="tab-content">
+        <div class="action-box">
+            <h4 style="margin-top: 0; color: var(--primary); font-size: 14px; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">🔎 Lacak Riwayat Spesifik per Unit AC</h4>
+            
+            <div id="topProblematicAcContainer" style="margin-top: 14px; margin-bottom: 16px;">
+            </div>
+            
+            <div class="row-group" style="margin-top: 10px;">
+                <div>
+                    <label>Pilih Lantai Gedung</label>
+                    <select id="searchLantai" onchange="updateDropdownUnitSearch()">
+                        <option value="">-- Pilih Lantai --</option>
+                        <option value="Lantai 1">Lantai 1</option>
+                        <option value="Lantai 2">Lantai 2</option>
+                        <option value="Lantai 3">Lantai 3</option>
+                        <option value="Lantai 4">Lantai 4</option>
+                        <option value="Lantai 5">Lantai 5</option>
+                        <option value="Lantai 6">Lantai 6</option>
+                        <option value="Lantai 7">Lantai 7</option>
+                        <option value="Rooftop">Rooftop</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Pilih Unit AC</label>
+                    <select id="searchUnit" onchange="renderDetailUnitSearch()">
+                        <option value="">-- Pilih Unit AC --</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="unitDetailResult">
+            <p class="loading-text">Silakan pilih lantai dan nama unit AC di atas.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal Pop-Up untuk Preview Gambar -->
+<div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
+    <span class="modal-close-btn" onclick="closeImageModal()">&times;</span>
+    <img class="modal-content-img" id="modalImgSrc" onclick="event.stopPropagation()">
+</div>
+
+<!-- CONTAINER KHUSUS UNTUK PRINT PDF -->
+<div id="printArea">
+    <!-- Isi dari Print Area akan digenerate otomatis oleh JavaScript (printPDF) -->
+</div>
+
+<script>
+    function handleImageError(imgElement, originalUrl) {
+        imgElement.outerHTML = `<a href="${originalUrl}" target="_blank" style="background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold; border: 1px solid #bae6fd; display: inline-flex; align-items: center; gap: 4px;">🔗 Buka Link</a>`;
+    }
+
+    function generateFotoElement(fotoStr) {
+        if (!fotoStr) return '';
+        let styleImg = "width:55px; height:55px; border-radius:6px; object-fit:cover; cursor:pointer; border:1px solid #e2e8f0; transition: transform 0.2s;";
+        
+        if (fotoStr.startsWith('data:image/')) {
+            return `<img src="${fotoStr}" alt="Bukti" onclick="openImageModal(this.src)" style="${styleImg}" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">`;
+        } else if (fotoStr.startsWith('http')) {
+            let imgSrc = fotoStr;
+            let driveIdMatch = fotoStr.match(/[-\w]{25,}/);
+            if (fotoStr.includes('drive.google.com') && driveIdMatch) {
+                imgSrc = `https://drive.google.com/thumbnail?id=${driveIdMatch[0]}&sz=w800`;
+            }
+            return `<img src="${imgSrc}" alt="Bukti" onclick="openImageModal(this.src)" onerror="handleImageError(this, '${fotoStr}')" style="${styleImg}" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">`;
+        }
+        return '';
+    }
+
+    function toggleCatatanKhusus(checkbox, inputId) {
+        const inputField = document.getElementById(inputId);
+        if (checkbox.checked) {
+            inputField.style.display = "block";
+            inputField.setAttribute("required", "true");
+        } else {
+            inputField.style.display = "none";
+            inputField.removeAttribute("required");
+            inputField.value = ""; 
+        }
+    }
+
+    function openImageModal(src) {
+        document.getElementById('imageModal').style.display = "block";
+        document.getElementById('modalImgSrc').src = src;
+    }
+    function closeImageModal() {
+        document.getElementById('imageModal').style.display = "none";
+    }
+
+    function formatKendalaHtml(ket) {
+        if (!ket || ket.trim() === "" || ket === "-" || ket.toLowerCase() === "tidak ada") {
+            return `<span style="color: var(--success); font-size: 10px; font-weight: 700;">✅ Kendala: Aman</span>`;
+        }
+        return `<span style="color: var(--danger); font-size: 10px; font-weight: 700;">⚠️ Kendala: ${ket}</span>`;
+    }
+
+    function switchTab(event, tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    function toggleLantai(targetId) {
+        const content = document.getElementById(targetId);
+        const btnBadge = document.getElementById('btn-' + targetId);
+        if (content.style.display === "block") {
+            content.style.display = "none"; if(btnBadge) btnBadge.innerHTML = '▲ Tampilkan Data';
+        } else {
+            content.style.display = "block"; if(btnBadge) btnBadge.innerHTML = '▼ Sembunyikan Data';
+        }
+    }
+
+    const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbwU-y3DZyojgN9Jt9sFPujf2C5bqA-rrPJFOwXfKC4ZJuwCCvzumIv6ZnDFFkcFzFjPlQ/exec";
+    
+    let globalData = [];
+    let selectedFile = null;
+
+    // MASTER DATA AC TERBARU RS HERMINA SOLO (TOTAL 233 UNIT)
+    const masterAcGedungBaru = {
+        "Lantai 1": [
+            "Poli Gigi (SPLIT 1PK)", "Poli THT (SPLIT 1PK)", "Poli Neurologi (SPLIT 1PK)", "Poli Jantung (SPLIT 1PK)", 
+            "Poli Obgyn 1 (SPLIT 1PK)", "Poli Obgyn 2 (SPLIT 1PK)", "Poli Paru (SPLIT 1PK)", "Poli Penyakit Dalam (SPLIT 1PK)", 
+            "Poli Mata (SPLIT 1PK)", "Poli Bedah (SPLIT 1PK)", "Ruang Laborat (SPLIT 2PK)", "Ruang MR (SPLIT 1PK)", 
+            "Ruang Panel Utama (SPLIT 1PK)", "Ruang Farmasi (SPLIT 1PK)", "Ruang Pendaftaran (SPLIT 2PK)", "Ruang Tindakan (SPLIT 1PK)", 
+            "Ruang Jenazah (SPLIT 1PK)", "Kokarmina A (SPLIT 1.5PK)", "Kokarmina B (SPLIT 1.5PK)",
+            "Ruang MR (CASSETTE 3PK)", "Ruang Farmasi (CASSETTE 3PK)", "Lorong A Utara (CASSETTE 2PK)", 
+            "Lorong A NS Barat (CASSETTE 3PK)", "Lorong A NS Timur (CASSETTE 3PK)", "Lorong A Selatan (CASSETTE 2PK)", 
+            "Lorong B Depan FO (CASSETTE 3PK)", "Lorong B No 2 dari Utara (CASSETTE 3PK)", "Lorong B Depan Farmasi (CASSETTE 3PK)"
+        ],
+        "Lantai 2": [
+            "Ruang IGD Ponek (SPLIT 1PK)", "Ruang IGD Isolasi (SPLIT 1PK)", "Ruang CT Scan 1 (SPLIT 2PK)", "Ruang CT Scan 2 (SPLIT 2PK)", 
+            "Ruang UPS Rad (SPLIT 1PK)", "Ruang USG Rad (SPLIT 1.5PK)", "Ruang Operator Rad (SPLIT 1PK)", "Ruang X Ray 1 (SPLIT 1PK)", 
+            "Ruang X Ray 2 (SPLIT 1PK)", "Poli Gigi (SPLIT 1PK)", "Poli Umum (SPLIT 1PK)", "Poli Anak (SPLIT 1PK)", 
+            "Ruang Farmasi (SPLIT 1PK)", "Ruang Audiometri (SPLIT 1PK)", "Ruang Poli Umum (SPLIT 1PK)", "Ruang Treadmill (SPLIT 1PK)", 
+            "Ruang Tunggu IGD Padma (SPLIT 1PK)", "Ruang Poli Urologi (SPLIT 1PK)", "Ruang Operator FO (SPLIT 1PK)", "Ruang Customer Service (SPLIT 1PK)", 
+            "Ruang Menyusui (SPLIT 1PK)",
+            "Lorong Barat Depan Rad (CASSETTE 3PK)", "Ruang MCU (CASSETTE 3PK)", "Lorong A Depan MCU (CASSETTE 3PK)", 
+            "Lorong A Depan Poli Umum (CASSETTE 3PK)", "Lobby Depan Lift (CASSETTE 3PK)", "Lobby Depan Security (CASSETTE 3PK)", 
+            "IGD Padma Utara (CASSETTE 3PK)", "IGD Padma Selatan (CASSETTE 3PK)", "IGD Kamala Depan Pintu (CASSETTE 3PK)", 
+            "IGD Kamala NS (CASSETTE 3PK)", "IGD Kamala Utara 1 (CASSETTE 3PK)", "IGD Kamala Utara 2 (CASSETTE 3PK)"
+        ],
+        "Lantai 3": [
+            "Ruang VK Padma 1 (SPLIT 1PK)", "Ruang VK Padma 2 (SPLIT 1PK)", "Ruang VK Padma 3 (SPLIT 1PK)", "Ruang Isolasi (SPLIT 1PK)", 
+            "Ruang Kamala 1 (SPLIT 1PK)", "Ruang Dokter OK (SPLIT 1PK)", "Ruang Operator OK5 A (SPLIT 1PK)", "Ruang Kamala 2 (SPLIT 1PK)", 
+            "Ruang Dokter VK (SPLIT 1PK)", "Ruang Farmasi Per OP (SPLIT 1PK)", "Ruang Tunggu HD,VK,RR (SPLIT 1PK)", "Ruang CSSU Steril (SPLIT 1PK)", 
+            "Ruang Adm CSSU (SPLIT 1PK)", "Ruang Racik CSSU (SPLIT 1PK)", "Ruang OK1 A (SPLIT 1.5PK)", "Ruang OK1 B (SPLIT 1PK)", 
+            "Ruang OK2 A (SPLIT 1.5PK)", "Ruang OK2 B (SPLIT 1PK)", "Ruang OK3 (SPLIT 1.5PK)", "Ruang OK4 A (SPLIT 1PK)", 
+            "Ruang OK4 B (SPLIT 1PK)", "Ruang OK5 A (SPLIT 1PK)", "Ruang OK5 B (SPLIT 1PK)", "Ruang Operator OK5 B (SPLIT 1PK)", 
+            "Ruang Trafo RR 1 (SPLIT 1PK)", "Ruang Trafo RR 2 (SPLIT 1PK)", "Ruang Panel (SPLIT 2PK)", "Ruang HD HBSAG (SPLIT 1PK)", 
+            "Ruang HD CAPD (SPLIT 1PK)",
+            "Lorong VK Utara (CASSETTE 3PK)", "Lorong VK Selatan (CASSETTE 3PK)", "Pre OP Utara (CASSETTE 3PK)", 
+            "Pre OP Selatan (CASSETTE 3PK)", "NS OK (CASSETTE 3PK)", "RR Utara (CASSETTE 3PK)", 
+            "RR Selatan (CASSETTE 3PK)", "Ruang Tunggu Flamboyan (CASSETTE 3PK)", "Ruang HD Timur (CASSETTE 3PK)", 
+            "Ruang HD Barat (CASSETTE 3PK)"
+        ],
+        "Lantai 4": [
+            "Kamar 401 (SPLIT 2PK)", "Kamar 417 A (SPLIT 2PK)", "Kamar 414 (SPLIT 1PK)", "Kamar 412 (SPLIT 1PK)", 
+            "Kamar 404 (SPLIT 1PK)", "Kamar 406 (SPLIT 1PK)", "Kamar 408 (SPLIT 1PK)", "Kamar 410 (SPLIT 1.5PK)", 
+            "Kamar 411 (SPLIT 1.5PK)", "Kamar 415 A (SPLIT 1PK)", "Kamar 415 B (SPLIT 1PK)", "Kamar 426 (SPLIT 1PK)", 
+            "Kamar 428 (SPLIT 1PK)", "Kamar 424 (SPLIT 2PK)", "Kamar 427 (SPLIT 2PK)", "Kamar 422 (SPLIT 1PK)", 
+            "Kamar 420 (SPLIT 1PK)", "Kamar 418 (SPLIT 1PK)", "Kamar 421 (SPLIT 1PK)", "Kamar 425 (SPLIT 1PK)", 
+            "Kamar 423 (SPLIT 1PK)", "Kamar 416 (SPLIT 1PK)", "Kamar 417 B (SPLIT 1PK)", "Kamar KBBL 1 (SPLIT 1PK)", 
+            "Kamar KBBL 2 (SPLIT 1PK)", "Ruang Edukasi KBBL (SPLIT 2PK)", "NS Lorong B (SPLIT 2PK)",
+            "Lorong A NS (CASSETTE 3PK)", "Lorong A Utara (CASSETTE 3PK)", "Lorong A Selatan (CASSETTE 3PK)", 
+            "Lorong B Utara (CASSETTE 3PK)", "Lorong B Selatan (CASSETTE 3PK)"
+        ],
+        "Lantai 5": [
+            "Kamar 520 (SPLIT 1PK - Unit 1)", "Kamar 520 (SPLIT 1PK - Unit 2)", "Kamar 516 (SPLIT 1PK)", "Kamar 519 (SPLIT 1PK)", 
+            "Kamar 517 (SPLIT 1PK)", "Kamar 514 (SPLIT 1PK - Unit 1)", "Kamar 514 (SPLIT 1PK - Unit 2)", "Kamar 512 (SPLIT 1PK - Unit 1)", 
+            "Kamar 512 (SPLIT 1PK - Unit 2)", "Kamar 515 (SPLIT 1PK)", "Kamar 513 (SPLIT 1PK)", "Kamar 510 (SPLIT 1PK)", 
+            "Kamar 506 (SPLIT 1PK)", "Kamar 502 (SPLIT 1PK)", "Kamar 504 (SPLIT 1PK)", "Kamar 505 (SPLIT 1PK)", 
+            "Kamar 507 (SPLIT 1PK)", "Kamar 509 (SPLIT 1PK - Unit 1)", "Kamar 509 (SPLIT 1PK - Unit 2)", "Kamar 508 (SPLIT 1PK)", 
+            "Kamar 511 (SPLIT 1PK - Unit 1)", "Kamar 511 (SPLIT 1PK - Unit 2)", "Ruang KTK OT 526 (SPLIT 1PK)", "Ruang KTK OT 528 (SPLIT 1PK)", 
+            "Ruang Dokter KTK 530 (SPLIT 1PK)", "Ruang TW 1 (SPLIT 1PK)", "Ruang TW 2 (SPLIT 1PK)", "Ruang TW 3 (SPLIT 1PK)", 
+            "Ruang Okupasi Terapi 3 (SPLIT 1PK)", "Ruang Fisio Lama (SPLIT 2PK)", "Lorong Fisio Baru A (SPLIT 2PK)", "Lorong Fisio Baru B (SPLIT 1PK)", 
+            "Ruang Bobath KTK (SPLIT 1PK)",
+            "Lorong B Selatan (CASSETTE 3PK)", "Lorong A (CASSETTE 3PK)", "Lorong B (CASSETTE 3PK)", 
+            "Ruang NS (CASSETTE 3PK)", "Ruang NS KTK/Fisio (CASSETTE 3PK)", "Ruang Tengah KTK (CASSETTE 3PK)"
+        ],
+        "Lantai 6": [
+            "Kamar 619 (SPLIT 1.5PK)", "Kamar 617 (SPLIT 1.5PK)", "Kamar 615 (SPLIT 1PK)", "Kamar 614 (SPLIT 1PK)", 
+            "Kamar 616 (SPLIT 1PK)", "Kamar 611 A (SPLIT 1.5PK)", "Kamar 611 B (SPLIT 1.5PK)", "Kamar 612 (SPLIT 1.5PK)", 
+            "Kamar 613 (SPLIT 2PK)", "Kamar 602 A (SPLIT 1PK)", "Kamar 602 B (SPLIT 1PK)", "Kamar 604 (SPLIT 1PK)", 
+            "Kamar 605 A (SPLIT 1PK)", "Kamar 605 B (SPLIT 1PK)", "Kamar 607 A (SPLIT 1PK)", "Kamar 607 B (SPLIT 1PK)", 
+            "Ruang Endoscopy 1 (SPLIT 1PK)", "Ruang Endoscopy 2 (SPLIT 2PK)", "Ruang EEG (SPLIT 1PK)",
+            "Lorong B Selatan (CASSETTE 3PK)", "NS (CASSETTE 3PK)", "HCU Barat (CASSETTE 3PK)", 
+            "HCU Timur (CASSETTE 3PK)", "Ruang Tunggu Pasien (CASSETTE 3PK)", "Lorong A Utara (CASSETTE 3PK)", 
+            "Lorong A Selatan (CASSETTE 3PK)", "Lorong Utara (CASSETTE 3PK)"
+        ],
+        "Lantai 7": [
+            "Ruang Panel Belakang (SPLIT 2PK)", "Ruang Server IT 1 (SPLIT 1PK)", "Ruang Server IT 2 (SPLIT 1.5PK)", "Ruang Server IT 3 (SPLIT 1PK)", 
+            "Dapur Gudang Basah (SPLIT 1PK)", "Dapur Gudang Kering (SPLIT 1PK)", "Admin Dapur (SPLIT 1PK)", "Ruang Direktur (SPLIT 2PK)", 
+            "Ruang Adm Medis (SPLIT 2PK)", "Ruang Personalia (SPLIT 2PK)", "Ruang BPJS (SPLIT 2PK)", "Ruang Adm Laundry (SPLIT 1PK)", 
+            "Ruang Linen Laundry (SPLIT 1PK)", "Ruang Farmasi (SPLIT 2PK)", "Ruang Gudang Umum (SPLIT 2PK)", "Ruang Gudang Farmasi (SPLIT 1PK)", 
+            "Ruang Mutu dan PPI (SPLIT 2PK)", "Ruang Asrama Wanita (SPLIT 1PK)", "Ruang Komdik (SPLIT 1PK)", "Ruang Keuangan (SPLIT 2PK)", 
+            "Kamar 703 (SPLIT 1PK)", "Kamar 708 (SPLIT 1PK)", "Kamar 705 (SPLIT 1PK)", "Kamar 706 (SPLIT 1PK)", 
+            "Kamar 717 A (SPLIT 1PK)", "Kamar 717 B (SPLIT 1PK)", "Kamar 719 A (SPLIT 1PK)", "Kamar 719 B (SPLIT 1PK)", 
+            "Kamar 715 (SPLIT 1PK)",
+            "Lorong A Barat (CASSETTE 3PK)", "Lorong A Selatan (CASSETTE 3PK)", "Ruang Aula (CASSETTE 3PK)", "Ruang Farmasi (CASSETTE 3PK)"
+        ],
+        "Rooftop": [
+            "Rumah Lift Depan (SPLIT 1PK)", "Rumah Lift Belakang (SPLIT 1PK - Unit 1)", "Rumah Lift Belakang (SPLIT 1PK - Unit 2)"
+        ]
+    };
+
+    let totalSemuaUnit = 0;
+    for (let lnt in masterAcGedungBaru) { totalSemuaUnit += masterAcGedungBaru[lnt].length; }
+
+    document.getElementById('tanggal').valueAsDate = new Date();
+    const now = new Date();
+    document.getElementById('jam').value = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    document.getElementById('filterBulan').value = now.getFullYear() + '-' + (now.getMonth() + 1).toString().padStart(2, '0');
+
+    function isSatuBulan(tglDb, yyyyMm) {
+        if (!tglDb || !yyyyMm) return false;
+        let tglStr = String(tglDb);
+        if (tglStr.startsWith(yyyyMm)) return true;
+        if (tglStr.includes('T') && tglStr.split('T')[0].startsWith(yyyyMm)) return true;
+        let separator = tglStr.includes('/') ? '/' : (tglStr.includes('-') ? '-' : '');
+        if (separator) {
+            let parts = tglStr.split('T')[0].split(separator);
+            if (parts.length === 3) {
+                let thn = parts[0].length === 4 ? parts[0] : (parts[2].length === 4 ? parts[2] : null);
+                let bln = parts[1].length === 1 ? '0' + parts[1] : parts[1];
+                if (thn && `${thn}-${bln}` === yyyyMm) return true;
+            }
+        }
+        try {
+            let d = new Date(tglDb);
+            if (!isNaN(d.getTime())) {
+                let y = d.getFullYear();
+                let m = (d.getMonth() + 1).toString().padStart(2, '0');
+                if (`${y}-${m}` === yyyyMm) return true;
+            }
+        } catch(e) {}
+        return false;
+    }
+
+    function triggerCamera() { document.getElementById('fotoKamera').click(); }
+    function triggerGallery() { document.getElementById('fotoGaleri').click(); }
+
+    function handleFileSelect(input) {
+        if (input.files && input.files[0]) {
+            selectedFile = input.files[0];
+            document.getElementById('fileInfoText').innerText = "✔️ File terpilih: " + selectedFile.name;
+            document.getElementById('fileInfoText').style.color = "var(--success)";
+        }
+    }
+
+    function formatTglSimpel(tglDb) {
+        if (!tglDb) return "-";
+        try {
+            let d = new Date(tglDb);
+            if (!isNaN(d.getTime())) {
+                let dNum = d.getDate().toString().padStart(2, '0');
+                let mNum = (d.getMonth() + 1).toString().padStart(2, '0');
+                let yNum = d.getFullYear();
+                return `${dNum}/${mNum}/${yNum}`;
+            }
+        } catch(e) {}
+        let str = String(tglDb);
+        if (str.includes('T')) str = str.split('T')[0];
+        if (str.includes('-')) {
+            const parts = str.split('-');
+            if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+        return str;
+    }
+
+    function formatJamSimpel(jamDb) {
+        if (!jamDb) return "-";
+        let str = String(jamDb);
+        if (str.includes('T') || str.includes('1899')) {
+            const dateObj = new Date(str);
+            return `${dateObj.getHours().toString().padStart(2, '0')}:${dateObj.getMinutes().toString().padStart(2, '0')}`;
+        }
+        if (str.split(':').length >= 2) return `${str.split(':')[0]}:${str.split(':')[1]}`;
+        return str;
+    }
+
+    function getBase64Image(file, callback) {
+        if (!file) return callback("");
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const MAX_WIDTH = 400;
+                let width = img.width; let height = img.height;
+                if (width > MAX_WIDTH) { height = Math.round((height * MAX_WIDTH) / width); width = MAX_WIDTH; }
+                canvas.width = width; canvas.height = height;
+                ctx.drawImage(img, 0, 0, width, height);
+                callback(canvas.toDataURL('image/jpeg', 0.4));
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function loadDataFromServer() {
+        fetch(URL_GOOGLE_SCRIPT)
+            .then(response => response.json())
+            .then(data => {
+                globalData = data; 
+                renderFormDanRiwayat();
+                renderTopProblematicAc(); 
+                document.getElementById('statusInfo').innerText = "✔️ Terhubung dengan Server (Google Sheets)";
+            })
+            .catch(error => {
+                document.getElementById('statusInfo').innerText = "❌ Gagal memuat data. Cek koneksi internet.";
+                document.getElementById('statusInfo').style.color = "#dc2626";
+            });
+    }
+
+    function renderTopProblematicAc() {
+        const container = document.getElementById('topProblematicAcContainer');
+        if (!globalData || globalData.length === 0) {
+            container.innerHTML = ''; return;
+        }
+
+        let issueCounts = {};
+
+        globalData.forEach(item => {
+            let hasKendala = item.keterangan && item.keterangan.trim() !== "" && item.keterangan.trim() !== "-" && 
+                             item.keterangan.toLowerCase() !== "tidak ada" && item.keterangan.toLowerCase() !== "aman";
+            let isError = (item.itemIndoor && item.itemIndoor.includes("Error")) || (item.itemOutdoor && item.itemOutdoor.includes("Error"));
+
+            if (hasKendala || isError) {
+                let units = item.unitAc ? item.unitAc.split(', ') : [];
+                units.forEach(u => {
+                    let parts = u.split(' - ');
+                    let lantai = parts[0];
+                    let unitClean = parts.slice(1).join(' - ');
+
+                    if (lantai && unitClean) {
+                        if (!issueCounts[u]) {
+                            issueCounts[u] = { count: 0, lastIssue: item.keterangan || "Servis Error", lastDate: item.tanggal, lantai: lantai, unitClean: unitClean };
+                        }
+                        issueCounts[u].count += 1;
+                        
+                        if (new Date(item.tanggal) > new Date(issueCounts[u].lastDate)) {
+                            issueCounts[u].lastIssue = (hasKendala) ? item.keterangan : "Servis Error";
+                            issueCounts[u].lastDate = item.tanggal;
+                        }
+                    }
+                });
+            }
+        });
+
+        let sortedIssues = Object.keys(issueCounts).map(key => {
+            return { fullKey: key, ...issueCounts[key] };
+        }).sort((a, b) => b.count - a.count);
+
+        if (sortedIssues.length === 0) {
+            container.innerHTML = `<div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 10px; font-size: 11px; color: var(--success); font-weight: 600; text-align: center;">✅ Seluruh AC sejauh ini tidak memiliki riwayat error atau catatan kendala.</div>`;
+            return;
+        }
+
+        let topIssues = sortedIssues.slice(0, 5);
+
+        let html = `<div style="background: #fef2f2; border: 1px solid #fecaca; padding: 12px; border-radius: 10px;">
+            <h5 style="margin: 0 0 10px 0; color: #991b1b; font-size: 12px; display: flex; align-items: center; justify-content: space-between;">
+                <span>⚠️ Top ${topIssues.length} AC Paling Sering Bermasalah</span>
+                <span style="font-size: 10px; font-weight: normal; font-style: italic;">(Klik unit untuk detail)</span>
+            </h5>
+            <div style="display: flex; flex-direction: column; gap: 8px;">`;
+
+        topIssues.forEach(item => {
+            let shortDesc = item.lastIssue.length > 40 ? item.lastIssue.substring(0, 40) + '...' : item.lastIssue;
+            
+            html += `<div class="problem-card-item" onclick="autoSelectProblemUnit('${item.lantai}', '${item.unitClean}')" style="background: #fff; padding: 8px 10px; border-radius: 8px; border: 1px solid #fca5a5; display: flex; justify-content: space-between; align-items: center;">
+                <div style="flex: 1; padding-right: 8px;">
+                    <div style="font-size: 12px; font-weight: 700; color: #7f1d1d; margin-bottom: 2px;">🏢 ${item.lantai} — ${item.unitClean}</div>
+                    <div style="font-size: 10px; color: #991b1b; line-height: 1.2;">Catatan Terakhir: <i>${shortDesc}</i></div>
+                </div>
+                <div style="background: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 800; text-align: center; min-width: 35px;">
+                    ${item.count}x<br><span style="font-size: 8px; font-weight: 700;">Masalah</span>
+                </div>
+            </div>`;
+        });
+
+        html += `</div></div>`;
+        container.innerHTML = html;
+    }
+
+    function autoSelectProblemUnit(lantai, unitClean) {
+        document.getElementById('searchLantai').value = lantai;
+        updateDropdownUnitSearch(); 
+        document.getElementById('searchUnit').value = unitClean;
+        renderDetailUnitSearch(); 
+        document.getElementById('unitDetailResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function cekKewajibanFoto() {
+        const lantaiPilih = document.getElementById('pilihLantai').value;
+        const selectedBulanFilter = document.getElementById('filterBulan').value;
+        let selectedUnits = [];
+        document.querySelectorAll('input[name="unitAcPilih"]:checked').forEach((cb) => { selectedUnits.push(cb.value); });
+        let sudahAdaFoto = false;
+        
+        globalData.forEach(item => {
+            if (isSatuBulan(item.tanggal, selectedBulanFilter) && item.foto && typeof item.foto === 'string' && (item.foto.startsWith('data:image/') || item.foto.startsWith('http'))) {
+                if (item.unitAc && item.unitAc.includes(lantaiPilih)) {
+                    let listUnit = item.unitAc.split(', ');
+                    listUnit.forEach(u => {
+                        if(u.startsWith(lantaiPilih + " -")) {
+                            let namaUnitClean = u.replace(lantaiPilih + " - ", "");
+                            if (selectedUnits.includes(namaUnitClean)) sudahAdaFoto = true;
+                        }
+                    });
+                }
+            }
+        });
+
+        if (sudahAdaFoto && !document.getElementById('chkReopen').checked) { document.getElementById('noteFotoWajib').innerText = "(Opsional - Foto sudah dilampirkan sebelumnya)"; } 
+        else { document.getElementById('noteFotoWajib').innerText = "(Wajib diunggah)"; }
+    }
+
+    function renderDaftarAcLantai() {
+        const lantaiPilih = document.getElementById('pilihLantai').value;
+        const container = document.getElementById('listUnitAcContainer');
+        container.innerHTML = '';
+        const selectedBulanFilter = document.getElementById('filterBulan').value;
+        const isReopenMode = document.getElementById('chkReopen').checked;
+        let statusServisMap = {}; 
+        
+        globalData.forEach(item => {
+            if (isSatuBulan(item.tanggal, selectedBulanFilter)) {
+                if (item.unitAc && item.unitAc.includes(lantaiPilih)) {
+                    let listUnit = item.unitAc.split(', ');
+                    listUnit.forEach(u => {
+                        if(u.startsWith(lantaiPilih + " -")) {
+                            let namaUnitClean = u.replace(lantaiPilih + " - ", "");
+                            if (!statusServisMap[namaUnitClean]) statusServisMap[namaUnitClean] = { indoor: false, outdoor: false };
+                            if (item.itemIndoor && item.itemIndoor !== "Tidak ada") statusServisMap[namaUnitClean].indoor = true;
+                            if (item.itemOutdoor && item.itemOutdoor !== "Tidak ada") statusServisMap[namaUnitClean].outdoor = true;
+                        }
+                    });
+                }
+            }
+        });
+        
+        const daftarUnitLantai = masterAcGedungBaru[lantaiPilih] || [];
+        let unitAktif = [];
+
+        daftarUnitLantai.forEach(unit => {
+            let stat = statusServisMap[unit] || { indoor: false, outdoor: false };
+            if (!isReopenMode && stat.indoor && stat.outdoor) return; 
+            unitAktif.push({ nama: unit, status: stat });
+        });
+
+        if (unitAktif.length === 0 && !isReopenMode) {
+            container.innerHTML = `<p style="color: var(--success); font-weight: bold; text-align: center; margin: 5px;">🎉 Semua unit AC di ${lantaiPilih} sudah tuntas 100%!</p>`;
+            cekKewajibanFoto(); return;
+        }
+
+        unitAktif.forEach(obj => {
+            let badgeText = "Belum Diservis"; let badgeClass = "badge-belum";
+            if (obj.status.indoor && !obj.status.outdoor) { badgeText = "Sisa: Outdoor"; badgeClass = "badge-sisa"; }
+            else if (!obj.status.indoor && obj.status.outdoor) { badgeText = "Sisa: Indoor"; badgeClass = "badge-sisa"; }
+            else if (obj.status.indoor && obj.status.outdoor) { badgeText = "✔️ Clear"; badgeClass = "badge-clear"; }
+
+            container.innerHTML += `<div class="ac-item-row"><label class="ac-label"><input type="checkbox" name="unitAcPilih" value="${obj.nama}" onchange="cekKewajibanFoto()"> ${obj.nama}</label><span class="badge-status ${badgeClass}">${badgeText}</span></div>`;
+        });
+        cekKewajibanFoto();
+    }
+
+    function renderFormDanRiwayat() {
+        renderDaftarAcLantai();
+        const rekapContainer = document.getElementById('rekapContainer'); const historyContainer = document.getElementById('historyContainer');
+        rekapContainer.innerHTML = ''; historyContainer.innerHTML = '';
+
+        const selectedBulan = document.getElementById('filterBulan').value;
+        let dataBulanIni = globalData.filter(item => isSatuBulan(item.tanggal, selectedBulan));
+        dataBulanIni.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+        
+        let statusMapRekap = {};
+        dataBulanIni.forEach(item => {
+            if (item.unitAc) {
+                let listU = item.unitAc.split(', ');
+                listU.forEach(u => {
+                    if (!statusMapRekap[u]) statusMapRekap[u] = { indoor: false, outdoor: false };
+                    if (item.itemIndoor && item.itemIndoor !== "Tidak ada") statusMapRekap[u].indoor = true;
+                    if (item.itemOutdoor && item.itemOutdoor !== "Tidak ada") statusMapRekap[u].outdoor = true;
+                });
+            }
+        });
+
+        let progressUnit = 0;
+        for (let u in statusMapRekap) {
+            if (statusMapRekap[u].indoor) progressUnit += 0.5;
+            if (statusMapRekap[u].outdoor) progressUnit += 0.5;
+        }
+
+        let persentase = Math.round((progressUnit / totalSemuaUnit) * 100);
+        if(persentase > 100) persentase = 100;
+        
+        document.getElementById('targetStatusText').innerHTML = (progressUnit >= totalSemuaUnit) 
+            ? `<span style="color: var(--success);">✨ TERCAPAI 100% (${progressUnit} / ${totalSemuaUnit} Unit)</span>` 
+            : `<span style="color: #d97706;">🔄 BERPROSES: ${progressUnit} dari ${totalSemuaUnit} Unit (${persentase}%)</span>`;
+
+        let idxRekap = 1;
+        for (let lantai in masterAcGedungBaru) {
+            let contentId = `rekap-lantai-${idxRekap}`; let btnId = `btn-${contentId}`;
+            let htmlRekap = `<div class="lantai-group-header" onclick="toggleLantai('${contentId}')"><span>🏢 ${lantai} (${masterAcGedungBaru[lantai].length} Unit)</span><span class="toggle-btn-badge" id="${btnId}">▲ Tampilkan Data</span></div><div id="${contentId}" class="lantai-content-collapsible" style="margin-bottom: 8px;"><table style="width: 100%; border-collapse: collapse; font-size: 11px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); background: #fff;"><thead style="background: var(--bg-color); color: var(--primary);"><tr><th style="padding: 6px 8px; text-align: left; width: 60%;">Unit AC</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Indoor</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Outdoor</th></tr></thead><tbody>`;
+
+            masterAcGedungBaru[lantai].forEach(unit => {
+                let key = `${lantai} - ${unit}`; let stat = statusMapRekap[key] || { indoor: false, outdoor: false };
+                let inCheck = stat.indoor ? '<span style="color: var(--success); font-weight: bold;">✔️ Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;">❌ Belum Tuntas</span>';
+                let outCheck = stat.outdoor ? '<span style="color: var(--success); font-weight: bold;">✔️ Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;">❌ Belum Tuntas</span>';
+                htmlRekap += `<tr style="border-top: 1px solid var(--border-color);"><td style="padding: 6px 8px;">${unit}</td><td style="padding: 6px 8px; text-align: center; background: ${stat.indoor ? '#f0fdf4' : '#fef2f2'};">${inCheck}</td><td style="padding: 6px 8px; text-align: center; background: ${stat.outdoor ? '#f0fdf4' : '#fef2f2'};">${outCheck}</td></tr>`;
+            });
+            htmlRekap += `</tbody></table></div>`; rekapContainer.innerHTML += htmlRekap; idxRekap++;
+        }
+
+        let historyByLantai = {};
+        for (let lantai in masterAcGedungBaru) {
+            historyByLantai[lantai] = {};
+            masterAcGedungBaru[lantai].forEach(unitName => { historyByLantai[lantai][unitName] = { unitName: unitName, indoorLogs: [], outdoorLogs: [], fotos: [] }; });
+        }
+
+        dataBulanIni.forEach(item => {
+            let units = item.unitAc ? item.unitAc.split(', ') : [];
+            let tglWaktuStr = `${formatTglSimpel(item.tanggal)} Jam ${formatJamSimpel(item.jam)}`;
+
+            units.forEach(u => {
+                let foundLantai = "Lantai 1";
+                for (let lnt in masterAcGedungBaru) { if (u.startsWith(lnt + " -")) { foundLantai = lnt; break; } }
+                
+                let cleanUnitName = u.replace(foundLantai + " - ", "").trim();
+                if (historyByLantai[foundLantai] && historyByLantai[foundLantai][cleanUnitName]) {
+                    let targetUnit = historyByLantai[foundLantai][cleanUnitName];
+                    if (item.itemIndoor && item.itemIndoor !== "Tidak ada") targetUnit.indoorLogs.push({ waktu: tglWaktuStr, tindakan: item.itemIndoor, keterangan: item.keterangan || "-" });
+                    if (item.itemOutdoor && item.itemOutdoor !== "Tidak ada") targetUnit.outdoorLogs.push({ waktu: tglWaktuStr, tindakan: item.itemOutdoor, keterangan: item.keterangan || "-" });
+                    if (item.foto && typeof item.foto === 'string' && (item.foto.startsWith('data:image/') || item.foto.startsWith('http'))) targetUnit.fotos.push(item.foto); 
+                }
+            });
+        });
+
+        let idxDetail = 1;
+        for (let lantai in historyByLantai) {
+            let allUnits = Object.values(historyByLantai[lantai]); 
+            let detailContentId = `detail-lantai-${idxDetail}`; let detailBtnId = `btn-${detailContentId}`;
+            let htmlRiwayatLantai = `<div class="lantai-group-header" onclick="toggleLantai('${detailContentId}')"><span>🏢 ${lantai} (${allUnits.length} Unit)</span><span class="toggle-btn-badge" id="${detailBtnId}">▲ Tampilkan Data</span></div><div id="${detailContentId}" class="lantai-content-collapsible">`;
+
+            allUnits.forEach(data => {
+                let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => `<div style="background:#f8fafc; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid var(--primary); font-size:11px;"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan)}</div>`).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
+                let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => `<div style="background:#fffbeb; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid var(--accent); font-size:11px;"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan)}</div>`).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
+                let fotoHtml = data.fotos.length > 0 ? `<div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;">${data.fotos.map(f => generateFotoElement(f)).join('')}</div>` : `<div style="font-size: 10px; color: var(--text-muted); margin-top: 4px; font-style: italic;">[Tidak ada foto]</div>`;
+
+                let isTuntas = (data.indoorLogs.length > 0 && data.outdoorLogs.length > 0);
+                let adaProgres = (data.indoorLogs.length > 0 || data.outdoorLogs.length > 0);
+                
+                let badgeTuntas = isTuntas 
+                    ? `<span style="background: var(--success); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">✔️ Tuntas</span>` 
+                    : (adaProgres 
+                        ? `<span style="background: var(--accent); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">⚠️ Belum Tuntas</span>` 
+                        : `<span style="background: var(--danger); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">✖️ Belum Tuntas</span>`);
+
+                htmlRiwayatLantai += `<div class="history-card"><div class="history-header"><span>🔧 ${data.unitName}</span>${badgeTuntas}</div><div class="log-section"><b>🔵 Riwayat Indoor:</b><br><div style="margin-top: 4px;">${indoorHtml}</div></div><div class="log-section" style="margin-top:8px;"><b>🟠 Riwayat Outdoor:</b><br><div style="margin-top: 4px;">${outdoorHtml}</div></div><div style="margin-top:8px; font-size: 11px;"><b>📸 Bukti Foto:</b>${fotoHtml}</div></div>`;
+            });
+
+            htmlRiwayatLantai += `</div>`; historyContainer.innerHTML += htmlRiwayatLantai; idxDetail++;
+        }
+        if(document.getElementById('searchUnit').value) renderDetailUnitSearch();
+    }
+
+    function updateDropdownUnitSearch() {
+        const lantai = document.getElementById('searchLantai').value;
+        const selectUnit = document.getElementById('searchUnit');
+        selectUnit.innerHTML = '<option value="">-- Pilih Unit AC --</option>';
+        if (lantai && masterAcGedungBaru[lantai]) { masterAcGedungBaru[lantai].forEach(unit => { selectUnit.innerHTML += `<option value="${unit}">${unit}</option>`; }); }
+        renderDetailUnitSearch();
+    }
+
+    function renderDetailUnitSearch() {
+        const lantai = document.getElementById('searchLantai').value;
+        const unit = document.getElementById('searchUnit').value;
+        const container = document.getElementById('unitDetailResult');
+        if (!lantai || !unit) { container.innerHTML = '<p class="loading-text">Silakan pilih lantai dan nama unit AC di atas.</p>'; return; }
+
+        const targetKey = `${lantai} - ${unit}`;
+        let historyUnit = [];
+        globalData.forEach(item => { if (item.unitAc && item.unitAc.includes(targetKey)) historyUnit.push(item); });
+        
+        if (historyUnit.length === 0) {
+            container.innerHTML = `<div class="history-card" style="text-align: center; padding: 20px;"><p style="color: var(--text-muted); font-weight: 600; margin: 0; font-size: 12px;">ℹ️ Belum ada riwayat untuk <b>${unit} (${lantai})</b>.</p></div>`; return;
+        }
+
+        let groupedByMonth = {};
+        
+        historyUnit.forEach(item => {
+            let dateObj = new Date(item.tanggal);
+            let monthKey = "Unknown";
+            let monthName = "Periode Tidak Diketahui";
+            
+            if (!isNaN(dateObj.getTime())) {
+                let y = dateObj.getFullYear();
+                let m = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+                monthKey = `${y}-${m}`;
+                monthName = dateObj.toLocaleString('id-ID', { month: 'long', year: 'numeric' });
+            } else {
+                monthKey = item.tanggal;
+                monthName = item.tanggal;
+            }
+
+            if (!groupedByMonth[monthKey]) {
+                groupedByMonth[monthKey] = {
+                    monthName: monthName,
+                    indoorLogs: [],
+                    outdoorLogs: [],
+                    fotos: [],
+                    keteranganList: [],
+                    hasKendala: false
+                };
+            }
+
+            let tglWaktuStr = `📅 ${formatTglSimpel(item.tanggal)} | 🕒 ${formatJamSimpel(item.jam)}`;
+            let hasKendalaItem = item.keterangan && item.keterangan.trim() !== "" && item.keterangan !== "-" && item.keterangan.toLowerCase() !== "tidak ada" && item.keterangan.toLowerCase() !== "aman";
+
+            if (hasKendalaItem) {
+                groupedByMonth[monthKey].hasKendala = true;
+                groupedByMonth[monthKey].keteranganList.push(`<b>[${formatTglSimpel(item.tanggal)}]</b> ${item.keterangan}`);
+            }
+
+            if (item.itemIndoor && item.itemIndoor !== "Tidak ada") {
+                groupedByMonth[monthKey].indoorLogs.push(`<div style="margin-bottom: 4px;"><span style="font-size:9px; color:var(--text-muted);">${tglWaktuStr}</span><br>${item.itemIndoor}</div>`);
+                if (item.itemIndoor.includes("Error")) groupedByMonth[monthKey].hasKendala = true;
+            }
+            if (item.itemOutdoor && item.itemOutdoor !== "Tidak ada") {
+                groupedByMonth[monthKey].outdoorLogs.push(`<div style="margin-bottom: 4px;"><span style="font-size:9px; color:var(--text-muted);">${tglWaktuStr}</span><br>${item.itemOutdoor}</div>`);
+                if (item.itemOutdoor.includes("Error")) groupedByMonth[monthKey].hasKendala = true;
+            }
+
+            if (item.foto && typeof item.foto === 'string' && (item.foto.startsWith('data:image/') || item.foto.startsWith('http'))) {
+                groupedByMonth[monthKey].fotos.push(item.foto);
+            }
+        });
+
+        let html = `<div class="history-card" style="background: #f0f9ff; border-color: #bae6fd;"><div style="font-size: 14px; font-weight: 800; color: var(--primary);">🏢 ${lantai} — 🔧 ${unit}</div><div style="font-size: 11px; color: #0369a1; font-weight: 600; margin-top: 2px;">Total Penanganan: <b>${historyUnit.length} Laporan Pekerjaan</b></div></div><h4 style="color: var(--primary); font-size: 13px; font-weight: 800; margin-top: 16px; margin-bottom: 8px;">📜 Kronologi Penanganan Bulanan:</h4>`;
+
+        let sortedMonths = Object.keys(groupedByMonth).sort((a, b) => b.localeCompare(a));
+
+        sortedMonths.forEach(monthKey => {
+            let data = groupedByMonth[monthKey];
+            let borderStyle = data.hasKendala ? 'border-left: 4px solid var(--danger);' : 'border-left: 4px solid var(--success);';
+            let badgeCategory = data.hasKendala ? `<span class="badge-status" style="background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;">⚠️ ADA KENDALA / ERROR</span>` : `<span class="badge-status badge-clear">✔️ PERAWATAN RUTIN / AMAN</span>`;
+
+            let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.join('') : `<span style="color: var(--text-muted); font-style: italic; font-size: 10px;">Tidak ada servis indoor di bulan ini.</span>`;
+            let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.join('') : `<span style="color: var(--text-muted); font-style: italic; font-size: 10px;">Tidak ada servis outdoor di bulan ini.</span>`;
+            
+            let kendalaHtml = data.hasKendala 
+                ? `<div style="background:#fef2f2; border: 1px solid #fecaca; padding:8px; border-radius:6px; font-size:11px; color:#991b1b; margin-top: 8px;"><b>⚠️ Catatan Masalah:</b><br><div style="margin-top:2px;">${data.keteranganList.join('<br>')}</div></div>` 
+                : `<div style="background:#f0fdf4; border: 1px solid #bbf7d0; padding:8px; border-radius:6px; font-size:11px; color:var(--success); margin-top: 8px;"><b>✅ Catatan Masalah:</b> <span style="font-weight:600;">Aman (Clear)</span></div>`;
+            
+            let fotoHtml = data.fotos.length > 0 ? `<div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">${data.fotos.map(f => generateFotoElement(f)).join('')}</div>` : '';
+
+            html += `<div class="history-card" style="${borderStyle}">
+                <div class="history-header">
+                    <span>📅 PERIODE: ${data.monthName.toUpperCase()}</span>
+                    ${badgeCategory}
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div style="background:#f8fafc; padding:8px; border-radius:6px; border:1px solid var(--border-color);">
+                        <b style="color:var(--primary); font-size:11px;">🔵 Indoor:</b>
+                        <div style="font-size:11px; font-weight:600; margin-top:4px;">${indoorHtml}</div>
+                    </div>
+                    <div style="background:#fffbeb; padding:8px; border-radius:6px; border:1px solid #fde68a;">
+                        <b style="color:var(--accent); font-size:11px;">🟠 Outdoor:</b>
+                        <div style="font-size:11px; font-weight:600; margin-top:4px;">${outdoorHtml}</div>
+                    </div>
+                </div>
+                ${kendalaHtml}
+                ${fotoHtml}
+            </div>`;
+        });
+        
+        container.innerHTML = html;
+    }
+
+    document.getElementById('formAc').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let lantaiAktif = document.getElementById('pilihLantai').value;
+        let selectedUnits = []; document.querySelectorAll('input[name="unitAcPilih"]:checked').forEach((checkbox) => { selectedUnits.push(checkbox.value); });
+        if(selectedUnits.length === 0) return alert('Pilih minimal 1 unit AC!');
+        
+        let indoorArr = []; 
+        document.querySelectorAll('input[name="optIndoor"]:checked').forEach((cb) => { 
+            let val = cb.value;
+            if (val === "Servis Turun" && document.getElementById('catatanIndoorTurun').value) {
+                val += ` (${document.getElementById('catatanIndoorTurun').value})`;
+            } else if (val === "Servis Error" && document.getElementById('catatanIndoorError').value) {
+                val += ` (${document.getElementById('catatanIndoorError').value})`;
+            }
+            indoorArr.push(val); 
+        });
+        
+        let outdoorArr = []; 
+        document.querySelectorAll('input[name="optOutdoor"]:checked').forEach((cb) => { 
+            let val = cb.value;
+            if (val === "Tambah Freon" && document.getElementById('catatanOutdoorFreon').value) {
+                val += ` (${document.getElementById('catatanOutdoorFreon').value})`;
+            } else if (val === "Servis Error" && document.getElementById('catatanOutdoorError').value) {
+                val += ` (${document.getElementById('catatanOutdoorError').value})`;
+            }
+            outdoorArr.push(val); 
+        });
+        
+        if (indoorArr.length === 0 && outdoorArr.length === 0) return alert('Pilih minimal satu item di Indoor atau Outdoor!');
+
+        const btn = document.getElementById('btnSubmit'); btn.innerText = "⏳ Memproses..."; btn.disabled = true;
+
+        getBase64Image(selectedFile, function(base64Foto) {
+            const data = {
+                tanggal: document.getElementById('tanggal').value, jam: document.getElementById('jam').value,
+                unitAc: selectedUnits.map(u => `${lantaiAktif} - ${u}`).join(', '),
+                itemIndoor: indoorArr.length > 0 ? indoorArr.join(', ') : 'Tidak ada',
+                itemOutdoor: outdoorArr.length > 0 ? outdoorArr.join(', ') : 'Tidak ada',
+                keterangan: document.getElementById('keterangan').value, foto: base64Foto
+            };
+
+            fetch(URL_GOOGLE_SCRIPT, { method: 'POST', body: JSON.stringify(data) })
+            .then(response => {
+                alert('Berhasil! Data Servis AC tersimpan.');
+                
+                document.getElementById('formAc').reset(); 
+                document.getElementById('catatanIndoorTurun').style.display = "none";
+                document.getElementById('catatanIndoorError').style.display = "none";
+                document.getElementById('catatanOutdoorFreon').style.display = "none";
+                document.getElementById('catatanOutdoorError').style.display = "none";
+
+                document.getElementById('tanggal').valueAsDate = new Date();
+                document.getElementById('chkReopen').checked = false; selectedFile = null;
+                document.getElementById('fileInfoText').innerText = "Belum ada foto yang dipilih.";
+                
+                btn.innerText = "🚀 Simpan & Submit Servis AC"; btn.disabled = false;
+                document.getElementById('historyContainer').innerHTML = '<p class="loading-text">Memperbarui data...</p>';
+                setTimeout(loadDataFromServer, 2000); 
+            })
+            .catch(error => { alert('Terkirim!'); btn.innerText = "🚀 Simpan & Submit Servis AC"; btn.disabled = false; setTimeout(loadDataFromServer, 1000); });
+        });
+    });
+
+    // ========== LOGIK CETAK PDF TERBARU (KOMPRESI LEBIH PADAT) ==========
+    function printPDF() {
+        const filterBulan = document.getElementById('filterBulan').value; 
+        if(!filterBulan) return alert('Pilih bulan terlebih dahulu!');
+        
+        const dataBulanIni = globalData.filter(item => isSatuBulan(item.tanggal, filterBulan));
+        dataBulanIni.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+
+        const [tahun, bulan] = filterBulan.split('-');
+        const namaBulan = new Date(tahun, bulan - 1).toLocaleString('id-ID', { month: 'long', year: 'numeric' });
+
+        let statusMapRekap = {};
+        let historyByLantai = {};
+        
+        for (let lantai in masterAcGedungBaru) {
+            historyByLantai[lantai] = {};
+            masterAcGedungBaru[lantai].forEach(unitName => { historyByLantai[lantai][unitName] = { unitName: unitName, indoorLogs: [], outdoorLogs: [], fotos: [] }; });
+        }
+
+        dataBulanIni.forEach(item => {
+            if (item.unitAc) {
+                let listU = item.unitAc.split(', ');
+                listU.forEach(u => {
+                    if (!statusMapRekap[u]) statusMapRekap[u] = { indoor: false, outdoor: false };
+                    if (item.itemIndoor && item.itemIndoor !== "Tidak ada") statusMapRekap[u].indoor = true;
+                    if (item.itemOutdoor && item.itemOutdoor !== "Tidak ada") statusMapRekap[u].outdoor = true;
+                });
+            }
+
+            let units = item.unitAc ? item.unitAc.split(', ') : [];
+            let tglWaktuStr = `${formatTglSimpel(item.tanggal)} ${formatJamSimpel(item.jam)}`;
+
+            units.forEach(u => {
+                let foundLantai = "Lantai 1";
+                for (let lnt in masterAcGedungBaru) { if (u.startsWith(lnt + " -")) { foundLantai = lnt; break; } }
+                let cleanUnitName = u.replace(foundLantai + " - ", "").trim();
+
+                if (historyByLantai[foundLantai] && historyByLantai[foundLantai][cleanUnitName]) {
+                    let targetUnit = historyByLantai[foundLantai][cleanUnitName];
+                    if (item.itemIndoor && item.itemIndoor !== "Tidak ada") targetUnit.indoorLogs.push({ waktu: tglWaktuStr, tindakan: item.itemIndoor, keterangan: item.keterangan || "-" });
+                    if (item.itemOutdoor && item.itemOutdoor !== "Tidak ada") targetUnit.outdoorLogs.push({ waktu: tglWaktuStr, tindakan: item.itemOutdoor, keterangan: item.keterangan || "-" });
+                    if (item.foto && typeof item.foto === 'string' && (item.foto.startsWith('data:image/') || item.foto.startsWith('http'))) targetUnit.fotos.push(item.foto);
+                }
+            });
+        });
+
+        const printAreaContainer = document.getElementById('printArea');
+        printAreaContainer.innerHTML = ''; // Bersihkan container
+
+        for (let lantai in historyByLantai) {
+            let unitsArr = Object.values(historyByLantai[lantai]);
+            
+            let progressLantai = 0;
+            let totalLantai = unitsArr.length;
+            
+            let tableHtml = `<table class="pdf-rekap-table">
+                <thead><tr><th style="width: 55%;">Unit AC</th><th style="width: 20%;">IN</th><th style="width: 25%;">OUT</th></tr></thead>
+                <tbody>`;
+            
+            masterAcGedungBaru[lantai].forEach(unit => {
+                let key = `${lantai} - ${unit}`;
+                let stat = statusMapRekap[key] || { indoor: false, outdoor: false };
+                if (stat.indoor) progressLantai += 0.5;
+                if (stat.outdoor) progressLantai += 0.5;
+
+                let iconIn = stat.indoor ? '<span style="color: #059669;">✔</span>' : '<span style="color: #dc2626;">✖</span>';
+                let iconOut = stat.outdoor ? '<span style="color: #059669;">✔</span>' : '<span style="color: #dc2626;">✖</span>';
+                tableHtml += `<tr><td>${unit}</td><td>${iconIn}</td><td>${iconOut}</td></tr>`;
+            });
+            tableHtml += `</tbody></table>`;
+            
+            let persenLantai = Math.round((progressLantai / totalLantai) * 100);
+
+            let pageHtml = `
+            <div class="pdf-page-container">
+                <div class="pdf-header">
+                    <h2>LAPORAN PEMELIHARAAN & SERVIS AC RS HERMINA SOLO (GEDUNG LAMA)</h2>
+                    <p>Periode: ${namaBulan.toUpperCase()} | Dicetak: ${new Date().toLocaleString('id-ID')}</p>
+                </div>
+                
+                <div class="pdf-floor-title">🏢 AREA PENGERJAAN: ${lantai.toUpperCase()}</div>
+
+                <div class="pdf-content-wrapper">
+                    
+                    <!-- KIRI: REKAP DAN TARGET -->
+                    <div class="pdf-sidebar">
+                        <div class="pdf-summary-box">
+                            PENCAPAIAN TARGET LANTAI INI:<br>
+                            <span style="font-size: 11px;">${progressLantai} / ${totalLantai} Unit (${persenLantai}%)</span>
+                        </div>
+                        <div style="font-size: 6px; font-weight: bold; color: var(--primary); margin-bottom: 4px; border-bottom: 1px solid var(--border-color); padding-bottom: 2px;">📊 REKAPITULASI PENGERJAAN:</div>
+                        ${tableHtml}
+                    </div>
+
+                    <!-- KANAN: DETAIL PEKERJAAN (5 KOLOM) -->
+                    <div class="pdf-main">
+                        <div class="pdf-grid-container">`;
+
+            // Looping Palet Detail (Grid) untuk lantai ini (diubah sizing inlinenya)
+            unitsArr.forEach(data => {
+                let isTuntas = (data.indoorLogs.length > 0 && data.outdoorLogs.length > 0);
+                let adaProgres = (data.indoorLogs.length > 0 || data.outdoorLogs.length > 0);
+                
+                let badgeTuntas = isTuntas 
+                    ? `<span style="background: #10b981 !important; color: white !important; padding: 1px 3px; border-radius: 2px; font-size: 4.5px; font-weight: 700;">Tuntas</span>` 
+                    : (adaProgres 
+                        ? `<span style="background: #d97706 !important; color: white !important; padding: 1px 3px; border-radius: 2px; font-size: 4.5px; font-weight: 700;">Blm Tuntas</span>` 
+                        : `<span style="background: #ef4444 !important; color: white !important; padding: 1px 3px; border-radius: 2px; font-size: 4.5px; font-weight: 700;">Kosong</span>`);
+
+                let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => {
+                    let ketText = (!l.keterangan || l.keterangan.trim() === "" || l.keterangan === "-" || l.keterangan.toLowerCase() === "tidak ada") ? "Aman" : l.keterangan;
+                    let ketStyle = ketText === "Aman" ? "color: #059669;" : "color: #dc2626;";
+                    return `<div style="background:#f8fafc; padding:2px 3px; margin-bottom:2px; border-radius:2px; border-left:2px solid #1e3a8a; font-size:5px;"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="${ketStyle}">Ket: ${ketText}</span></div>`;
+                }).join('') : `<span style="color: #dc2626; font-size: 5px; font-weight: bold;">❌ Belum Diservis</span>`;
+                
+                let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => {
+                    let ketText = (!l.keterangan || l.keterangan.trim() === "" || l.keterangan === "-" || l.keterangan.toLowerCase() === "tidak ada") ? "Aman" : l.keterangan;
+                    let ketStyle = ketText === "Aman" ? "color: #059669;" : "color: #dc2626;";
+                    return `<div style="background:#fffbeb; padding:2px 3px; margin-bottom:2px; border-radius:2px; border-left:2px solid #d97706; font-size:5px;"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="${ketStyle}">Ket: ${ketText}</span></div>`;
+                }).join('') : `<span style="color: #dc2626; font-size: 5px; font-weight: bold;">❌ Belum Diservis</span>`;
+
+                let fotoImgs = '';
+                if (data.fotos.length > 0) {
+                    fotoImgs = '<div class="pdf-foto-container">';
+                    data.fotos.forEach(f => { 
+                        if(f.startsWith('data:image/')){ fotoImgs += `<img src="${f}" alt="Foto">`; } 
+                        else { fotoImgs += `<div style="border: 1px solid #cbd5e1; padding: 1px 2px; border-radius: 2px; font-size: 4px; color: #1d4ed8; background: #e0f2fe;">[Ada Lampiran Link]</div>`; }
+                    });
+                    fotoImgs += '</div>';
+                } else {
+                    fotoImgs = '<div style="font-size: 5px; color: #94a3b8; margin-top: 1px; font-style: italic;">[Tidak ada foto]</div>';
+                }
+
+                pageHtml += `
+                    <div class="pdf-grid-box">
+                        <div class="pdf-grid-header"><span>🔧 ${data.unitName}</span>${badgeTuntas}</div>
+                        <div style="margin-top:2px;"><b>🔵 Indoor:</b><br>${indoorHtml}</div>
+                        <div style="margin-top:2px;"><b>🟠 Outdoor:</b><br>${outdoorHtml}</div>
+                        <div style="margin-top:2px;"><b>📸 Foto:</b>${fotoImgs}</div>
+                    </div>`;
+            });
+            
+            pageHtml += `</div></div></div></div>`; 
+            printAreaContainer.innerHTML += pageHtml;
+        }
+
+        window.print();
+    }
+
+    window.onload = loadDataFromServer;
+</script>
+</body>
+</html>
