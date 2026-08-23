@@ -259,10 +259,10 @@
                 print-color-adjust: exact !important;
             }
 
-            @page { size: A4 landscape; margin: 5mm 8mm; } /* Margin kertas diperkecil */
+            @page { size: A4 landscape; margin: 5mm 8mm; } 
 
             .pdf-page-container {
-                page-break-after: always; /* 1 Kertas 1 Lantai */
+                page-break-after: always; 
                 page-break-inside: avoid;
                 display: flex;
                 flex-direction: column;
@@ -276,7 +276,7 @@
                 text-align: center;
                 border-bottom: 1.5px solid var(--primary);
                 padding-bottom: 2px;
-                margin-bottom: 6px; /* Spasi Header dikurangi */
+                margin-bottom: 6px; 
             }
             .pdf-header h2 { margin: 0; font-size: 11px; color: var(--primary); font-weight: 900; }
             .pdf-header p { margin: 1px 0 0 0; font-size: 8px; font-weight: 600; color: #334155; }
@@ -295,34 +295,32 @@
 
             .pdf-content-wrapper {
                 display: flex;
-                gap: 8px; /* Gap antar kolom rekap dan grid diperkecil */
+                gap: 8px; 
                 flex: 1;
                 align-items: flex-start;
             }
 
-            /* Kolom Kiri Tabel Rekap (Lebar diturunkan ke 22%) */
             .pdf-sidebar {
                 width: 22%; 
                 border-right: 1.5px dashed #cbd5e1;
                 padding-right: 6px;
             }
 
-            /* Kolom Kanan Grid Detail (Lebar dinaikkan ke 78%) */
             .pdf-main {
                 width: 78%;
             }
 
             .pdf-summary-box { background: #f0fdf4 !important; border: 1px solid #bbf7d0; padding: 4px; margin-bottom: 6px; text-align: center; font-weight: bold; font-size: 7.5px; color: #065f46; border-radius: 4px; line-height: 1.2; }
             
-            .pdf-rekap-table { width: 100%; border-collapse: collapse; margin-bottom: 6px; font-size: 6px; } /* Font tabel direduksi */
+            .pdf-rekap-table { width: 100%; border-collapse: collapse; margin-bottom: 6px; font-size: 6px; } 
             .pdf-rekap-table th, .pdf-rekap-table td { border: 1px solid #94a3b8; padding: 1px 2px; text-align: center; line-height: 1.1; }
             .pdf-rekap-table th { background-color: var(--primary) !important; color: white; font-weight: bold; }
             .pdf-rekap-table td:first-child { text-align: left; font-weight: 600; color: #1e293b; }
 
             .pdf-grid-container {
                 display: grid;
-                grid-template-columns: repeat(5, 1fr); /* DIUBAH JADI 5 KOLOM AGAR BARIS KEBAWAH LEBIH SEDIKIT */
-                gap: 4px; /* Gap antar box diperkecil */
+                grid-template-columns: repeat(5, 1fr); 
+                gap: 4px; 
                 align-content: start;
             }
             
@@ -330,7 +328,7 @@
             .pdf-grid-header { font-weight: bold; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px; margin-bottom: 2px; color: var(--primary); font-size: 6px; display: flex; justify-content: space-between; align-items: center; }
             
             .pdf-foto-container { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-start; margin-top: 2px; }
-            #printArea img { width: 20px; height: 20px; object-fit: cover; border-radius: 2px; border: 1px solid #cbd5e1; } /* Foto diperkecil */
+            #printArea img { width: 20px; height: 20px; object-fit: cover; border-radius: 2px; border: 1px solid #cbd5e1; } 
         }
     </style>
 </head>
@@ -573,11 +571,14 @@
         document.getElementById('imageModal').style.display = "none";
     }
 
-    function formatKendalaHtml(ket) {
-        if (!ket || ket.trim() === "" || ket === "-" || ket.toLowerCase() === "tidak ada") {
+    // UPDATE: Membaca kendala baik dari input umum maupun jika tindakan memiliki catatan spesifik (di dalam tanda kurung)
+    function formatKendalaHtml(ket, tindakan) {
+        let hasNote = (ket && ket.trim() !== "" && ket !== "-" && ket.toLowerCase() !== "tidak ada" && ket.toLowerCase() !== "aman") || (tindakan && tindakan.includes('('));
+        if (!hasNote) {
             return `<span style="color: var(--success); font-size: 10px; font-weight: 700;">✅ Kendala: Aman</span>`;
         }
-        return `<span style="color: var(--danger); font-size: 10px; font-weight: 700;">⚠️ Kendala: ${ket}</span>`;
+        let ketText = (ket && ket.trim() !== "" && ket !== "-" && ket.toLowerCase() !== "tidak ada") ? ket : "Ada Perbaikan / Catatan";
+        return `<span style="color: var(--danger); font-size: 10px; font-weight: 700;">⚠️ Kendala: ${ketText}</span>`;
     }
 
     function switchTab(event, tabId) {
@@ -811,7 +812,7 @@
         globalData.forEach(item => {
             let hasKendala = item.keterangan && item.keterangan.trim() !== "" && item.keterangan.trim() !== "-" && 
                              item.keterangan.toLowerCase() !== "tidak ada" && item.keterangan.toLowerCase() !== "aman";
-            let isError = (item.itemIndoor && item.itemIndoor.includes("Error")) || (item.itemOutdoor && item.itemOutdoor.includes("Error"));
+            let isError = (item.itemIndoor && item.itemIndoor.includes("(")) || (item.itemOutdoor && item.itemOutdoor.includes("("));
 
             if (hasKendala || isError) {
                 let units = item.unitAc ? item.unitAc.split(', ') : [];
@@ -822,12 +823,12 @@
 
                     if (lantai && unitClean) {
                         if (!issueCounts[u]) {
-                            issueCounts[u] = { count: 0, lastIssue: item.keterangan || "Servis Error", lastDate: item.tanggal, lantai: lantai, unitClean: unitClean };
+                            issueCounts[u] = { count: 0, lastIssue: item.keterangan || "Ada Catatan Khusus/Error", lastDate: item.tanggal, lantai: lantai, unitClean: unitClean };
                         }
                         issueCounts[u].count += 1;
                         
                         if (new Date(item.tanggal) > new Date(issueCounts[u].lastDate)) {
-                            issueCounts[u].lastIssue = (hasKendala) ? item.keterangan : "Servis Error";
+                            issueCounts[u].lastIssue = (hasKendala) ? item.keterangan : "Ada Catatan Khusus/Error";
                             issueCounts[u].lastDate = item.tanggal;
                         }
                     }
@@ -953,6 +954,7 @@
         cekKewajibanFoto();
     }
 
+    // UPDATE: Pewarnaan pada Tab Riwayat
     function renderFormDanRiwayat() {
         renderDaftarAcLantai();
         const rekapContainer = document.getElementById('rekapContainer'); const historyContainer = document.getElementById('historyContainer');
@@ -1032,8 +1034,22 @@
             let htmlRiwayatLantai = `<div class="lantai-group-header" onclick="toggleLantai('${detailContentId}')"><span>🏢 ${lantai} (${allUnits.length} Unit)</span><span class="toggle-btn-badge" id="${detailBtnId}">▲ Tampilkan Data</span></div><div id="${detailContentId}" class="lantai-content-collapsible">`;
 
             allUnits.forEach(data => {
-                let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => `<div style="background:#f8fafc; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid var(--primary); font-size:11px;"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan)}</div>`).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
-                let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => `<div style="background:#fffbeb; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid var(--accent); font-size:11px;"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan)}</div>`).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
+                let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => {
+                    let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
+                    let bg = hasNote ? "#fef2f2" : "#f8fafc";
+                    let border = hasNote ? "var(--danger)" : "var(--primary)";
+                    let textCol = hasNote ? "color: var(--danger);" : "";
+                    return `<div style="background:${bg}; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid ${border}; font-size:11px; ${textCol}"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan, l.tindakan)}</div>`
+                }).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
+                
+                let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => {
+                    let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
+                    let bg = hasNote ? "#fef2f2" : "#fffbeb";
+                    let border = hasNote ? "var(--danger)" : "var(--accent)";
+                    let textCol = hasNote ? "color: var(--danger);" : "";
+                    return `<div style="background:${bg}; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid ${border}; font-size:11px; ${textCol}"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan, l.tindakan)}</div>`
+                }).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
+                
                 let fotoHtml = data.fotos.length > 0 ? `<div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;">${data.fotos.map(f => generateFotoElement(f)).join('')}</div>` : `<div style="font-size: 10px; color: var(--text-muted); margin-top: 4px; font-style: italic;">[Tidak ada foto]</div>`;
 
                 let isTuntas = (data.indoorLogs.length > 0 && data.outdoorLogs.length > 0);
@@ -1104,20 +1120,23 @@
             }
 
             let tglWaktuStr = `📅 ${formatTglSimpel(item.tanggal)} | 🕒 ${formatJamSimpel(item.jam)}`;
-            let hasKendalaItem = item.keterangan && item.keterangan.trim() !== "" && item.keterangan !== "-" && item.keterangan.toLowerCase() !== "tidak ada" && item.keterangan.toLowerCase() !== "aman";
+            
+            let hasKendalaItem = (item.keterangan && item.keterangan.trim() !== "" && item.keterangan !== "-" && item.keterangan.toLowerCase() !== "tidak ada" && item.keterangan.toLowerCase() !== "aman");
+            let specificNote = (item.itemIndoor && item.itemIndoor.includes('(')) || (item.itemOutdoor && item.itemOutdoor.includes('('));
 
-            if (hasKendalaItem) {
+            if (hasKendalaItem || specificNote) {
                 groupedByMonth[monthKey].hasKendala = true;
-                groupedByMonth[monthKey].keteranganList.push(`<b>[${formatTglSimpel(item.tanggal)}]</b> ${item.keterangan}`);
+                let noteStr = hasKendalaItem ? item.keterangan : "Ada Perbaikan / Catatan Khusus";
+                if (!groupedByMonth[monthKey].keteranganList.includes(`<b>[${formatTglSimpel(item.tanggal)}]</b> ${noteStr}`)) {
+                    groupedByMonth[monthKey].keteranganList.push(`<b>[${formatTglSimpel(item.tanggal)}]</b> ${noteStr}`);
+                }
             }
 
             if (item.itemIndoor && item.itemIndoor !== "Tidak ada") {
                 groupedByMonth[monthKey].indoorLogs.push(`<div style="margin-bottom: 4px;"><span style="font-size:9px; color:var(--text-muted);">${tglWaktuStr}</span><br>${item.itemIndoor}</div>`);
-                if (item.itemIndoor.includes("Error")) groupedByMonth[monthKey].hasKendala = true;
             }
             if (item.itemOutdoor && item.itemOutdoor !== "Tidak ada") {
                 groupedByMonth[monthKey].outdoorLogs.push(`<div style="margin-bottom: 4px;"><span style="font-size:9px; color:var(--text-muted);">${tglWaktuStr}</span><br>${item.itemOutdoor}</div>`);
-                if (item.itemOutdoor.includes("Error")) groupedByMonth[monthKey].hasKendala = true;
             }
 
             if (item.foto && typeof item.foto === 'string' && (item.foto.startsWith('data:image/') || item.foto.startsWith('http'))) {
@@ -1229,7 +1248,7 @@
         });
     });
 
-    // ========== LOGIK CETAK PDF TERBARU (KOMPRESI LEBIH PADAT) ==========
+    // ========== UPDATE LOGIK CETAK PDF TERBARU (HIGHLIGHT MERAH UNTUK MASALAH/CATATAN) ==========
     function printPDF() {
         const filterBulan = document.getElementById('filterBulan').value; 
         if(!filterBulan) return alert('Pilih bulan terlebih dahulu!');
@@ -1276,7 +1295,7 @@
         });
 
         const printAreaContainer = document.getElementById('printArea');
-        printAreaContainer.innerHTML = ''; // Bersihkan container
+        printAreaContainer.innerHTML = ''; 
 
         for (let lantai in historyByLantai) {
             let unitsArr = Object.values(historyByLantai[lantai]);
@@ -1327,7 +1346,7 @@
                     <div class="pdf-main">
                         <div class="pdf-grid-container">`;
 
-            // Looping Palet Detail (Grid) untuk lantai ini (diubah sizing inlinenya)
+            // Looping Palet Detail (Grid) untuk lantai ini
             unitsArr.forEach(data => {
                 let isTuntas = (data.indoorLogs.length > 0 && data.outdoorLogs.length > 0);
                 let adaProgres = (data.indoorLogs.length > 0 || data.outdoorLogs.length > 0);
@@ -1338,16 +1357,26 @@
                         ? `<span style="background: #d97706 !important; color: white !important; padding: 1px 3px; border-radius: 2px; font-size: 4.5px; font-weight: 700;">Blm Tuntas</span>` 
                         : `<span style="background: #ef4444 !important; color: white !important; padding: 1px 3px; border-radius: 2px; font-size: 4.5px; font-weight: 700;">Kosong</span>`);
 
+                // UPDATE LOGIK INDOOR
                 let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => {
-                    let ketText = (!l.keterangan || l.keterangan.trim() === "" || l.keterangan === "-" || l.keterangan.toLowerCase() === "tidak ada") ? "Aman" : l.keterangan;
-                    let ketStyle = ketText === "Aman" ? "color: #059669;" : "color: #dc2626;";
-                    return `<div style="background:#f8fafc; padding:2px 3px; margin-bottom:2px; border-radius:2px; border-left:2px solid #1e3a8a; font-size:5px;"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="${ketStyle}">Ket: ${ketText}</span></div>`;
+                    let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
+                    let ketText = hasNote ? ((l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada") ? l.keterangan : "Ada Perbaikan / Catatan Khusus") : "Aman";
+                    let ketStyle = hasNote ? "color: #dc2626;" : "color: #059669;";
+                    let bgStyle = hasNote ? "background:#fef2f2; border-left:2px solid #dc2626;" : "background:#f8fafc; border-left:2px solid #1e3a8a;";
+                    let textStyle = hasNote ? "color: #dc2626;" : "color: inherit;";
+                    
+                    return `<div style="${bgStyle} padding:2px 3px; margin-bottom:2px; border-radius:2px; font-size:5px; ${textStyle}"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="${ketStyle} font-weight:bold;">Ket: ${ketText}</span></div>`;
                 }).join('') : `<span style="color: #dc2626; font-size: 5px; font-weight: bold;">❌ Belum Diservis</span>`;
                 
+                // UPDATE LOGIK OUTDOOR
                 let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => {
-                    let ketText = (!l.keterangan || l.keterangan.trim() === "" || l.keterangan === "-" || l.keterangan.toLowerCase() === "tidak ada") ? "Aman" : l.keterangan;
-                    let ketStyle = ketText === "Aman" ? "color: #059669;" : "color: #dc2626;";
-                    return `<div style="background:#fffbeb; padding:2px 3px; margin-bottom:2px; border-radius:2px; border-left:2px solid #d97706; font-size:5px;"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="${ketStyle}">Ket: ${ketText}</span></div>`;
+                    let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
+                    let ketText = hasNote ? ((l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada") ? l.keterangan : "Ada Perbaikan / Catatan Khusus") : "Aman";
+                    let ketStyle = hasNote ? "color: #dc2626;" : "color: #059669;";
+                    let bgStyle = hasNote ? "background:#fef2f2; border-left:2px solid #dc2626;" : "background:#fffbeb; border-left:2px solid #d97706;";
+                    let textStyle = hasNote ? "color: #dc2626;" : "color: inherit;";
+                    
+                    return `<div style="${bgStyle} padding:2px 3px; margin-bottom:2px; border-radius:2px; font-size:5px; ${textStyle}"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="${ketStyle} font-weight:bold;">Ket: ${ketText}</span></div>`;
                 }).join('') : `<span style="color: #dc2626; font-size: 5px; font-weight: bold;">❌ Belum Diservis</span>`;
 
                 let fotoImgs = '';
