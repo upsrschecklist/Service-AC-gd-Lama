@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servis & Pemeliharaan AC Gedung Lama | RS Hermina Solo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Family -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 Pop-Up -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         :root {
             --primary: #1e3a8a; 
@@ -41,7 +47,8 @@
 
         .header-brand { text-align: center; margin-bottom: 20px; }
         .header-brand h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin: 0 0 4px 0; font-weight: 700; }
-        h2 { text-align: center; color: var(--primary); margin: 0 0 12px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        h2 { text-align: center; color: var(--primary); margin: 0 0 4px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        h3 { text-align: center; color: var(--text-muted); margin: 0 0 12px 0; font-size: 14px; font-weight: 600; }
 
         .status-koneksi { 
             text-align: center; 
@@ -52,7 +59,10 @@
             background: #f0fdf4;
             padding: 8px 12px;
             border-radius: 9999px;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
             width: 100%;
             box-sizing: border-box;
             border: 1px solid #bbf7d0;
@@ -82,7 +92,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .tab-btn.active {
@@ -127,7 +137,10 @@
             flex: 1; padding: 10px; background: #fff; color: var(--primary);
             border: 1.5px solid var(--primary); border-radius: 8px;
             font-size: 12px; font-weight: 600; cursor: pointer; text-align: center;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            transition: all 0.2s ease;
         }
+        .btn-photo-opt:hover { background: #eff6ff; }
 
         .file-info { font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 4px; }
 
@@ -136,7 +149,7 @@
             border: 1px solid #bbf7d0; padding: 16px; border-radius: 12px; 
             margin-bottom: 20px; text-align: center; 
         }
-        .target-box h4 { margin: 0 0 4px 0; color: var(--primary); font-size: 13px; text-transform: uppercase; }
+        .target-box h4 { margin: 0 0 4px 0; color: var(--primary); font-size: 13px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .target-status { font-size: 15px; font-weight: 800; color: #065f46; }
 
         .ac-selection-box { 
@@ -154,7 +167,7 @@
         .ac-item-row { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 6px; }
         .ac-label { font-weight: 600; color: var(--text-main); font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1; }
         
-        .badge-status { font-size: 10px; padding: 4px 8px; border-radius: 9999px; font-weight: 700; }
+        .badge-status { font-size: 10px; padding: 4px 8px; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
         .badge-belum { background: #fef2f2; color: var(--danger); border: 1px solid #fecaca; }
         .badge-sisa { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
         .badge-clear { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
@@ -162,7 +175,7 @@
         .reopen-box { background: #fffbeb; border: 1px solid #fde68a; padding: 10px 12px; border-radius: 8px; margin-bottom: 16px; font-size: 12px; color: #92400e; display: flex; align-items: center; gap: 8px; font-weight: 600; }
 
         .servis-section { background: #fff; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 16px; }
-        .servis-section h4 { margin: 0 0 10px 0; color: var(--primary); font-size: 13px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; font-weight: 700; }
+        .servis-section h4 { margin: 0 0 10px 0; color: var(--primary); font-size: 13px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
         .check-grid { display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 12px; }
         .check-item { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); color: #475569; }
 
@@ -170,14 +183,18 @@
             width: 100%; padding: 12px; 
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%); 
             color: white; border: none; border-radius: 10px; font-size: 14px; 
-            cursor: pointer; font-weight: 700; margin-top: 12px; 
+            cursor: pointer; font-weight: 700; margin-top: 12px; display: flex;
+            align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.2s ease;
         }
+        #btnSubmit:hover { opacity: 0.95; }
 
         .action-box { background: #f8fafc; padding: 16px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color); }
         .btn-pdf { 
             background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); 
             margin-top: 10px; border: none; color: white; padding: 10px; 
             border-radius: 8px; font-weight: 600; width: 100%; cursor: pointer; font-size: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
 
         .lantai-group-header { 
@@ -194,7 +211,7 @@
             align-items: center; 
             cursor: pointer;
         }
-        .toggle-btn-badge { background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+        .toggle-btn-badge { background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
         .lantai-content-collapsible { display: none; }
 
         .history-card { 
@@ -224,7 +241,7 @@
         .section-divider-title {
             color: var(--primary); margin-top: 24px; margin-bottom: 10px; font-size: 15px; 
             font-weight: 800; border-bottom: 2px dashed var(--border-color); padding-bottom: 6px;
-            display: flex; align-items: center; gap: 6px;
+            display: flex; align-items: center; gap: 8px;
         }
         
         .modal-overlay {
@@ -248,7 +265,7 @@
 
         #printArea { display: none; }
         
-        /* ---------- CSS KHUSUS PRINT PDF (SUDAH DIKOMPRES AGAR PAS 1 HALAMAN) ---------- */
+        /* CSS PRINT PDF */
         @media print {
             body { background: white; padding: 0; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
             .container { display: none; }
@@ -276,10 +293,27 @@
                 text-align: center;
                 border-bottom: 1.5px solid var(--primary);
                 padding-bottom: 2px;
-                margin-bottom: 6px; 
+                margin-bottom: 4px; 
             }
             .pdf-header h2 { margin: 0; font-size: 11px; color: var(--primary); font-weight: 900; }
             .pdf-header p { margin: 1px 0 0 0; font-size: 8px; font-weight: 600; color: #334155; }
+
+            /* BANNER TARGET MENYELURUH DI ATAS PDF */
+            .pdf-global-target-banner {
+                background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%) !important;
+                color: white !important;
+                padding: 4px 8px;
+                font-weight: 800;
+                font-size: 8px;
+                margin-bottom: 5px;
+                border-radius: 4px;
+                text-align: center;
+                letter-spacing: 0.5px;
+                border: 1px solid #1e293b;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
 
             .pdf-floor-title {
                 background: var(--primary) !important;
@@ -338,15 +372,23 @@
     <div class="header-brand">
         <h4>Manajemen Fasilitas</h4>
         <h2>Laporan Servis AC Gedung Lama</h2>
-        <h3> RS Hermina Solo</h3>
+        <h3>RS Hermina Solo</h3>
     </div>
     
-    <div class="status-koneksi" id="statusInfo">Mengambil data dari server... 🔄</div>
+    <div class="status-koneksi" id="statusInfo">
+        <i class="fa-solid fa-spinner fa-spin"></i> Mengambil data dari server...
+    </div>
 
     <div class="tab-nav">
-        <button class="tab-btn active" onclick="switchTab(event, 'tabInput')">📝 Input Servis</button>
-        <button class="tab-btn" onclick="switchTab(event, 'tabRiwayat')">📊 Riwayat & Rekap</button>
-        <button class="tab-btn" onclick="switchTab(event, 'tabCariUnit')">🔍 Cari Data Unit</button>
+        <button class="tab-btn active" onclick="switchTab(event, 'tabInput')">
+            <i class="fa-solid fa-pen-to-square"></i> Input Servis
+        </button>
+        <button class="tab-btn" onclick="switchTab(event, 'tabRiwayat')">
+            <i class="fa-solid fa-chart-pie"></i> Riwayat & Rekap
+        </button>
+        <button class="tab-btn" onclick="switchTab(event, 'tabCariUnit')">
+            <i class="fa-solid fa-magnifying-glass"></i> Cari Data Unit
+        </button>
     </div>
 
     <!-- TAB 1: INPUT DATA -->
@@ -385,12 +427,12 @@
                 
                 <label class="reopen-box">
                     <input type="checkbox" id="chkReopen" onchange="renderDaftarAcLantai()"> 
-                    ⚠️ Tampilkan kembali AC yang sudah Clear (Untuk Servis Ulang / Susulan)
+                    <i class="fa-solid fa-triangle-exclamation"></i> Tampilkan kembali AC yang sudah Clear (Untuk Servis Ulang / Susulan)
                 </label>
             </div>
 
             <div class="servis-section" id="sectionIndoor">
-                <h4>🔵 Pengecekan Indoor (Pilih Sesuai Kebutuhan)</h4>
+                <h4><i class="fa-solid fa-circle" style="color: #3b82f6;"></i> Pengecekan Indoor (Pilih Sesuai Kebutuhan)</h4>
                 <div class="check-grid">
                     <label class="check-item"><input type="checkbox" name="optIndoor" value="Pembersihan Filter"> Pembersihan Filter</label>
                     <label class="check-item"><input type="checkbox" name="optIndoor" value="Pembersihan Unit"> Pembersihan Unit</label>
@@ -408,7 +450,7 @@
             </div>
 
             <div class="servis-section" id="sectionOutdoor">
-                <h4>🟠 Pengecekan Outdoor (Pilih Sesuai Kebutuhan)</h4>
+                <h4><i class="fa-solid fa-circle" style="color: #f59e0b;"></i> Pengecekan Outdoor (Pilih Sesuai Kebutuhan)</h4>
                 <div class="check-grid">
                     <label class="check-item"><input type="checkbox" name="optOutdoor" value="Pembersihan Unit"> Pembersihan Unit</label>
                     
@@ -432,8 +474,8 @@
             <div class="form-group">
                 <label id="labelFoto">Bukti Foto Servis / Perbaikan AC <small style="color: var(--danger);" id="noteFotoWajib">(Wajib diunggah)</small></label>
                 <div class="photo-options">
-                    <button type="button" class="btn-photo-opt" onclick="triggerCamera()">📸 Ambil Foto</button>
-                    <button type="button" class="btn-photo-opt" onclick="triggerGallery()">🖼️ Pilih Galeri</button>
+                    <button type="button" class="btn-photo-opt" onclick="triggerCamera()"><i class="fa-solid fa-camera"></i> Ambil Foto</button>
+                    <button type="button" class="btn-photo-opt" onclick="triggerGallery()"><i class="fa-solid fa-image"></i> Pilih Galeri</button>
                 </div>
                 <input type="file" id="fotoKamera" accept="image/*" capture="environment" style="display: none;" onchange="handleFileSelect(this)">
                 <input type="file" id="fotoGaleri" accept="image/*" style="display: none;" onchange="handleFileSelect(this)">
@@ -441,7 +483,7 @@
                 <div class="file-info" id="fileInfoText">Belum ada foto yang dipilih.</div>
             </div>
             
-            <button type="submit" id="btnSubmit">🚀 Simpan & Submit Servis AC</button>
+            <button type="submit" id="btnSubmit"><i class="fa-solid fa-paper-plane"></i> Simpan & Submit Servis AC</button>
         </form>
     </div>
 
@@ -450,16 +492,16 @@
         <div class="action-box">
             <label style="color: var(--primary); font-size: 13px;">Tampilkan Rekap Laporan Bulanan</label>
             <input type="month" id="filterBulan" onchange="renderFormDanRiwayat()">
-            <button class="btn-pdf" onclick="printPDF()">🖨️ Cetak Laporan PDF (Otomatis Tertata)</button>
+            <button class="btn-pdf" onclick="printPDF()"><i class="fa-solid fa-print"></i> Cetak Laporan PDF (Otomatis Tertata)</button>
         </div>
 
         <div class="target-box" id="targetBoxContainer">
-            <h4>🎯 Status Target Servis Bulanan</h4>
+            <h4><i class="fa-solid fa-bullseye"></i> Status Target Servis Bulanan</h4>
             <div class="target-status" id="targetStatusText">Menghitung target...</div>
         </div>
 
         <div class="section-divider-title">
-            📊 <span>1. Rekap Status Pengerjaan (Atas)</span>
+            <i class="fa-solid fa-chart-column"></i> <span>1. Rekap Status Pengerjaan (Atas)</span>
         </div>
         <p style="font-size: 11px; color: var(--text-muted); margin-top: -6px; margin-bottom: 12px;">Klik nama lantai untuk membuka/menyembunyikan tabel status.</p>
         
@@ -468,7 +510,7 @@
         </div>
 
         <div class="section-divider-title" style="margin-top: 28px;">
-            📋 <span>2. Riwayat Detail & Catatan Unit AC (Bawah)</span>
+            <i class="fa-solid fa-list-check"></i> <span>2. Riwayat Detail & Catatan Unit AC (Bawah)</span>
         </div>
         <p style="font-size: 11px; color: var(--text-muted); margin-top: -6px; margin-bottom: 12px;">Klik lantai di bawah ini untuk melihat detail tindakan & foto pengerjaan.</p>
         
@@ -482,10 +524,11 @@
     <!-- TAB 3: PENCARIAN DATA PER UNIT -->
     <div id="tabCariUnit" class="tab-content">
         <div class="action-box">
-            <h4 style="margin-top: 0; color: var(--primary); font-size: 14px; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">🔎 Lacak Riwayat Spesifik per Unit AC</h4>
+            <h4 style="margin-top: 0; color: var(--primary); font-size: 14px; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-magnifying-glass-location"></i> Lacak Riwayat Spesifik per Unit AC
+            </h4>
             
-            <div id="topProblematicAcContainer" style="margin-top: 14px; margin-bottom: 16px;">
-            </div>
+            <div id="topProblematicAcContainer" style="margin-top: 14px; margin-bottom: 16px;"></div>
             
             <div class="row-group" style="margin-top: 10px;">
                 <div>
@@ -518,20 +561,18 @@
 
 </div>
 
-<!-- Modal Pop-Up untuk Preview Gambar -->
+<!-- Modal Pop-Up Preview Gambar -->
 <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
     <span class="modal-close-btn" onclick="closeImageModal()">&times;</span>
     <img class="modal-content-img" id="modalImgSrc" onclick="event.stopPropagation()">
 </div>
 
-<!-- CONTAINER KHUSUS UNTUK PRINT PDF -->
-<div id="printArea">
-    <!-- Isi dari Print Area akan digenerate otomatis oleh JavaScript (printPDF) -->
-</div>
+<!-- Print Area -->
+<div id="printArea"></div>
 
 <script>
     function handleImageError(imgElement, originalUrl) {
-        imgElement.outerHTML = `<a href="${originalUrl}" target="_blank" style="background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold; border: 1px solid #bae6fd; display: inline-flex; align-items: center; gap: 4px;">🔗 Buka Link</a>`;
+        imgElement.outerHTML = `<a href="${originalUrl}" target="_blank" style="background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold; border: 1px solid #bae6fd; display: inline-flex; align-items: center; gap: 4px;"><i class="fa-solid fa-link"></i> Buka Link</a>`;
     }
 
     function generateFotoElement(fotoStr) {
@@ -571,14 +612,13 @@
         document.getElementById('imageModal').style.display = "none";
     }
 
-    // UPDATE: Membaca kendala baik dari input umum maupun jika tindakan memiliki catatan spesifik (di dalam tanda kurung)
     function formatKendalaHtml(ket, tindakan) {
         let hasNote = (ket && ket.trim() !== "" && ket !== "-" && ket.toLowerCase() !== "tidak ada" && ket.toLowerCase() !== "aman") || (tindakan && tindakan.includes('('));
         if (!hasNote) {
-            return `<span style="color: var(--success); font-size: 10px; font-weight: 700;">✅ Kendala: Aman</span>`;
+            return `<span style="color: var(--success); font-size: 10px; font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Kendala: Aman</span>`;
         }
         let ketText = (ket && ket.trim() !== "" && ket !== "-" && ket.toLowerCase() !== "tidak ada") ? ket : "Ada Perbaikan / Catatan";
-        return `<span style="color: var(--danger); font-size: 10px; font-weight: 700;">⚠️ Kendala: ${ketText}</span>`;
+        return `<span style="color: var(--danger); font-size: 10px; font-weight: 700;"><i class="fa-solid fa-triangle-exclamation"></i> Kendala: ${ketText}</span>`;
     }
 
     function switchTab(event, tabId) {
@@ -592,9 +632,11 @@
         const content = document.getElementById(targetId);
         const btnBadge = document.getElementById('btn-' + targetId);
         if (content.style.display === "block") {
-            content.style.display = "none"; if(btnBadge) btnBadge.innerHTML = '▲ Tampilkan Data';
+            content.style.display = "none"; 
+            if(btnBadge) btnBadge.innerHTML = '<i class="fa-solid fa-chevron-up"></i> Tampilkan Data';
         } else {
-            content.style.display = "block"; if(btnBadge) btnBadge.innerHTML = '▼ Sembunyikan Data';
+            content.style.display = "block"; 
+            if(btnBadge) btnBadge.innerHTML = '<i class="fa-solid fa-chevron-down"></i> Sembunyikan Data';
         }
     }
 
@@ -603,7 +645,6 @@
     let globalData = [];
     let selectedFile = null;
 
-    // MASTER DATA AC TERBARU RS HERMINA SOLO (TOTAL 233 UNIT)
     const masterAcGedungBaru = {
         "Lantai 1": [
             "Poli Gigi (SPLIT 1PK)", "Poli THT (SPLIT 1PK)", "Poli Neurologi (SPLIT 1PK)", "Poli Jantung (SPLIT 1PK)", 
@@ -730,8 +771,7 @@
     function handleFileSelect(input) {
         if (input.files && input.files[0]) {
             selectedFile = input.files[0];
-            document.getElementById('fileInfoText').innerText = "✔️ File terpilih: " + selectedFile.name;
-            document.getElementById('fileInfoText').style.color = "var(--success)";
+            document.getElementById('fileInfoText').innerHTML = `<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> File terpilih: ${selectedFile.name}</span>`;
         }
     }
 
@@ -793,10 +833,10 @@
                 globalData = data; 
                 renderFormDanRiwayat();
                 renderTopProblematicAc(); 
-                document.getElementById('statusInfo').innerText = "✔️ Terhubung dengan Server (Google Sheets)";
+                document.getElementById('statusInfo').innerHTML = `<i class="fa-solid fa-circle-check"></i> Terhubung dengan Server (Google Sheets)`;
             })
             .catch(error => {
-                document.getElementById('statusInfo').innerText = "❌ Gagal memuat data. Cek koneksi internet.";
+                document.getElementById('statusInfo').innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Gagal memuat data. Cek koneksi internet.`;
                 document.getElementById('statusInfo').style.color = "#dc2626";
             });
     }
@@ -841,7 +881,7 @@
         }).sort((a, b) => b.count - a.count);
 
         if (sortedIssues.length === 0) {
-            container.innerHTML = `<div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 10px; font-size: 11px; color: var(--success); font-weight: 600; text-align: center;">✅ Seluruh AC sejauh ini tidak memiliki riwayat error atau catatan kendala.</div>`;
+            container.innerHTML = `<div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 10px; font-size: 11px; color: var(--success); font-weight: 600; text-align: center;"><i class="fa-solid fa-circle-check"></i> Seluruh AC sejauh ini tidak memiliki riwayat error atau catatan kendala.</div>`;
             return;
         }
 
@@ -849,7 +889,7 @@
 
         let html = `<div style="background: #fef2f2; border: 1px solid #fecaca; padding: 12px; border-radius: 10px;">
             <h5 style="margin: 0 0 10px 0; color: #991b1b; font-size: 12px; display: flex; align-items: center; justify-content: space-between;">
-                <span>⚠️ Top ${topIssues.length} AC Paling Sering Bermasalah</span>
+                <span><i class="fa-solid fa-triangle-exclamation"></i> Top ${topIssues.length} AC Paling Sering Bermasalah</span>
                 <span style="font-size: 10px; font-weight: normal; font-style: italic;">(Klik unit untuk detail)</span>
             </h5>
             <div style="display: flex; flex-direction: column; gap: 8px;">`;
@@ -859,7 +899,7 @@
             
             html += `<div class="problem-card-item" onclick="autoSelectProblemUnit('${item.lantai}', '${item.unitClean}')" style="background: #fff; padding: 8px 10px; border-radius: 8px; border: 1px solid #fca5a5; display: flex; justify-content: space-between; align-items: center;">
                 <div style="flex: 1; padding-right: 8px;">
-                    <div style="font-size: 12px; font-weight: 700; color: #7f1d1d; margin-bottom: 2px;">🏢 ${item.lantai} — ${item.unitClean}</div>
+                    <div style="font-size: 12px; font-weight: 700; color: #7f1d1d; margin-bottom: 2px;"><i class="fa-solid fa-building"></i> ${item.lantai} — ${item.unitClean}</div>
                     <div style="font-size: 10px; color: #991b1b; line-height: 1.2;">Catatan Terakhir: <i>${shortDesc}</i></div>
                 </div>
                 <div style="background: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 800; text-align: center; min-width: 35px;">
@@ -939,7 +979,7 @@
         });
 
         if (unitAktif.length === 0 && !isReopenMode) {
-            container.innerHTML = `<p style="color: var(--success); font-weight: bold; text-align: center; margin: 5px;">🎉 Semua unit AC di ${lantaiPilih} sudah tuntas 100%!</p>`;
+            container.innerHTML = `<p style="color: var(--success); font-weight: bold; text-align: center; margin: 5px;"><i class="fa-solid fa-square-check"></i> Semua unit AC di ${lantaiPilih} sudah tuntas 100%!</p>`;
             cekKewajibanFoto(); return;
         }
 
@@ -947,14 +987,13 @@
             let badgeText = "Belum Diservis"; let badgeClass = "badge-belum";
             if (obj.status.indoor && !obj.status.outdoor) { badgeText = "Sisa: Outdoor"; badgeClass = "badge-sisa"; }
             else if (!obj.status.indoor && obj.status.outdoor) { badgeText = "Sisa: Indoor"; badgeClass = "badge-sisa"; }
-            else if (obj.status.indoor && obj.status.outdoor) { badgeText = "✔️ Clear"; badgeClass = "badge-clear"; }
+            else if (obj.status.indoor && obj.status.outdoor) { badgeText = '<i class="fa-solid fa-check"></i> Clear'; badgeClass = "badge-clear"; }
 
             container.innerHTML += `<div class="ac-item-row"><label class="ac-label"><input type="checkbox" name="unitAcPilih" value="${obj.nama}" onchange="cekKewajibanFoto()"> ${obj.nama}</label><span class="badge-status ${badgeClass}">${badgeText}</span></div>`;
         });
         cekKewajibanFoto();
     }
 
-    // UPDATE: Pewarnaan pada Tab Riwayat
     function renderFormDanRiwayat() {
         renderDaftarAcLantai();
         const rekapContainer = document.getElementById('rekapContainer'); const historyContainer = document.getElementById('historyContainer');
@@ -986,18 +1025,18 @@
         if(persentase > 100) persentase = 100;
         
         document.getElementById('targetStatusText').innerHTML = (progressUnit >= totalSemuaUnit) 
-            ? `<span style="color: var(--success);">✨ TERCAPAI 100% (${progressUnit} / ${totalSemuaUnit} Unit)</span>` 
-            : `<span style="color: #d97706;">🔄 BERPROSES: ${progressUnit} dari ${totalSemuaUnit} Unit (${persentase}%)</span>`;
+            ? `<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> TERCAPAI 100% (${progressUnit} / ${totalSemuaUnit} Unit)</span>` 
+            : `<span style="color: #d97706;"><i class="fa-solid fa-arrows-rotate"></i> BERPROSES: ${progressUnit} dari ${totalSemuaUnit} Unit (${persentase}%)</span>`;
 
         let idxRekap = 1;
         for (let lantai in masterAcGedungBaru) {
             let contentId = `rekap-lantai-${idxRekap}`; let btnId = `btn-${contentId}`;
-            let htmlRekap = `<div class="lantai-group-header" onclick="toggleLantai('${contentId}')"><span>🏢 ${lantai} (${masterAcGedungBaru[lantai].length} Unit)</span><span class="toggle-btn-badge" id="${btnId}">▲ Tampilkan Data</span></div><div id="${contentId}" class="lantai-content-collapsible" style="margin-bottom: 8px;"><table style="width: 100%; border-collapse: collapse; font-size: 11px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); background: #fff;"><thead style="background: var(--bg-color); color: var(--primary);"><tr><th style="padding: 6px 8px; text-align: left; width: 60%;">Unit AC</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Indoor</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Outdoor</th></tr></thead><tbody>`;
+            let htmlRekap = `<div class="lantai-group-header" onclick="toggleLantai('${contentId}')"><span><i class="fa-solid fa-building"></i> ${lantai} (${masterAcGedungBaru[lantai].length} Unit)</span><span class="toggle-btn-badge" id="${btnId}"><i class="fa-solid fa-chevron-up"></i> Tampilkan Data</span></div><div id="${contentId}" class="lantai-content-collapsible" style="margin-bottom: 8px;"><table style="width: 100%; border-collapse: collapse; font-size: 11px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); background: #fff;"><thead style="background: var(--bg-color); color: var(--primary);"><tr><th style="padding: 6px 8px; text-align: left; width: 60%;">Unit AC</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Indoor</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Outdoor</th></tr></thead><tbody>`;
 
             masterAcGedungBaru[lantai].forEach(unit => {
                 let key = `${lantai} - ${unit}`; let stat = statusMapRekap[key] || { indoor: false, outdoor: false };
-                let inCheck = stat.indoor ? '<span style="color: var(--success); font-weight: bold;">✔️ Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;">❌ Belum Tuntas</span>';
-                let outCheck = stat.outdoor ? '<span style="color: var(--success); font-weight: bold;">✔️ Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;">❌ Belum Tuntas</span>';
+                let inCheck = stat.indoor ? '<span style="color: var(--success); font-weight: bold;"><i class="fa-solid fa-check"></i> Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;"><i class="fa-solid fa-xmark"></i> Belum</span>';
+                let outCheck = stat.outdoor ? '<span style="color: var(--success); font-weight: bold;"><i class="fa-solid fa-check"></i> Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;"><i class="fa-solid fa-xmark"></i> Belum</span>';
                 htmlRekap += `<tr style="border-top: 1px solid var(--border-color);"><td style="padding: 6px 8px;">${unit}</td><td style="padding: 6px 8px; text-align: center; background: ${stat.indoor ? '#f0fdf4' : '#fef2f2'};">${inCheck}</td><td style="padding: 6px 8px; text-align: center; background: ${stat.outdoor ? '#f0fdf4' : '#fef2f2'};">${outCheck}</td></tr>`;
             });
             htmlRekap += `</tbody></table></div>`; rekapContainer.innerHTML += htmlRekap; idxRekap++;
@@ -1031,7 +1070,7 @@
         for (let lantai in historyByLantai) {
             let allUnits = Object.values(historyByLantai[lantai]); 
             let detailContentId = `detail-lantai-${idxDetail}`; let detailBtnId = `btn-${detailContentId}`;
-            let htmlRiwayatLantai = `<div class="lantai-group-header" onclick="toggleLantai('${detailContentId}')"><span>🏢 ${lantai} (${allUnits.length} Unit)</span><span class="toggle-btn-badge" id="${detailBtnId}">▲ Tampilkan Data</span></div><div id="${detailContentId}" class="lantai-content-collapsible">`;
+            let htmlRiwayatLantai = `<div class="lantai-group-header" onclick="toggleLantai('${detailContentId}')"><span><i class="fa-solid fa-building"></i> ${lantai} (${allUnits.length} Unit)</span><span class="toggle-btn-badge" id="${detailBtnId}"><i class="fa-solid fa-chevron-up"></i> Tampilkan Data</span></div><div id="${detailContentId}" class="lantai-content-collapsible">`;
 
             allUnits.forEach(data => {
                 let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => {
@@ -1040,7 +1079,7 @@
                     let border = hasNote ? "var(--danger)" : "var(--primary)";
                     let textCol = hasNote ? "color: var(--danger);" : "";
                     return `<div style="background:${bg}; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid ${border}; font-size:11px; ${textCol}"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan, l.tindakan)}</div>`
-                }).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
+                }).join('') : `<span style="color: var(--danger); font-size: 11px;"><i class="fa-solid fa-xmark"></i> Belum Tuntas</span>`;
                 
                 let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => {
                     let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
@@ -1048,7 +1087,7 @@
                     let border = hasNote ? "var(--danger)" : "var(--accent)";
                     let textCol = hasNote ? "color: var(--danger);" : "";
                     return `<div style="background:${bg}; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid ${border}; font-size:11px; ${textCol}"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan, l.tindakan)}</div>`
-                }).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
+                }).join('') : `<span style="color: var(--danger); font-size: 11px;"><i class="fa-solid fa-xmark"></i> Belum Tuntas</span>`;
                 
                 let fotoHtml = data.fotos.length > 0 ? `<div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;">${data.fotos.map(f => generateFotoElement(f)).join('')}</div>` : `<div style="font-size: 10px; color: var(--text-muted); margin-top: 4px; font-style: italic;">[Tidak ada foto]</div>`;
 
@@ -1056,12 +1095,12 @@
                 let adaProgres = (data.indoorLogs.length > 0 || data.outdoorLogs.length > 0);
                 
                 let badgeTuntas = isTuntas 
-                    ? `<span style="background: var(--success); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">✔️ Tuntas</span>` 
+                    ? `<span style="background: var(--success); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;"><i class="fa-solid fa-check"></i> Tuntas</span>` 
                     : (adaProgres 
-                        ? `<span style="background: var(--accent); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">⚠️ Belum Tuntas</span>` 
-                        : `<span style="background: var(--danger); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">✖️ Belum Tuntas</span>`);
+                        ? `<span style="background: var(--accent); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;"><i class="fa-solid fa-triangle-exclamation"></i> Belum Tuntas</span>` 
+                        : `<span style="background: var(--danger); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;"><i class="fa-solid fa-xmark"></i> Belum Diservis</span>`);
 
-                htmlRiwayatLantai += `<div class="history-card"><div class="history-header"><span>🔧 ${data.unitName}</span>${badgeTuntas}</div><div class="log-section"><b>🔵 Riwayat Indoor:</b><br><div style="margin-top: 4px;">${indoorHtml}</div></div><div class="log-section" style="margin-top:8px;"><b>🟠 Riwayat Outdoor:</b><br><div style="margin-top: 4px;">${outdoorHtml}</div></div><div style="margin-top:8px; font-size: 11px;"><b>📸 Bukti Foto:</b>${fotoHtml}</div></div>`;
+                htmlRiwayatLantai += `<div class="history-card"><div class="history-header"><span><i class="fa-solid fa-wrench"></i> ${data.unitName}</span>${badgeTuntas}</div><div class="log-section"><b><i class="fa-solid fa-circle" style="color: #3b82f6;"></i> Riwayat Indoor:</b><br><div style="margin-top: 4px;">${indoorHtml}</div></div><div class="log-section" style="margin-top:8px;"><b><i class="fa-solid fa-circle" style="color: #f59e0b;"></i> Riwayat Outdoor:</b><br><div style="margin-top: 4px;">${outdoorHtml}</div></div><div style="margin-top:8px; font-size: 11px;"><b><i class="fa-solid fa-camera"></i> Bukti Foto:</b>${fotoHtml}</div></div>`;
             });
 
             htmlRiwayatLantai += `</div>`; historyContainer.innerHTML += htmlRiwayatLantai; idxDetail++;
@@ -1088,7 +1127,7 @@
         globalData.forEach(item => { if (item.unitAc && item.unitAc.includes(targetKey)) historyUnit.push(item); });
         
         if (historyUnit.length === 0) {
-            container.innerHTML = `<div class="history-card" style="text-align: center; padding: 20px;"><p style="color: var(--text-muted); font-weight: 600; margin: 0; font-size: 12px;">ℹ️ Belum ada riwayat untuk <b>${unit} (${lantai})</b>.</p></div>`; return;
+            container.innerHTML = `<div class="history-card" style="text-align: center; padding: 20px;"><p style="color: var(--text-muted); font-weight: 600; margin: 0; font-size: 12px;"><i class="fa-solid fa-circle-info"></i> Belum ada riwayat untuk <b>${unit} (${lantai})</b>.</p></div>`; return;
         }
 
         let groupedByMonth = {};
@@ -1119,7 +1158,7 @@
                 };
             }
 
-            let tglWaktuStr = `📅 ${formatTglSimpel(item.tanggal)} | 🕒 ${formatJamSimpel(item.jam)}`;
+            let tglWaktuStr = `<i class="fa-regular fa-calendar"></i> ${formatTglSimpel(item.tanggal)} | <i class="fa-regular fa-clock"></i> ${formatJamSimpel(item.jam)}`;
             
             let hasKendalaItem = (item.keterangan && item.keterangan.trim() !== "" && item.keterangan !== "-" && item.keterangan.toLowerCase() !== "tidak ada" && item.keterangan.toLowerCase() !== "aman");
             let specificNote = (item.itemIndoor && item.itemIndoor.includes('(')) || (item.itemOutdoor && item.itemOutdoor.includes('('));
@@ -1144,36 +1183,36 @@
             }
         });
 
-        let html = `<div class="history-card" style="background: #f0f9ff; border-color: #bae6fd;"><div style="font-size: 14px; font-weight: 800; color: var(--primary);">🏢 ${lantai} — 🔧 ${unit}</div><div style="font-size: 11px; color: #0369a1; font-weight: 600; margin-top: 2px;">Total Penanganan: <b>${historyUnit.length} Laporan Pekerjaan</b></div></div><h4 style="color: var(--primary); font-size: 13px; font-weight: 800; margin-top: 16px; margin-bottom: 8px;">📜 Kronologi Penanganan Bulanan:</h4>`;
+        let html = `<div class="history-card" style="background: #f0f9ff; border-color: #bae6fd;"><div style="font-size: 14px; font-weight: 800; color: var(--primary);"><i class="fa-solid fa-building"></i> ${lantai} — <i class="fa-solid fa-wrench"></i> ${unit}</div><div style="font-size: 11px; color: #0369a1; font-weight: 600; margin-top: 2px;">Total Penanganan: <b>${historyUnit.length} Laporan Pekerjaan</b></div></div><h4 style="color: var(--primary); font-size: 13px; font-weight: 800; margin-top: 16px; margin-bottom: 8px;"><i class="fa-solid fa-clock-rotate-left"></i> Kronologi Penanganan Bulanan:</h4>`;
 
         let sortedMonths = Object.keys(groupedByMonth).sort((a, b) => b.localeCompare(a));
 
         sortedMonths.forEach(monthKey => {
             let data = groupedByMonth[monthKey];
             let borderStyle = data.hasKendala ? 'border-left: 4px solid var(--danger);' : 'border-left: 4px solid var(--success);';
-            let badgeCategory = data.hasKendala ? `<span class="badge-status" style="background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;">⚠️ ADA KENDALA / ERROR</span>` : `<span class="badge-status badge-clear">✔️ PERAWATAN RUTIN / AMAN</span>`;
+            let badgeCategory = data.hasKendala ? `<span class="badge-status" style="background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;"><i class="fa-solid fa-triangle-exclamation"></i> ADA KENDALA / ERROR</span>` : `<span class="badge-status badge-clear"><i class="fa-solid fa-check"></i> PERAWATAN RUTIN / AMAN</span>`;
 
             let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.join('') : `<span style="color: var(--text-muted); font-style: italic; font-size: 10px;">Tidak ada servis indoor di bulan ini.</span>`;
             let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.join('') : `<span style="color: var(--text-muted); font-style: italic; font-size: 10px;">Tidak ada servis outdoor di bulan ini.</span>`;
             
             let kendalaHtml = data.hasKendala 
-                ? `<div style="background:#fef2f2; border: 1px solid #fecaca; padding:8px; border-radius:6px; font-size:11px; color:#991b1b; margin-top: 8px;"><b>⚠️ Catatan Masalah:</b><br><div style="margin-top:2px;">${data.keteranganList.join('<br>')}</div></div>` 
-                : `<div style="background:#f0fdf4; border: 1px solid #bbf7d0; padding:8px; border-radius:6px; font-size:11px; color:var(--success); margin-top: 8px;"><b>✅ Catatan Masalah:</b> <span style="font-weight:600;">Aman (Clear)</span></div>`;
+                ? `<div style="background:#fef2f2; border: 1px solid #fecaca; padding:8px; border-radius:6px; font-size:11px; color:#991b1b; margin-top: 8px;"><b><i class="fa-solid fa-triangle-exclamation"></i> Catatan Masalah:</b><br><div style="margin-top:2px;">${data.keteranganList.join('<br>')}</div></div>` 
+                : `<div style="background:#f0fdf4; border: 1px solid #bbf7d0; padding:8px; border-radius:6px; font-size:11px; color:var(--success); margin-top: 8px;"><b><i class="fa-solid fa-circle-check"></i> Catatan Masalah:</b> <span style="font-weight:600;">Aman (Clear)</span></div>`;
             
             let fotoHtml = data.fotos.length > 0 ? `<div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">${data.fotos.map(f => generateFotoElement(f)).join('')}</div>` : '';
 
             html += `<div class="history-card" style="${borderStyle}">
                 <div class="history-header">
-                    <span>📅 PERIODE: ${data.monthName.toUpperCase()}</span>
+                    <span><i class="fa-regular fa-calendar-check"></i> PERIODE: ${data.monthName.toUpperCase()}</span>
                     ${badgeCategory}
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div style="background:#f8fafc; padding:8px; border-radius:6px; border:1px solid var(--border-color);">
-                        <b style="color:var(--primary); font-size:11px;">🔵 Indoor:</b>
+                        <b style="color:var(--primary); font-size:11px;"><i class="fa-solid fa-circle" style="color: #3b82f6;"></i> Indoor:</b>
                         <div style="font-size:11px; font-weight:600; margin-top:4px;">${indoorHtml}</div>
                     </div>
                     <div style="background:#fffbeb; padding:8px; border-radius:6px; border:1px solid #fde68a;">
-                        <b style="color:var(--accent); font-size:11px;">🟠 Outdoor:</b>
+                        <b style="color:var(--accent); font-size:11px;"><i class="fa-solid fa-circle" style="color: #f59e0b;"></i> Outdoor:</b>
                         <div style="font-size:11px; font-weight:600; margin-top:4px;">${outdoorHtml}</div>
                     </div>
                 </div>
@@ -1185,11 +1224,22 @@
         container.innerHTML = html;
     }
 
+    // FORM SUBMIT DENGAN SWEETALERT2
     document.getElementById('formAc').addEventListener('submit', function(e) {
         e.preventDefault();
         let lantaiAktif = document.getElementById('pilihLantai').value;
-        let selectedUnits = []; document.querySelectorAll('input[name="unitAcPilih"]:checked').forEach((checkbox) => { selectedUnits.push(checkbox.value); });
-        if(selectedUnits.length === 0) return alert('Pilih minimal 1 unit AC!');
+        let selectedUnits = []; 
+        document.querySelectorAll('input[name="unitAcPilih"]:checked').forEach((checkbox) => { selectedUnits.push(checkbox.value); });
+        
+        if(selectedUnits.length === 0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Peringatan',
+                text: 'Pilih minimal 1 unit AC!',
+                confirmButtonColor: '#1e3a8a'
+            });
+            return;
+        }
         
         let indoorArr = []; 
         document.querySelectorAll('input[name="optIndoor"]:checked').forEach((cb) => { 
@@ -1213,22 +1263,44 @@
             outdoorArr.push(val); 
         });
         
-        if (indoorArr.length === 0 && outdoorArr.length === 0) return alert('Pilih minimal satu item di Indoor atau Outdoor!');
+        if (indoorArr.length === 0 && outdoorArr.length === 0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Peringatan',
+                text: 'Pilih minimal satu item tindakan di Indoor atau Outdoor!',
+                confirmButtonColor: '#1e3a8a'
+            });
+            return;
+        }
 
-        const btn = document.getElementById('btnSubmit'); btn.innerText = "⏳ Memproses..."; btn.disabled = true;
+        // Tampilkan SweetAlert Loading
+        Swal.fire({
+            title: 'Mengirim Data...',
+            text: 'Mohon tunggu, data servis sedang disimpan.',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
 
         getBase64Image(selectedFile, function(base64Foto) {
             const data = {
-                tanggal: document.getElementById('tanggal').value, jam: document.getElementById('jam').value,
+                tanggal: document.getElementById('tanggal').value, 
+                jam: document.getElementById('jam').value,
                 unitAc: selectedUnits.map(u => `${lantaiAktif} - ${u}`).join(', '),
                 itemIndoor: indoorArr.length > 0 ? indoorArr.join(', ') : 'Tidak ada',
                 itemOutdoor: outdoorArr.length > 0 ? outdoorArr.join(', ') : 'Tidak ada',
-                keterangan: document.getElementById('keterangan').value, foto: base64Foto
+                keterangan: document.getElementById('keterangan').value, 
+                foto: base64Foto
             };
 
             fetch(URL_GOOGLE_SCRIPT, { method: 'POST', body: JSON.stringify(data) })
             .then(response => {
-                alert('Berhasil! Data Servis AC tersimpan.');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Data Servis AC telah tersimpan ke database.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
                 
                 document.getElementById('formAc').reset(); 
                 document.getElementById('catatanIndoorTurun').style.display = "none";
@@ -1240,18 +1312,34 @@
                 document.getElementById('chkReopen').checked = false; selectedFile = null;
                 document.getElementById('fileInfoText').innerText = "Belum ada foto yang dipilih.";
                 
-                btn.innerText = "🚀 Simpan & Submit Servis AC"; btn.disabled = false;
                 document.getElementById('historyContainer').innerHTML = '<p class="loading-text">Memperbarui data...</p>';
                 setTimeout(loadDataFromServer, 2000); 
             })
-            .catch(error => { alert('Terkirim!'); btn.innerText = "🚀 Simpan & Submit Servis AC"; btn.disabled = false; setTimeout(loadDataFromServer, 1000); });
+            .catch(error => { 
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Terkirim!',
+                    text: 'Data servis berhasil terkirim.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                setTimeout(loadDataFromServer, 1000); 
+            });
         });
     });
 
-    // ========== UPDATE LOGIK CETAK PDF TERBARU (HIGHLIGHT MERAH UNTUK MASALAH/CATATAN) ==========
+    // FUNGSI PRINT PDF LENGKAP DENGAN TARGET MENYELURUH DI ATAS
     function printPDF() {
         const filterBulan = document.getElementById('filterBulan').value; 
-        if(!filterBulan) return alert('Pilih bulan terlebih dahulu!');
+        if(!filterBulan) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Pilih Bulan',
+                text: 'Silakan pilih bulan terlebih dahulu!',
+                confirmButtonColor: '#dc2626'
+            });
+            return;
+        }
         
         const dataBulanIni = globalData.filter(item => isSatuBulan(item.tanggal, filterBulan));
         dataBulanIni.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
@@ -1294,6 +1382,19 @@
             });
         });
 
+        // Hitung Progres Menyeluruh Gedung
+        let totalProgressGlobal = 0;
+        for (let lnt in masterAcGedungBaru) {
+            masterAcGedungBaru[lnt].forEach(unit => {
+                let key = `${lnt} - ${unit}`;
+                let stat = statusMapRekap[key] || { indoor: false, outdoor: false };
+                if (stat.indoor) totalProgressGlobal += 0.5;
+                if (stat.outdoor) totalProgressGlobal += 0.5;
+            });
+        }
+        let persenGlobal = Math.round((totalProgressGlobal / totalSemuaUnit) * 100);
+        if (persenGlobal > 100) persenGlobal = 100;
+
         const printAreaContainer = document.getElementById('printArea');
         printAreaContainer.innerHTML = ''; 
 
@@ -1328,6 +1429,12 @@
                     <p>Periode: ${namaBulan.toUpperCase()} | Dicetak: ${new Date().toLocaleString('id-ID')}</p>
                 </div>
                 
+                <!-- BANNER TARGET MENYELURUH DI PALING ATAS -->
+                <div class="pdf-global-target-banner">
+                    <span>🎯 TOTAL TARGET SERVIS KESELURUHAN GEDUNG LAMA:</span>
+                    <span>${totalProgressGlobal} dari ${totalSemuaUnit} Unit Tuntas (${persenGlobal}%)</span>
+                </div>
+
                 <div class="pdf-floor-title">🏢 AREA PENGERJAAN: ${lantai.toUpperCase()}</div>
 
                 <div class="pdf-content-wrapper">
@@ -1346,7 +1453,6 @@
                     <div class="pdf-main">
                         <div class="pdf-grid-container">`;
 
-            // Looping Palet Detail (Grid) untuk lantai ini
             unitsArr.forEach(data => {
                 let isTuntas = (data.indoorLogs.length > 0 && data.outdoorLogs.length > 0);
                 let adaProgres = (data.indoorLogs.length > 0 || data.outdoorLogs.length > 0);
@@ -1357,7 +1463,6 @@
                         ? `<span style="background: #d97706 !important; color: white !important; padding: 1px 3px; border-radius: 2px; font-size: 4.5px; font-weight: 700;">Blm Tuntas</span>` 
                         : `<span style="background: #ef4444 !important; color: white !important; padding: 1px 3px; border-radius: 2px; font-size: 4.5px; font-weight: 700;">Kosong</span>`);
 
-                // UPDATE LOGIK INDOOR
                 let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => {
                     let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
                     let ketText = hasNote ? ((l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada") ? l.keterangan : "Ada Perbaikan / Catatan Khusus") : "Aman";
@@ -1368,7 +1473,6 @@
                     return `<div style="${bgStyle} padding:2px 3px; margin-bottom:2px; border-radius:2px; font-size:5px; ${textStyle}"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="${ketStyle} font-weight:bold;">Ket: ${ketText}</span></div>`;
                 }).join('') : `<span style="color: #dc2626; font-size: 5px; font-weight: bold;">❌ Belum Diservis</span>`;
                 
-                // UPDATE LOGIK OUTDOOR
                 let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => {
                     let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
                     let ketText = hasNote ? ((l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada") ? l.keterangan : "Ada Perbaikan / Catatan Khusus") : "Aman";
@@ -1404,7 +1508,9 @@
             printAreaContainer.innerHTML += pageHtml;
         }
 
-        window.print();
+        setTimeout(() => {
+            window.print();
+        }, 300);
     }
 
     window.onload = loadDataFromServer;
