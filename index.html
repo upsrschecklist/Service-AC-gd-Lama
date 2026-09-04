@@ -4,13 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servis & Pemeliharaan AC Gedung Lama | RS Hermina Solo</title>
-    <!-- Font Family -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- SweetAlert2 Pop-Up -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1e3a8a; 
@@ -47,8 +41,7 @@
 
         .header-brand { text-align: center; margin-bottom: 20px; }
         .header-brand h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin: 0 0 4px 0; font-weight: 700; }
-        h2 { text-align: center; color: var(--primary); margin: 0 0 4px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-        h3 { text-align: center; color: var(--text-muted); margin: 0 0 12px 0; font-size: 14px; font-weight: 600; }
+        h2 { text-align: center; color: var(--primary); margin: 0 0 12px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
 
         .status-koneksi { 
             text-align: center; 
@@ -59,10 +52,7 @@
             background: #f0fdf4;
             padding: 8px 12px;
             border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            display: inline-block;
             width: 100%;
             box-sizing: border-box;
             border: 1px solid #bbf7d0;
@@ -92,7 +82,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .tab-btn.active {
@@ -137,10 +127,7 @@
             flex: 1; padding: 10px; background: #fff; color: var(--primary);
             border: 1.5px solid var(--primary); border-radius: 8px;
             font-size: 12px; font-weight: 600; cursor: pointer; text-align: center;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            transition: all 0.2s ease;
         }
-        .btn-photo-opt:hover { background: #eff6ff; }
 
         .file-info { font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 4px; }
 
@@ -149,7 +136,7 @@
             border: 1px solid #bbf7d0; padding: 16px; border-radius: 12px; 
             margin-bottom: 20px; text-align: center; 
         }
-        .target-box h4 { margin: 0 0 4px 0; color: var(--primary); font-size: 13px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .target-box h4 { margin: 0 0 4px 0; color: var(--primary); font-size: 13px; text-transform: uppercase; }
         .target-status { font-size: 15px; font-weight: 800; color: #065f46; }
 
         .ac-selection-box { 
@@ -167,7 +154,7 @@
         .ac-item-row { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 6px; }
         .ac-label { font-weight: 600; color: var(--text-main); font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1; }
         
-        .badge-status { font-size: 10px; padding: 4px 8px; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+        .badge-status { font-size: 10px; padding: 4px 8px; border-radius: 9999px; font-weight: 700; }
         .badge-belum { background: #fef2f2; color: var(--danger); border: 1px solid #fecaca; }
         .badge-sisa { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
         .badge-clear { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
@@ -175,7 +162,7 @@
         .reopen-box { background: #fffbeb; border: 1px solid #fde68a; padding: 10px 12px; border-radius: 8px; margin-bottom: 16px; font-size: 12px; color: #92400e; display: flex; align-items: center; gap: 8px; font-weight: 600; }
 
         .servis-section { background: #fff; padding: 14px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 16px; }
-        .servis-section h4 { margin: 0 0 10px 0; color: var(--primary); font-size: 13px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+        .servis-section h4 { margin: 0 0 10px 0; color: var(--primary); font-size: 13px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; font-weight: 700; }
         .check-grid { display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 12px; }
         .check-item { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); color: #475569; }
 
@@ -183,18 +170,14 @@
             width: 100%; padding: 12px; 
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%); 
             color: white; border: none; border-radius: 10px; font-size: 14px; 
-            cursor: pointer; font-weight: 700; margin-top: 12px; display: flex;
-            align-items: center; justify-content: center; gap: 8px;
-            transition: all 0.2s ease;
+            cursor: pointer; font-weight: 700; margin-top: 12px; 
         }
-        #btnSubmit:hover { opacity: 0.95; }
 
         .action-box { background: #f8fafc; padding: 16px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color); }
         .btn-pdf { 
             background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); 
             margin-top: 10px; border: none; color: white; padding: 10px; 
             border-radius: 8px; font-weight: 600; width: 100%; cursor: pointer; font-size: 12px;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
 
         .lantai-group-header { 
@@ -211,7 +194,7 @@
             align-items: center; 
             cursor: pointer;
         }
-        .toggle-btn-badge { background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+        .toggle-btn-badge { background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
         .lantai-content-collapsible { display: none; }
 
         .history-card { 
@@ -241,7 +224,7 @@
         .section-divider-title {
             color: var(--primary); margin-top: 24px; margin-bottom: 10px; font-size: 15px; 
             font-weight: 800; border-bottom: 2px dashed var(--border-color); padding-bottom: 6px;
-            display: flex; align-items: center; gap: 8px;
+            display: flex; align-items: center; gap: 6px;
         }
         
         .modal-overlay {
@@ -265,7 +248,7 @@
 
         #printArea { display: none; }
         
-        /* CSS PRINT PDF */
+        /* ---------- CSS KHUSUS PRINT PDF ---------- */
         @media print {
             body { background: white; padding: 0; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
             .container { display: none; }
@@ -293,27 +276,10 @@
                 text-align: center;
                 border-bottom: 1.5px solid var(--primary);
                 padding-bottom: 2px;
-                margin-bottom: 4px; 
+                margin-bottom: 6px; 
             }
             .pdf-header h2 { margin: 0; font-size: 11px; color: var(--primary); font-weight: 900; }
             .pdf-header p { margin: 1px 0 0 0; font-size: 8px; font-weight: 600; color: #334155; }
-
-            /* BANNER TARGET MENYELURUH DI ATAS PDF */
-            .pdf-global-target-banner {
-                background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%) !important;
-                color: white !important;
-                padding: 4px 8px;
-                font-weight: 800;
-                font-size: 8px;
-                margin-bottom: 5px;
-                border-radius: 4px;
-                text-align: center;
-                letter-spacing: 0.5px;
-                border: 1px solid #1e293b;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
 
             .pdf-floor-title {
                 background: var(--primary) !important;
@@ -327,22 +293,9 @@
                 letter-spacing: 1px;
             }
 
-            .pdf-content-wrapper {
-                display: flex;
-                gap: 8px; 
-                flex: 1;
-                align-items: flex-start;
-            }
-
-            .pdf-sidebar {
-                width: 22%; 
-                border-right: 1.5px dashed #cbd5e1;
-                padding-right: 6px;
-            }
-
-            .pdf-main {
-                width: 78%;
-            }
+            .pdf-content-wrapper { display: flex; gap: 8px; flex: 1; align-items: flex-start; }
+            .pdf-sidebar { width: 22%; border-right: 1.5px dashed #cbd5e1; padding-right: 6px; }
+            .pdf-main { width: 78%; }
 
             .pdf-summary-box { background: #f0fdf4 !important; border: 1px solid #bbf7d0; padding: 4px; margin-bottom: 6px; text-align: center; font-weight: bold; font-size: 7.5px; color: #065f46; border-radius: 4px; line-height: 1.2; }
             
@@ -351,13 +304,7 @@
             .pdf-rekap-table th { background-color: var(--primary) !important; color: white; font-weight: bold; }
             .pdf-rekap-table td:first-child { text-align: left; font-weight: 600; color: #1e293b; }
 
-            .pdf-grid-container {
-                display: grid;
-                grid-template-columns: repeat(5, 1fr); 
-                gap: 4px; 
-                align-content: start;
-            }
-            
+            .pdf-grid-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; align-content: start; }
             .pdf-grid-box { border: 1px solid #cbd5e1; padding: 3px; border-radius: 4px; background: #fff; font-size: 5px; line-height: 1.1; break-inside: avoid; }
             .pdf-grid-header { font-weight: bold; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px; margin-bottom: 2px; color: var(--primary); font-size: 6px; display: flex; justify-content: space-between; align-items: center; }
             
@@ -372,23 +319,15 @@
     <div class="header-brand">
         <h4>Manajemen Fasilitas</h4>
         <h2>Laporan Servis AC Gedung Lama</h2>
-        <h3>RS Hermina Solo</h3>
+        <h3> RS Hermina Solo</h3>
     </div>
     
-    <div class="status-koneksi" id="statusInfo">
-        <i class="fa-solid fa-spinner fa-spin"></i> Mengambil data dari server...
-    </div>
+    <div class="status-koneksi" id="statusInfo">Mengambil data dari server... 🔄</div>
 
     <div class="tab-nav">
-        <button class="tab-btn active" onclick="switchTab(event, 'tabInput')">
-            <i class="fa-solid fa-pen-to-square"></i> Input Servis
-        </button>
-        <button class="tab-btn" onclick="switchTab(event, 'tabRiwayat')">
-            <i class="fa-solid fa-chart-pie"></i> Riwayat & Rekap
-        </button>
-        <button class="tab-btn" onclick="switchTab(event, 'tabCariUnit')">
-            <i class="fa-solid fa-magnifying-glass"></i> Cari Data Unit
-        </button>
+        <button class="tab-btn active" onclick="switchTab(event, 'tabInput')">📝 Input Servis</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tabRiwayat')">📊 Riwayat & Rekap</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tabCariUnit')">🔍 Cari Data Unit</button>
     </div>
 
     <!-- TAB 1: INPUT DATA -->
@@ -427,12 +366,12 @@
                 
                 <label class="reopen-box">
                     <input type="checkbox" id="chkReopen" onchange="renderDaftarAcLantai()"> 
-                    <i class="fa-solid fa-triangle-exclamation"></i> Tampilkan kembali AC yang sudah Clear (Untuk Servis Ulang / Susulan)
+                    ⚠️ Tampilkan kembali AC yang sudah Clear (Untuk Servis Ulang / Susulan)
                 </label>
             </div>
 
             <div class="servis-section" id="sectionIndoor">
-                <h4><i class="fa-solid fa-circle" style="color: #3b82f6;"></i> Pengecekan Indoor (Pilih Sesuai Kebutuhan)</h4>
+                <h4>🔵 Pengecekan Indoor (Pilih Sesuai Kebutuhan)</h4>
                 <div class="check-grid">
                     <label class="check-item"><input type="checkbox" name="optIndoor" value="Pembersihan Filter"> Pembersihan Filter</label>
                     <label class="check-item"><input type="checkbox" name="optIndoor" value="Pembersihan Unit"> Pembersihan Unit</label>
@@ -450,7 +389,7 @@
             </div>
 
             <div class="servis-section" id="sectionOutdoor">
-                <h4><i class="fa-solid fa-circle" style="color: #f59e0b;"></i> Pengecekan Outdoor (Pilih Sesuai Kebutuhan)</h4>
+                <h4>🟠 Pengecekan Outdoor (Pilih Sesuai Kebutuhan)</h4>
                 <div class="check-grid">
                     <label class="check-item"><input type="checkbox" name="optOutdoor" value="Pembersihan Unit"> Pembersihan Unit</label>
                     
@@ -467,15 +406,24 @@
             </div>
 
             <div class="form-group">
-                <label>Catatan Umum <small style="color: var(--text-muted); font-weight: normal;">(Opsional)</small></label>
+                <label>Catatan Umum <small id="noteKeterangan" style="color: var(--text-muted); font-weight: normal;">(Opsional)</small></label>
                 <textarea id="keterangan" rows="2" placeholder="Tuliskan catatan umum atau kendala tambahan jika ada..."></textarea>
+            </div>
+            
+            <!-- KOTAK CENTANG PENANGGULANGAN: Default Tersembunyi, hanya muncul jika unit yang dicentang sedang bermasalah -->
+            <div class="form-group" id="containerTeratasi" style="display: none; background: #e0f2fe; padding: 12px; border-radius: 8px; border: 1px solid #bae6fd;">
+                <label style="color: #0369a1; font-size: 13px; margin-bottom: 0; display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="chkTeratasi" style="width: 16px; height: 16px; margin-top: 2px;" onchange="toggleTeratasiRequired()"> 
+                    <span>Tandai bahwa kendala/error sebelumnya pada AC ini <b>TELAH TERATASI (Clear)</b></span>
+                </label>
+                <p style="font-size: 10px; color: #0284c7; margin: 4px 0 0 24px; font-weight: normal;">Centang ini agar unit tersebut hilang dari daftar merah "AC Paling Sering Bermasalah".</p>
             </div>
             
             <div class="form-group">
                 <label id="labelFoto">Bukti Foto Servis / Perbaikan AC <small style="color: var(--danger);" id="noteFotoWajib">(Wajib diunggah)</small></label>
                 <div class="photo-options">
-                    <button type="button" class="btn-photo-opt" onclick="triggerCamera()"><i class="fa-solid fa-camera"></i> Ambil Foto</button>
-                    <button type="button" class="btn-photo-opt" onclick="triggerGallery()"><i class="fa-solid fa-image"></i> Pilih Galeri</button>
+                    <button type="button" class="btn-photo-opt" onclick="triggerCamera()">📸 Ambil Foto</button>
+                    <button type="button" class="btn-photo-opt" onclick="triggerGallery()">🖼️ Pilih Galeri</button>
                 </div>
                 <input type="file" id="fotoKamera" accept="image/*" capture="environment" style="display: none;" onchange="handleFileSelect(this)">
                 <input type="file" id="fotoGaleri" accept="image/*" style="display: none;" onchange="handleFileSelect(this)">
@@ -483,7 +431,7 @@
                 <div class="file-info" id="fileInfoText">Belum ada foto yang dipilih.</div>
             </div>
             
-            <button type="submit" id="btnSubmit"><i class="fa-solid fa-paper-plane"></i> Simpan & Submit Servis AC</button>
+            <button type="submit" id="btnSubmit">🚀 Simpan & Submit Servis AC</button>
         </form>
     </div>
 
@@ -492,16 +440,16 @@
         <div class="action-box">
             <label style="color: var(--primary); font-size: 13px;">Tampilkan Rekap Laporan Bulanan</label>
             <input type="month" id="filterBulan" onchange="renderFormDanRiwayat()">
-            <button class="btn-pdf" onclick="printPDF()"><i class="fa-solid fa-print"></i> Cetak Laporan PDF (Otomatis Tertata)</button>
+            <button class="btn-pdf" onclick="printPDF()">🖨️ Cetak Laporan PDF (Otomatis Tertata)</button>
         </div>
 
         <div class="target-box" id="targetBoxContainer">
-            <h4><i class="fa-solid fa-bullseye"></i> Status Target Servis Bulanan</h4>
+            <h4>🎯 Status Target Servis Bulanan</h4>
             <div class="target-status" id="targetStatusText">Menghitung target...</div>
         </div>
 
         <div class="section-divider-title">
-            <i class="fa-solid fa-chart-column"></i> <span>1. Rekap Status Pengerjaan (Atas)</span>
+            📊 <span>1. Rekap Status Pengerjaan (Atas)</span>
         </div>
         <p style="font-size: 11px; color: var(--text-muted); margin-top: -6px; margin-bottom: 12px;">Klik nama lantai untuk membuka/menyembunyikan tabel status.</p>
         
@@ -510,7 +458,7 @@
         </div>
 
         <div class="section-divider-title" style="margin-top: 28px;">
-            <i class="fa-solid fa-list-check"></i> <span>2. Riwayat Detail & Catatan Unit AC (Bawah)</span>
+            📋 <span>2. Riwayat Detail & Catatan Unit AC (Bawah)</span>
         </div>
         <p style="font-size: 11px; color: var(--text-muted); margin-top: -6px; margin-bottom: 12px;">Klik lantai di bawah ini untuk melihat detail tindakan & foto pengerjaan.</p>
         
@@ -524,11 +472,10 @@
     <!-- TAB 3: PENCARIAN DATA PER UNIT -->
     <div id="tabCariUnit" class="tab-content">
         <div class="action-box">
-            <h4 style="margin-top: 0; color: var(--primary); font-size: 14px; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-magnifying-glass-location"></i> Lacak Riwayat Spesifik per Unit AC
-            </h4>
+            <h4 style="margin-top: 0; color: var(--primary); font-size: 14px; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">🔎 Lacak Riwayat Spesifik per Unit AC</h4>
             
-            <div id="topProblematicAcContainer" style="margin-top: 14px; margin-bottom: 16px;"></div>
+            <div id="topProblematicAcContainer" style="margin-top: 14px; margin-bottom: 16px;">
+            </div>
             
             <div class="row-group" style="margin-top: 10px;">
                 <div>
@@ -561,18 +508,18 @@
 
 </div>
 
-<!-- Modal Pop-Up Preview Gambar -->
+<!-- Modal Pop-Up untuk Preview Gambar -->
 <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
     <span class="modal-close-btn" onclick="closeImageModal()">&times;</span>
     <img class="modal-content-img" id="modalImgSrc" onclick="event.stopPropagation()">
 </div>
 
-<!-- Print Area -->
+<!-- CONTAINER KHUSUS UNTUK PRINT PDF -->
 <div id="printArea"></div>
 
 <script>
     function handleImageError(imgElement, originalUrl) {
-        imgElement.outerHTML = `<a href="${originalUrl}" target="_blank" style="background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold; border: 1px solid #bae6fd; display: inline-flex; align-items: center; gap: 4px;"><i class="fa-solid fa-link"></i> Buka Link</a>`;
+        imgElement.outerHTML = `<a href="${originalUrl}" target="_blank" style="background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold; border: 1px solid #bae6fd; display: inline-flex; align-items: center; gap: 4px;">🔗 Buka Link</a>`;
     }
 
     function generateFotoElement(fotoStr) {
@@ -604,6 +551,25 @@
         }
     }
 
+    function toggleTeratasiRequired() {
+        const isChecked = document.getElementById('chkTeratasi').checked;
+        const noteKet = document.getElementById('noteKeterangan');
+        const ketInput = document.getElementById('keterangan');
+
+        if (isChecked) {
+            noteKet.innerText = "(Wajib diisi untuk rincian penanggulangan)";
+            noteKet.style.color = "var(--danger)";
+            noteKet.style.fontWeight = "bold";
+            ketInput.setAttribute('required', 'true');
+        } else {
+            noteKet.innerText = "(Opsional)";
+            noteKet.style.color = "var(--text-muted)";
+            noteKet.style.fontWeight = "normal";
+            ketInput.removeAttribute('required');
+        }
+        cekKewajibanFoto();
+    }
+
     function openImageModal(src) {
         document.getElementById('imageModal').style.display = "block";
         document.getElementById('modalImgSrc').src = src;
@@ -613,12 +579,19 @@
     }
 
     function formatKendalaHtml(ket, tindakan) {
-        let hasNote = (ket && ket.trim() !== "" && ket !== "-" && ket.toLowerCase() !== "tidak ada" && ket.toLowerCase() !== "aman") || (tindakan && tindakan.includes('('));
-        if (!hasNote) {
-            return `<span style="color: var(--success); font-size: 10px; font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Kendala: Aman</span>`;
+        let isTeratasi = ket && ket.includes("[TERATASI]");
+        let cleanKet = ket ? ket.replace("[TERATASI]", "").trim() : "";
+        
+        if (isTeratasi) {
+            return `<span style="color: var(--success); font-size: 10px; font-weight: 700;">✅ Penanggulangan Selesai: ${cleanKet || "Unit normal kembali"}</span>`;
         }
-        let ketText = (ket && ket.trim() !== "" && ket !== "-" && ket.toLowerCase() !== "tidak ada") ? ket : "Ada Perbaikan / Catatan";
-        return `<span style="color: var(--danger); font-size: 10px; font-weight: 700;"><i class="fa-solid fa-triangle-exclamation"></i> Kendala: ${ketText}</span>`;
+
+        let hasNote = (cleanKet && cleanKet !== "" && cleanKet !== "-" && cleanKet.toLowerCase() !== "tidak ada" && cleanKet.toLowerCase() !== "aman") || (tindakan && tindakan.includes('('));
+        if (!hasNote) {
+            return `<span style="color: var(--success); font-size: 10px; font-weight: 700;">✅ Kendala: Aman</span>`;
+        }
+        let ketText = (cleanKet && cleanKet !== "" && cleanKet !== "-" && cleanKet.toLowerCase() !== "tidak ada") ? cleanKet : "Ada Perbaikan / Catatan";
+        return `<span style="color: var(--danger); font-size: 10px; font-weight: 700;">⚠️ Kendala: ${ketText}</span>`;
     }
 
     function switchTab(event, tabId) {
@@ -632,11 +605,9 @@
         const content = document.getElementById(targetId);
         const btnBadge = document.getElementById('btn-' + targetId);
         if (content.style.display === "block") {
-            content.style.display = "none"; 
-            if(btnBadge) btnBadge.innerHTML = '<i class="fa-solid fa-chevron-up"></i> Tampilkan Data';
+            content.style.display = "none"; if(btnBadge) btnBadge.innerHTML = '▲ Tampilkan Data';
         } else {
-            content.style.display = "block"; 
-            if(btnBadge) btnBadge.innerHTML = '<i class="fa-solid fa-chevron-down"></i> Sembunyikan Data';
+            content.style.display = "block"; if(btnBadge) btnBadge.innerHTML = '▼ Sembunyikan Data';
         }
     }
 
@@ -771,7 +742,8 @@
     function handleFileSelect(input) {
         if (input.files && input.files[0]) {
             selectedFile = input.files[0];
-            document.getElementById('fileInfoText').innerHTML = `<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> File terpilih: ${selectedFile.name}</span>`;
+            document.getElementById('fileInfoText').innerText = "✔️ File terpilih: " + selectedFile.name;
+            document.getElementById('fileInfoText').style.color = "var(--success)";
         }
     }
 
@@ -833,12 +805,79 @@
                 globalData = data; 
                 renderFormDanRiwayat();
                 renderTopProblematicAc(); 
-                document.getElementById('statusInfo').innerHTML = `<i class="fa-solid fa-circle-check"></i> Terhubung dengan Server (Google Sheets)`;
+                document.getElementById('statusInfo').innerText = "✔️ Terhubung dengan Server (Google Sheets)";
             })
             .catch(error => {
-                document.getElementById('statusInfo').innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Gagal memuat data. Cek koneksi internet.`;
+                document.getElementById('statusInfo').innerText = "❌ Gagal memuat data. Cek koneksi internet.";
                 document.getElementById('statusInfo').style.color = "#dc2626";
             });
+    }
+
+    // Fungsi mengecek apakah unit AC yang dicentang sedang berstatus bermasalah
+    function cekStatusBermasalahUnitPilihan() {
+        let lantaiAktif = document.getElementById('pilihLantai').value;
+        let selectedUnits = []; 
+        document.querySelectorAll('input[name="unitAcPilih"]:checked').forEach((cb) => { selectedUnits.push(cb.value); });
+
+        if (selectedUnits.length === 0 || !globalData || globalData.length === 0) {
+            sembunyikanOpsiTeratasi();
+            return;
+        }
+
+        // Tentukan unit mana saja yang sedang berstatus bermasalah
+        let latestStatus = {};
+        let sortedData = [...globalData].sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+
+        sortedData.forEach(item => {
+            let units = item.unitAc ? item.unitAc.split(', ') : [];
+            let isTeratasi = item.keterangan && item.keterangan.includes("[TERATASI]");
+            let rawKeterangan = item.keterangan ? item.keterangan.replace("[TERATASI]", "").trim() : "";
+            
+            let hasKendala = rawKeterangan !== "" && rawKeterangan !== "-" && 
+                             rawKeterangan.toLowerCase() !== "tidak ada" && rawKeterangan.toLowerCase() !== "aman";
+            let isError = (item.itemIndoor && item.itemIndoor.includes("(")) || (item.itemOutdoor && item.itemOutdoor.includes("("));
+
+            units.forEach(u => {
+                let parts = u.split(' - ');
+                let lantai = parts[0];
+                let unitClean = parts.slice(1).join(' - ');
+                if (lantai && unitClean) {
+                    if (isTeratasi) {
+                        latestStatus[u] = "TERATASI"; 
+                    } else if (hasKendala || isError) {
+                        latestStatus[u] = "BERMASALAH";
+                    } else {
+                        if (!latestStatus[u]) latestStatus[u] = "AMAN";
+                    }
+                }
+            });
+        });
+
+        // Cek apakah ada satupun unit yang dipilih sedang berstatus BERMASALAH
+        let adaYangBermasalah = false;
+        selectedUnits.forEach(uName => {
+            let fullKey = `${lantaiAktif} - ${uName}`;
+            if (latestStatus[fullKey] === "BERMASALAH") {
+                adaYangBermasalah = true;
+            }
+        });
+
+        const containerTeratasi = document.getElementById('containerTeratasi');
+        if (adaYangBermasalah) {
+            containerTeratasi.style.display = "block"; // Munculkan jika bermasalah
+        } else {
+            sembunyikanOpsiTeratasi(); // Sembunyikan jika aman
+        }
+    }
+
+    function sembunyikanOpsiTeratasi() {
+        const containerTeratasi = document.getElementById('containerTeratasi');
+        containerTeratasi.style.display = "none";
+        const chkTeratasi = document.getElementById('chkTeratasi');
+        if (chkTeratasi.checked) {
+            chkTeratasi.checked = false;
+            toggleTeratasiRequired();
+        }
     }
 
     function renderTopProblematicAc() {
@@ -848,40 +887,51 @@
         }
 
         let issueCounts = {};
+        let latestStatus = {}; 
 
-        globalData.forEach(item => {
-            let hasKendala = item.keterangan && item.keterangan.trim() !== "" && item.keterangan.trim() !== "-" && 
-                             item.keterangan.toLowerCase() !== "tidak ada" && item.keterangan.toLowerCase() !== "aman";
+        let sortedData = [...globalData].sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+
+        sortedData.forEach(item => {
+            let units = item.unitAc ? item.unitAc.split(', ') : [];
+            let isTeratasi = item.keterangan && item.keterangan.includes("[TERATASI]");
+            let rawKeterangan = item.keterangan ? item.keterangan.replace("[TERATASI]", "").trim() : "";
+            
+            let hasKendala = rawKeterangan !== "" && rawKeterangan !== "-" && 
+                             rawKeterangan.toLowerCase() !== "tidak ada" && rawKeterangan.toLowerCase() !== "aman";
             let isError = (item.itemIndoor && item.itemIndoor.includes("(")) || (item.itemOutdoor && item.itemOutdoor.includes("("));
 
-            if (hasKendala || isError) {
-                let units = item.unitAc ? item.unitAc.split(', ') : [];
-                units.forEach(u => {
-                    let parts = u.split(' - ');
-                    let lantai = parts[0];
-                    let unitClean = parts.slice(1).join(' - ');
+            units.forEach(u => {
+                let parts = u.split(' - ');
+                let lantai = parts[0];
+                let unitClean = parts.slice(1).join(' - ');
 
-                    if (lantai && unitClean) {
-                        if (!issueCounts[u]) {
-                            issueCounts[u] = { count: 0, lastIssue: item.keterangan || "Ada Catatan Khusus/Error", lastDate: item.tanggal, lantai: lantai, unitClean: unitClean };
-                        }
-                        issueCounts[u].count += 1;
-                        
-                        if (new Date(item.tanggal) > new Date(issueCounts[u].lastDate)) {
-                            issueCounts[u].lastIssue = (hasKendala) ? item.keterangan : "Ada Catatan Khusus/Error";
-                            issueCounts[u].lastDate = item.tanggal;
-                        }
+                if (lantai && unitClean) {
+                    if (!issueCounts[u]) {
+                        issueCounts[u] = { count: 0, lastIssue: "-", lastDate: item.tanggal, lantai: lantai, unitClean: unitClean };
                     }
-                });
-            }
+                    
+                    if (isTeratasi) {
+                        latestStatus[u] = "TERATASI"; 
+                    } else if (hasKendala || isError) {
+                        latestStatus[u] = "BERMASALAH";
+                        issueCounts[u].count += 1;
+                        issueCounts[u].lastIssue = (hasKendala) ? rawKeterangan : "Ada Catatan Khusus/Error";
+                        issueCounts[u].lastDate = item.tanggal;
+                    } else {
+                        if (!latestStatus[u]) latestStatus[u] = "AMAN";
+                    }
+                }
+            });
         });
 
-        let sortedIssues = Object.keys(issueCounts).map(key => {
-            return { fullKey: key, ...issueCounts[key] };
-        }).sort((a, b) => b.count - a.count);
+        let sortedIssues = Object.keys(issueCounts)
+            .filter(key => latestStatus[key] === "BERMASALAH" && issueCounts[key].count > 0)
+            .map(key => {
+                return { fullKey: key, ...issueCounts[key] };
+            }).sort((a, b) => b.count - a.count);
 
         if (sortedIssues.length === 0) {
-            container.innerHTML = `<div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 10px; font-size: 11px; color: var(--success); font-weight: 600; text-align: center;"><i class="fa-solid fa-circle-check"></i> Seluruh AC sejauh ini tidak memiliki riwayat error atau catatan kendala.</div>`;
+            container.innerHTML = `<div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 10px; font-size: 11px; color: var(--success); font-weight: 600; text-align: center;">✅ Alhamdulillah, seluruh AC sejauh ini beroperasi dengan normal atau kendala sebelumnya sudah tuntas ditanggulangi.</div>`;
             return;
         }
 
@@ -889,7 +939,7 @@
 
         let html = `<div style="background: #fef2f2; border: 1px solid #fecaca; padding: 12px; border-radius: 10px;">
             <h5 style="margin: 0 0 10px 0; color: #991b1b; font-size: 12px; display: flex; align-items: center; justify-content: space-between;">
-                <span><i class="fa-solid fa-triangle-exclamation"></i> Top ${topIssues.length} AC Paling Sering Bermasalah</span>
+                <span>⚠️ Top ${topIssues.length} AC Paling Sering Bermasalah</span>
                 <span style="font-size: 10px; font-weight: normal; font-style: italic;">(Klik unit untuk detail)</span>
             </h5>
             <div style="display: flex; flex-direction: column; gap: 8px;">`;
@@ -899,7 +949,7 @@
             
             html += `<div class="problem-card-item" onclick="autoSelectProblemUnit('${item.lantai}', '${item.unitClean}')" style="background: #fff; padding: 8px 10px; border-radius: 8px; border: 1px solid #fca5a5; display: flex; justify-content: space-between; align-items: center;">
                 <div style="flex: 1; padding-right: 8px;">
-                    <div style="font-size: 12px; font-weight: 700; color: #7f1d1d; margin-bottom: 2px;"><i class="fa-solid fa-building"></i> ${item.lantai} — ${item.unitClean}</div>
+                    <div style="font-size: 12px; font-weight: 700; color: #7f1d1d; margin-bottom: 2px;">🏢 ${item.lantai} — ${item.unitClean}</div>
                     <div style="font-size: 10px; color: #991b1b; line-height: 1.2;">Catatan Terakhir: <i>${shortDesc}</i></div>
                 </div>
                 <div style="background: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 800; text-align: center; min-width: 35px;">
@@ -941,8 +991,21 @@
             }
         });
 
-        if (sudahAdaFoto && !document.getElementById('chkReopen').checked) { document.getElementById('noteFotoWajib').innerText = "(Opsional - Foto sudah dilampirkan sebelumnya)"; } 
-        else { document.getElementById('noteFotoWajib').innerText = "(Wajib diunggah)"; }
+        const isTeratasi = document.getElementById('chkTeratasi').checked;
+
+        if (isTeratasi) { 
+            document.getElementById('noteFotoWajib').innerText = "(Wajib unggah bukti penanggulangan)";
+            document.getElementById('noteFotoWajib').style.color = "var(--danger)";
+        } else if (sudahAdaFoto && !document.getElementById('chkReopen').checked) { 
+            document.getElementById('noteFotoWajib').innerText = "(Opsional - Foto sudah dilampirkan sebelumnya)";
+            document.getElementById('noteFotoWajib').style.color = "var(--text-muted)";
+        } else { 
+            document.getElementById('noteFotoWajib').innerText = "(Wajib diunggah)";
+            document.getElementById('noteFotoWajib').style.color = "var(--danger)";
+        }
+
+        // Jalankan pengecekan status bermasalah unit
+        cekStatusBermasalahUnitPilihan();
     }
 
     function renderDaftarAcLantai() {
@@ -979,7 +1042,7 @@
         });
 
         if (unitAktif.length === 0 && !isReopenMode) {
-            container.innerHTML = `<p style="color: var(--success); font-weight: bold; text-align: center; margin: 5px;"><i class="fa-solid fa-square-check"></i> Semua unit AC di ${lantaiPilih} sudah tuntas 100%!</p>`;
+            container.innerHTML = `<p style="color: var(--success); font-weight: bold; text-align: center; margin: 5px;">🎉 Semua unit AC di ${lantaiPilih} sudah tuntas 100%!</p>`;
             cekKewajibanFoto(); return;
         }
 
@@ -987,7 +1050,7 @@
             let badgeText = "Belum Diservis"; let badgeClass = "badge-belum";
             if (obj.status.indoor && !obj.status.outdoor) { badgeText = "Sisa: Outdoor"; badgeClass = "badge-sisa"; }
             else if (!obj.status.indoor && obj.status.outdoor) { badgeText = "Sisa: Indoor"; badgeClass = "badge-sisa"; }
-            else if (obj.status.indoor && obj.status.outdoor) { badgeText = '<i class="fa-solid fa-check"></i> Clear'; badgeClass = "badge-clear"; }
+            else if (obj.status.indoor && obj.status.outdoor) { badgeText = "✔️ Clear"; badgeClass = "badge-clear"; }
 
             container.innerHTML += `<div class="ac-item-row"><label class="ac-label"><input type="checkbox" name="unitAcPilih" value="${obj.nama}" onchange="cekKewajibanFoto()"> ${obj.nama}</label><span class="badge-status ${badgeClass}">${badgeText}</span></div>`;
         });
@@ -1025,18 +1088,18 @@
         if(persentase > 100) persentase = 100;
         
         document.getElementById('targetStatusText').innerHTML = (progressUnit >= totalSemuaUnit) 
-            ? `<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> TERCAPAI 100% (${progressUnit} / ${totalSemuaUnit} Unit)</span>` 
-            : `<span style="color: #d97706;"><i class="fa-solid fa-arrows-rotate"></i> BERPROSES: ${progressUnit} dari ${totalSemuaUnit} Unit (${persentase}%)</span>`;
+            ? `<span style="color: var(--success);">✨ TERCAPAI 100% (${progressUnit} / ${totalSemuaUnit} Unit)</span>` 
+            : `<span style="color: #d97706;">🔄 BERPROSES: ${progressUnit} dari ${totalSemuaUnit} Unit (${persentase}%)</span>`;
 
         let idxRekap = 1;
         for (let lantai in masterAcGedungBaru) {
             let contentId = `rekap-lantai-${idxRekap}`; let btnId = `btn-${contentId}`;
-            let htmlRekap = `<div class="lantai-group-header" onclick="toggleLantai('${contentId}')"><span><i class="fa-solid fa-building"></i> ${lantai} (${masterAcGedungBaru[lantai].length} Unit)</span><span class="toggle-btn-badge" id="${btnId}"><i class="fa-solid fa-chevron-up"></i> Tampilkan Data</span></div><div id="${contentId}" class="lantai-content-collapsible" style="margin-bottom: 8px;"><table style="width: 100%; border-collapse: collapse; font-size: 11px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); background: #fff;"><thead style="background: var(--bg-color); color: var(--primary);"><tr><th style="padding: 6px 8px; text-align: left; width: 60%;">Unit AC</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Indoor</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Outdoor</th></tr></thead><tbody>`;
+            let htmlRekap = `<div class="lantai-group-header" onclick="toggleLantai('${contentId}')"><span>🏢 ${lantai} (${masterAcGedungBaru[lantai].length} Unit)</span><span class="toggle-btn-badge" id="${btnId}">▲ Tampilkan Data</span></div><div id="${contentId}" class="lantai-content-collapsible" style="margin-bottom: 8px;"><table style="width: 100%; border-collapse: collapse; font-size: 11px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); background: #fff;"><thead style="background: var(--bg-color); color: var(--primary);"><tr><th style="padding: 6px 8px; text-align: left; width: 60%;">Unit AC</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Indoor</th><th style="padding: 6px 8px; text-align: center; width: 20%;">Outdoor</th></tr></thead><tbody>`;
 
             masterAcGedungBaru[lantai].forEach(unit => {
                 let key = `${lantai} - ${unit}`; let stat = statusMapRekap[key] || { indoor: false, outdoor: false };
-                let inCheck = stat.indoor ? '<span style="color: var(--success); font-weight: bold;"><i class="fa-solid fa-check"></i> Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;"><i class="fa-solid fa-xmark"></i> Belum</span>';
-                let outCheck = stat.outdoor ? '<span style="color: var(--success); font-weight: bold;"><i class="fa-solid fa-check"></i> Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;"><i class="fa-solid fa-xmark"></i> Belum</span>';
+                let inCheck = stat.indoor ? '<span style="color: var(--success); font-weight: bold;">✔️ Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;">❌ Belum Tuntas</span>';
+                let outCheck = stat.outdoor ? '<span style="color: var(--success); font-weight: bold;">✔️ Tuntas</span>' : '<span style="color: var(--danger); font-weight: bold;">❌ Belum Tuntas</span>';
                 htmlRekap += `<tr style="border-top: 1px solid var(--border-color);"><td style="padding: 6px 8px;">${unit}</td><td style="padding: 6px 8px; text-align: center; background: ${stat.indoor ? '#f0fdf4' : '#fef2f2'};">${inCheck}</td><td style="padding: 6px 8px; text-align: center; background: ${stat.outdoor ? '#f0fdf4' : '#fef2f2'};">${outCheck}</td></tr>`;
             });
             htmlRekap += `</tbody></table></div>`; rekapContainer.innerHTML += htmlRekap; idxRekap++;
@@ -1070,24 +1133,32 @@
         for (let lantai in historyByLantai) {
             let allUnits = Object.values(historyByLantai[lantai]); 
             let detailContentId = `detail-lantai-${idxDetail}`; let detailBtnId = `btn-${detailContentId}`;
-            let htmlRiwayatLantai = `<div class="lantai-group-header" onclick="toggleLantai('${detailContentId}')"><span><i class="fa-solid fa-building"></i> ${lantai} (${allUnits.length} Unit)</span><span class="toggle-btn-badge" id="${detailBtnId}"><i class="fa-solid fa-chevron-up"></i> Tampilkan Data</span></div><div id="${detailContentId}" class="lantai-content-collapsible">`;
+            let htmlRiwayatLantai = `<div class="lantai-group-header" onclick="toggleLantai('${detailContentId}')"><span>🏢 ${lantai} (${allUnits.length} Unit)</span><span class="toggle-btn-badge" id="${detailBtnId}">▲ Tampilkan Data</span></div><div id="${detailContentId}" class="lantai-content-collapsible">`;
 
             allUnits.forEach(data => {
                 let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => {
-                    let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
-                    let bg = hasNote ? "#fef2f2" : "#f8fafc";
-                    let border = hasNote ? "var(--danger)" : "var(--primary)";
-                    let textCol = hasNote ? "color: var(--danger);" : "";
+                    let isTeratasi = l.keterangan && l.keterangan.includes("[TERATASI]");
+                    let cleanKet = l.keterangan ? l.keterangan.replace("[TERATASI]", "").trim() : "";
+                    let hasNote = (cleanKet && cleanKet !== "" && cleanKet !== "-" && cleanKet.toLowerCase() !== "tidak ada" && cleanKet.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
+                    
+                    let bg = isTeratasi ? "#f0fdf4" : (hasNote ? "#fef2f2" : "#f8fafc");
+                    let border = isTeratasi ? "var(--success)" : (hasNote ? "var(--danger)" : "var(--primary)");
+                    let textCol = isTeratasi ? "color: #065f46;" : (hasNote ? "color: var(--danger);" : "");
+                    
                     return `<div style="background:${bg}; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid ${border}; font-size:11px; ${textCol}"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan, l.tindakan)}</div>`
-                }).join('') : `<span style="color: var(--danger); font-size: 11px;"><i class="fa-solid fa-xmark"></i> Belum Tuntas</span>`;
+                }).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
                 
                 let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => {
-                    let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
-                    let bg = hasNote ? "#fef2f2" : "#fffbeb";
-                    let border = hasNote ? "var(--danger)" : "var(--accent)";
-                    let textCol = hasNote ? "color: var(--danger);" : "";
+                    let isTeratasi = l.keterangan && l.keterangan.includes("[TERATASI]");
+                    let cleanKet = l.keterangan ? l.keterangan.replace("[TERATASI]", "").trim() : "";
+                    let hasNote = (cleanKet && cleanKet !== "" && cleanKet !== "-" && cleanKet.toLowerCase() !== "tidak ada" && cleanKet.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
+                    
+                    let bg = isTeratasi ? "#f0fdf4" : (hasNote ? "#fef2f2" : "#fffbeb");
+                    let border = isTeratasi ? "var(--success)" : (hasNote ? "var(--danger)" : "var(--accent)");
+                    let textCol = isTeratasi ? "color: #065f46;" : (hasNote ? "color: var(--danger);" : "");
+
                     return `<div style="background:${bg}; padding:6px 8px; margin-bottom:4px; border-radius:6px; border-left:3px solid ${border}; font-size:11px; ${textCol}"><b>[${l.waktu}]</b> ${l.tindakan} <br>${formatKendalaHtml(l.keterangan, l.tindakan)}</div>`
-                }).join('') : `<span style="color: var(--danger); font-size: 11px;"><i class="fa-solid fa-xmark"></i> Belum Tuntas</span>`;
+                }).join('') : `<span style="color: var(--danger); font-size: 11px;">❌ Belum Tuntas</span>`;
                 
                 let fotoHtml = data.fotos.length > 0 ? `<div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;">${data.fotos.map(f => generateFotoElement(f)).join('')}</div>` : `<div style="font-size: 10px; color: var(--text-muted); margin-top: 4px; font-style: italic;">[Tidak ada foto]</div>`;
 
@@ -1095,12 +1166,12 @@
                 let adaProgres = (data.indoorLogs.length > 0 || data.outdoorLogs.length > 0);
                 
                 let badgeTuntas = isTuntas 
-                    ? `<span style="background: var(--success); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;"><i class="fa-solid fa-check"></i> Tuntas</span>` 
+                    ? `<span style="background: var(--success); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">✔️ Tuntas</span>` 
                     : (adaProgres 
-                        ? `<span style="background: var(--accent); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;"><i class="fa-solid fa-triangle-exclamation"></i> Belum Tuntas</span>` 
-                        : `<span style="background: var(--danger); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;"><i class="fa-solid fa-xmark"></i> Belum Diservis</span>`);
+                        ? `<span style="background: var(--accent); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">⚠️ Belum Tuntas</span>` 
+                        : `<span style="background: var(--danger); color: white; padding: 3px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">✖️ Belum Tuntas</span>`);
 
-                htmlRiwayatLantai += `<div class="history-card"><div class="history-header"><span><i class="fa-solid fa-wrench"></i> ${data.unitName}</span>${badgeTuntas}</div><div class="log-section"><b><i class="fa-solid fa-circle" style="color: #3b82f6;"></i> Riwayat Indoor:</b><br><div style="margin-top: 4px;">${indoorHtml}</div></div><div class="log-section" style="margin-top:8px;"><b><i class="fa-solid fa-circle" style="color: #f59e0b;"></i> Riwayat Outdoor:</b><br><div style="margin-top: 4px;">${outdoorHtml}</div></div><div style="margin-top:8px; font-size: 11px;"><b><i class="fa-solid fa-camera"></i> Bukti Foto:</b>${fotoHtml}</div></div>`;
+                htmlRiwayatLantai += `<div class="history-card"><div class="history-header"><span>🔧 ${data.unitName}</span>${badgeTuntas}</div><div class="log-section"><b>🔵 Riwayat Indoor:</b><br><div style="margin-top: 4px;">${indoorHtml}</div></div><div class="log-section" style="margin-top:8px;"><b>🟠 Riwayat Outdoor:</b><br><div style="margin-top: 4px;">${outdoorHtml}</div></div><div style="margin-top:8px; font-size: 11px;"><b>📸 Bukti Foto:</b>${fotoHtml}</div></div>`;
             });
 
             htmlRiwayatLantai += `</div>`; historyContainer.innerHTML += htmlRiwayatLantai; idxDetail++;
@@ -1127,7 +1198,7 @@
         globalData.forEach(item => { if (item.unitAc && item.unitAc.includes(targetKey)) historyUnit.push(item); });
         
         if (historyUnit.length === 0) {
-            container.innerHTML = `<div class="history-card" style="text-align: center; padding: 20px;"><p style="color: var(--text-muted); font-weight: 600; margin: 0; font-size: 12px;"><i class="fa-solid fa-circle-info"></i> Belum ada riwayat untuk <b>${unit} (${lantai})</b>.</p></div>`; return;
+            container.innerHTML = `<div class="history-card" style="text-align: center; padding: 20px;"><p style="color: var(--text-muted); font-weight: 600; margin: 0; font-size: 12px;">ℹ️ Belum ada riwayat untuk <b>${unit} (${lantai})</b>.</p></div>`; return;
         }
 
         let groupedByMonth = {};
@@ -1149,25 +1220,30 @@
 
             if (!groupedByMonth[monthKey]) {
                 groupedByMonth[monthKey] = {
-                    monthName: monthName,
-                    indoorLogs: [],
-                    outdoorLogs: [],
-                    fotos: [],
-                    keteranganList: [],
-                    hasKendala: false
+                    monthName: monthName, indoorLogs: [], outdoorLogs: [],
+                    fotos: [], keteranganList: [], hasKendala: false, hasPenanggulangan: false
                 };
             }
 
-            let tglWaktuStr = `<i class="fa-regular fa-calendar"></i> ${formatTglSimpel(item.tanggal)} | <i class="fa-regular fa-clock"></i> ${formatJamSimpel(item.jam)}`;
+            let tglWaktuStr = `📅 ${formatTglSimpel(item.tanggal)} | 🕒 ${formatJamSimpel(item.jam)}`;
             
-            let hasKendalaItem = (item.keterangan && item.keterangan.trim() !== "" && item.keterangan !== "-" && item.keterangan.toLowerCase() !== "tidak ada" && item.keterangan.toLowerCase() !== "aman");
+            let rawKeterangan = item.keterangan || "";
+            let isTeratasi = rawKeterangan.includes("[TERATASI]");
+            rawKeterangan = rawKeterangan.replace("[TERATASI]", "").trim();
+
+            let hasKendalaItem = (rawKeterangan && rawKeterangan !== "" && rawKeterangan !== "-" && rawKeterangan.toLowerCase() !== "tidak ada" && rawKeterangan.toLowerCase() !== "aman");
             let specificNote = (item.itemIndoor && item.itemIndoor.includes('(')) || (item.itemOutdoor && item.itemOutdoor.includes('('));
 
-            if (hasKendalaItem || specificNote) {
+            if (isTeratasi) {
+                groupedByMonth[monthKey].hasPenanggulangan = true;
+                let formattedNote = `<div style="background:#dcfce7; padding:6px 8px; border-radius:6px; margin-top:6px; border-left:3px solid #16a34a;"><b style="color:#16a34a; font-size: 11px;">[${formatTglSimpel(item.tanggal)}] ✅ Penanggulangan Selesai</b><br><span style="color:#065f46;">${rawKeterangan || "Unit normal kembali."}</span></div>`;
+                groupedByMonth[monthKey].keteranganList.push(formattedNote);
+            } else if (hasKendalaItem || specificNote) {
                 groupedByMonth[monthKey].hasKendala = true;
-                let noteStr = hasKendalaItem ? item.keterangan : "Ada Perbaikan / Catatan Khusus";
-                if (!groupedByMonth[monthKey].keteranganList.includes(`<b>[${formatTglSimpel(item.tanggal)}]</b> ${noteStr}`)) {
-                    groupedByMonth[monthKey].keteranganList.push(`<b>[${formatTglSimpel(item.tanggal)}]</b> ${noteStr}`);
+                let noteStr = hasKendalaItem ? rawKeterangan : "Ada Perbaikan / Catatan Khusus";
+                let formattedNote = `<div style="background:#fef2f2; padding:6px 8px; border-radius:6px; margin-top:6px; border-left:3px solid #dc2626;"><b style="color:#dc2626; font-size: 11px;">[${formatTglSimpel(item.tanggal)}] ⚠️ Kendala Dilaporkan</b><br><span style="color:#991b1b;">${noteStr}</span></div>`;
+                if (!groupedByMonth[monthKey].keteranganList.includes(formattedNote)) {
+                    groupedByMonth[monthKey].keteranganList.push(formattedNote);
                 }
             }
 
@@ -1177,42 +1253,50 @@
             if (item.itemOutdoor && item.itemOutdoor !== "Tidak ada") {
                 groupedByMonth[monthKey].outdoorLogs.push(`<div style="margin-bottom: 4px;"><span style="font-size:9px; color:var(--text-muted);">${tglWaktuStr}</span><br>${item.itemOutdoor}</div>`);
             }
-
             if (item.foto && typeof item.foto === 'string' && (item.foto.startsWith('data:image/') || item.foto.startsWith('http'))) {
                 groupedByMonth[monthKey].fotos.push(item.foto);
             }
         });
 
-        let html = `<div class="history-card" style="background: #f0f9ff; border-color: #bae6fd;"><div style="font-size: 14px; font-weight: 800; color: var(--primary);"><i class="fa-solid fa-building"></i> ${lantai} — <i class="fa-solid fa-wrench"></i> ${unit}</div><div style="font-size: 11px; color: #0369a1; font-weight: 600; margin-top: 2px;">Total Penanganan: <b>${historyUnit.length} Laporan Pekerjaan</b></div></div><h4 style="color: var(--primary); font-size: 13px; font-weight: 800; margin-top: 16px; margin-bottom: 8px;"><i class="fa-solid fa-clock-rotate-left"></i> Kronologi Penanganan Bulanan:</h4>`;
+        let html = `<div class="history-card" style="background: #f0f9ff; border-color: #bae6fd;"><div style="font-size: 14px; font-weight: 800; color: var(--primary);">🏢 ${lantai} — 🔧 ${unit}</div><div style="font-size: 11px; color: #0369a1; font-weight: 600; margin-top: 2px;">Total Penanganan: <b>${historyUnit.length} Laporan Pekerjaan</b></div></div><h4 style="color: var(--primary); font-size: 13px; font-weight: 800; margin-top: 16px; margin-bottom: 8px;">📜 Kronologi Penanganan Bulanan:</h4>`;
 
         let sortedMonths = Object.keys(groupedByMonth).sort((a, b) => b.localeCompare(a));
 
         sortedMonths.forEach(monthKey => {
             let data = groupedByMonth[monthKey];
-            let borderStyle = data.hasKendala ? 'border-left: 4px solid var(--danger);' : 'border-left: 4px solid var(--success);';
-            let badgeCategory = data.hasKendala ? `<span class="badge-status" style="background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;"><i class="fa-solid fa-triangle-exclamation"></i> ADA KENDALA / ERROR</span>` : `<span class="badge-status badge-clear"><i class="fa-solid fa-check"></i> PERAWATAN RUTIN / AMAN</span>`;
+            
+            let borderStyle = "border-left: 4px solid var(--success);";
+            let badgeCategory = `<span class="badge-status badge-clear">✔️ AMAN / PERAWATAN</span>`;
+            
+            if (data.hasKendala && !data.hasPenanggulangan) {
+                borderStyle = "border-left: 4px solid var(--danger);";
+                badgeCategory = `<span class="badge-status" style="background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;">⚠️ ADA KENDALA / ERROR</span>`;
+            } else if (data.hasKendala && data.hasPenanggulangan) {
+                borderStyle = "border-left: 4px solid var(--success);";
+                badgeCategory = `<span class="badge-status badge-clear" style="border: 1px solid #6ee7b7; background: #d1fae5;">✅ KENDALA TELAH DITANGGULANGI</span>`;
+            }
 
             let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.join('') : `<span style="color: var(--text-muted); font-style: italic; font-size: 10px;">Tidak ada servis indoor di bulan ini.</span>`;
             let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.join('') : `<span style="color: var(--text-muted); font-style: italic; font-size: 10px;">Tidak ada servis outdoor di bulan ini.</span>`;
             
-            let kendalaHtml = data.hasKendala 
-                ? `<div style="background:#fef2f2; border: 1px solid #fecaca; padding:8px; border-radius:6px; font-size:11px; color:#991b1b; margin-top: 8px;"><b><i class="fa-solid fa-triangle-exclamation"></i> Catatan Masalah:</b><br><div style="margin-top:2px;">${data.keteranganList.join('<br>')}</div></div>` 
-                : `<div style="background:#f0fdf4; border: 1px solid #bbf7d0; padding:8px; border-radius:6px; font-size:11px; color:var(--success); margin-top: 8px;"><b><i class="fa-solid fa-circle-check"></i> Catatan Masalah:</b> <span style="font-weight:600;">Aman (Clear)</span></div>`;
+            let kendalaHtml = (data.keteranganList.length > 0)
+                ? `<div style="margin-top: 10px; font-size:11px;"><b>📌 Catatan Bulan Ini:</b>${data.keteranganList.join('')}</div>` 
+                : `<div style="background:#f0fdf4; border: 1px solid #bbf7d0; padding:8px; border-radius:6px; font-size:11px; color:var(--success); margin-top: 8px;"><b>✅ Catatan Masalah:</b> <span style="font-weight:600;">Aman (Clear)</span></div>`;
             
             let fotoHtml = data.fotos.length > 0 ? `<div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">${data.fotos.map(f => generateFotoElement(f)).join('')}</div>` : '';
 
             html += `<div class="history-card" style="${borderStyle}">
                 <div class="history-header">
-                    <span><i class="fa-regular fa-calendar-check"></i> PERIODE: ${data.monthName.toUpperCase()}</span>
+                    <span>📅 PERIODE: ${data.monthName.toUpperCase()}</span>
                     ${badgeCategory}
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div style="background:#f8fafc; padding:8px; border-radius:6px; border:1px solid var(--border-color);">
-                        <b style="color:var(--primary); font-size:11px;"><i class="fa-solid fa-circle" style="color: #3b82f6;"></i> Indoor:</b>
+                        <b style="color:var(--primary); font-size:11px;">🔵 Indoor:</b>
                         <div style="font-size:11px; font-weight:600; margin-top:4px;">${indoorHtml}</div>
                     </div>
                     <div style="background:#fffbeb; padding:8px; border-radius:6px; border:1px solid #fde68a;">
-                        <b style="color:var(--accent); font-size:11px;"><i class="fa-solid fa-circle" style="color: #f59e0b;"></i> Outdoor:</b>
+                        <b style="color:var(--accent); font-size:11px;">🟠 Outdoor:</b>
                         <div style="font-size:11px; font-weight:600; margin-top:4px;">${outdoorHtml}</div>
                     </div>
                 </div>
@@ -1224,22 +1308,11 @@
         container.innerHTML = html;
     }
 
-    // FORM SUBMIT DENGAN SWEETALERT2
     document.getElementById('formAc').addEventListener('submit', function(e) {
         e.preventDefault();
         let lantaiAktif = document.getElementById('pilihLantai').value;
-        let selectedUnits = []; 
-        document.querySelectorAll('input[name="unitAcPilih"]:checked').forEach((checkbox) => { selectedUnits.push(checkbox.value); });
-        
-        if(selectedUnits.length === 0) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Peringatan',
-                text: 'Pilih minimal 1 unit AC!',
-                confirmButtonColor: '#1e3a8a'
-            });
-            return;
-        }
+        let selectedUnits = []; document.querySelectorAll('input[name="unitAcPilih"]:checked').forEach((checkbox) => { selectedUnits.push(checkbox.value); });
+        if(selectedUnits.length === 0) return alert('Pilih minimal 1 unit AC!');
         
         let indoorArr = []; 
         document.querySelectorAll('input[name="optIndoor"]:checked').forEach((cb) => { 
@@ -1263,46 +1336,41 @@
             outdoorArr.push(val); 
         });
         
-        if (indoorArr.length === 0 && outdoorArr.length === 0) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Peringatan',
-                text: 'Pilih minimal satu item tindakan di Indoor atau Outdoor!',
-                confirmButtonColor: '#1e3a8a'
-            });
-            return;
+        if (indoorArr.length === 0 && outdoorArr.length === 0) return alert('Pilih minimal satu item di Indoor atau Outdoor!');
+
+        const isTeratasi = document.getElementById('chkTeratasi').checked && document.getElementById('containerTeratasi').style.display !== "none";
+        if (isTeratasi) {
+            if (document.getElementById('keterangan').value.trim() === '') {
+                document.getElementById('keterangan').focus();
+                return alert('⚠️ DITOLAK: Karena Anda menandai kendala TELAH TERATASI, maka kolom "Catatan Umum" WAJIB DIISI dengan rincian perbaikannya!');
+            }
+            if (!selectedFile) {
+                return alert('⚠️ DITOLAK: Karena Anda menandai kendala TELAH TERATASI, Anda WAJIB MELAMPIRKAN BUKTI FOTO perbaikan/penanggulangan tersebut!');
+            }
         }
 
-        // Tampilkan SweetAlert Loading
-        Swal.fire({
-            title: 'Mengirim Data...',
-            text: 'Mohon tunggu, data servis sedang disimpan.',
-            allowOutsideClick: false,
-            didOpen: () => { Swal.showLoading(); }
-        });
+        const btn = document.getElementById('btnSubmit'); btn.innerText = "⏳ Memproses..."; btn.disabled = true;
+        
+        let ketValue = document.getElementById('keterangan').value;
+        if (isTeratasi) {
+            ketValue = "[TERATASI] " + ketValue;
+        }
 
         getBase64Image(selectedFile, function(base64Foto) {
             const data = {
-                tanggal: document.getElementById('tanggal').value, 
-                jam: document.getElementById('jam').value,
+                tanggal: document.getElementById('tanggal').value, jam: document.getElementById('jam').value,
                 unitAc: selectedUnits.map(u => `${lantaiAktif} - ${u}`).join(', '),
                 itemIndoor: indoorArr.length > 0 ? indoorArr.join(', ') : 'Tidak ada',
                 itemOutdoor: outdoorArr.length > 0 ? outdoorArr.join(', ') : 'Tidak ada',
-                keterangan: document.getElementById('keterangan').value, 
-                foto: base64Foto
+                keterangan: ketValue, foto: base64Foto
             };
 
             fetch(URL_GOOGLE_SCRIPT, { method: 'POST', body: JSON.stringify(data) })
             .then(response => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil!',
-                    text: 'Data Servis AC telah tersimpan ke database.',
-                    timer: 2000,
-                    showConfirmButton: false
-                });
+                alert('Berhasil! Data Servis AC tersimpan.');
                 
                 document.getElementById('formAc').reset(); 
+                document.getElementById('chkTeratasi').checked = false; toggleTeratasiRequired();
                 document.getElementById('catatanIndoorTurun').style.display = "none";
                 document.getElementById('catatanIndoorError').style.display = "none";
                 document.getElementById('catatanOutdoorFreon').style.display = "none";
@@ -1312,34 +1380,17 @@
                 document.getElementById('chkReopen').checked = false; selectedFile = null;
                 document.getElementById('fileInfoText').innerText = "Belum ada foto yang dipilih.";
                 
+                btn.innerText = "🚀 Simpan & Submit Servis AC"; btn.disabled = false;
                 document.getElementById('historyContainer').innerHTML = '<p class="loading-text">Memperbarui data...</p>';
                 setTimeout(loadDataFromServer, 2000); 
             })
-            .catch(error => { 
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Terkirim!',
-                    text: 'Data servis berhasil terkirim.',
-                    timer: 2000,
-                    showConfirmButton: false
-                });
-                setTimeout(loadDataFromServer, 1000); 
-            });
+            .catch(error => { alert('Terkirim!'); btn.innerText = "🚀 Simpan & Submit Servis AC"; btn.disabled = false; setTimeout(loadDataFromServer, 1000); });
         });
     });
 
-    // FUNGSI PRINT PDF LENGKAP DENGAN TARGET MENYELURUH DI ATAS
     function printPDF() {
         const filterBulan = document.getElementById('filterBulan').value; 
-        if(!filterBulan) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Pilih Bulan',
-                text: 'Silakan pilih bulan terlebih dahulu!',
-                confirmButtonColor: '#dc2626'
-            });
-            return;
-        }
+        if(!filterBulan) return alert('Pilih bulan terlebih dahulu!');
         
         const dataBulanIni = globalData.filter(item => isSatuBulan(item.tanggal, filterBulan));
         dataBulanIni.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
@@ -1382,19 +1433,6 @@
             });
         });
 
-        // Hitung Progres Menyeluruh Gedung
-        let totalProgressGlobal = 0;
-        for (let lnt in masterAcGedungBaru) {
-            masterAcGedungBaru[lnt].forEach(unit => {
-                let key = `${lnt} - ${unit}`;
-                let stat = statusMapRekap[key] || { indoor: false, outdoor: false };
-                if (stat.indoor) totalProgressGlobal += 0.5;
-                if (stat.outdoor) totalProgressGlobal += 0.5;
-            });
-        }
-        let persenGlobal = Math.round((totalProgressGlobal / totalSemuaUnit) * 100);
-        if (persenGlobal > 100) persenGlobal = 100;
-
         const printAreaContainer = document.getElementById('printArea');
         printAreaContainer.innerHTML = ''; 
 
@@ -1428,18 +1466,8 @@
                     <h2>LAPORAN PEMELIHARAAN & SERVIS AC RS HERMINA SOLO (GEDUNG LAMA)</h2>
                     <p>Periode: ${namaBulan.toUpperCase()} | Dicetak: ${new Date().toLocaleString('id-ID')}</p>
                 </div>
-                
-                <!-- BANNER TARGET MENYELURUH DI PALING ATAS -->
-                <div class="pdf-global-target-banner">
-                    <span>🎯 TOTAL TARGET SERVIS KESELURUHAN GEDUNG LAMA:</span>
-                    <span>${totalProgressGlobal} dari ${totalSemuaUnit} Unit Tuntas (${persenGlobal}%)</span>
-                </div>
-
                 <div class="pdf-floor-title">🏢 AREA PENGERJAAN: ${lantai.toUpperCase()}</div>
-
                 <div class="pdf-content-wrapper">
-                    
-                    <!-- KIRI: REKAP DAN TARGET -->
                     <div class="pdf-sidebar">
                         <div class="pdf-summary-box">
                             PENCAPAIAN TARGET LANTAI INI:<br>
@@ -1448,8 +1476,6 @@
                         <div style="font-size: 6px; font-weight: bold; color: var(--primary); margin-bottom: 4px; border-bottom: 1px solid var(--border-color); padding-bottom: 2px;">📊 REKAPITULASI PENGERJAAN:</div>
                         ${tableHtml}
                     </div>
-
-                    <!-- KANAN: DETAIL PEKERJAAN (5 KOLOM) -->
                     <div class="pdf-main">
                         <div class="pdf-grid-container">`;
 
@@ -1464,8 +1490,15 @@
                         : `<span style="background: #ef4444 !important; color: white !important; padding: 1px 3px; border-radius: 2px; font-size: 4.5px; font-weight: 700;">Kosong</span>`);
 
                 let indoorHtml = data.indoorLogs.length > 0 ? data.indoorLogs.map(l => {
-                    let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
-                    let ketText = hasNote ? ((l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada") ? l.keterangan : "Ada Perbaikan / Catatan Khusus") : "Aman";
+                    let isTeratasi = l.keterangan && l.keterangan.includes("[TERATASI]");
+                    let cleanKet = l.keterangan ? l.keterangan.replace("[TERATASI]", "").trim() : "";
+                    let hasNote = (cleanKet && cleanKet !== "" && cleanKet !== "-" && cleanKet.toLowerCase() !== "tidak ada" && cleanKet.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
+                    
+                    if (isTeratasi) {
+                        return `<div style="background:#f0fdf4; border-left:2px solid #10b981; padding:2px 3px; margin-bottom:2px; border-radius:2px; font-size:5px; color: #065f46;"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="color: #059669; font-weight:bold;">✅ Ket: ${cleanKet || "Ditanggulangi"}</span></div>`;
+                    }
+                    
+                    let ketText = hasNote ? ((cleanKet && cleanKet !== "" && cleanKet !== "-" && cleanKet.toLowerCase() !== "tidak ada") ? cleanKet : "Ada Perbaikan / Catatan Khusus") : "Aman";
                     let ketStyle = hasNote ? "color: #dc2626;" : "color: #059669;";
                     let bgStyle = hasNote ? "background:#fef2f2; border-left:2px solid #dc2626;" : "background:#f8fafc; border-left:2px solid #1e3a8a;";
                     let textStyle = hasNote ? "color: #dc2626;" : "color: inherit;";
@@ -1474,8 +1507,15 @@
                 }).join('') : `<span style="color: #dc2626; font-size: 5px; font-weight: bold;">❌ Belum Diservis</span>`;
                 
                 let outdoorHtml = data.outdoorLogs.length > 0 ? data.outdoorLogs.map(l => {
-                    let hasNote = (l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada" && l.keterangan.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
-                    let ketText = hasNote ? ((l.keterangan && l.keterangan.trim() !== "" && l.keterangan !== "-" && l.keterangan.toLowerCase() !== "tidak ada") ? l.keterangan : "Ada Perbaikan / Catatan Khusus") : "Aman";
+                    let isTeratasi = l.keterangan && l.keterangan.includes("[TERATASI]");
+                    let cleanKet = l.keterangan ? l.keterangan.replace("[TERATASI]", "").trim() : "";
+                    let hasNote = (cleanKet && cleanKet !== "" && cleanKet !== "-" && cleanKet.toLowerCase() !== "tidak ada" && cleanKet.toLowerCase() !== "aman") || (l.tindakan && l.tindakan.includes('('));
+                    
+                    if (isTeratasi) {
+                        return `<div style="background:#f0fdf4; border-left:2px solid #10b981; padding:2px 3px; margin-bottom:2px; border-radius:2px; font-size:5px; color: #065f46;"><b>[${l.waktu}]</b> ${l.tindakan}<br><span style="color: #059669; font-weight:bold;">✅ Ket: ${cleanKet || "Ditanggulangi"}</span></div>`;
+                    }
+                    
+                    let ketText = hasNote ? ((cleanKet && cleanKet !== "" && cleanKet !== "-" && cleanKet.toLowerCase() !== "tidak ada") ? cleanKet : "Ada Perbaikan / Catatan Khusus") : "Aman";
                     let ketStyle = hasNote ? "color: #dc2626;" : "color: #059669;";
                     let bgStyle = hasNote ? "background:#fef2f2; border-left:2px solid #dc2626;" : "background:#fffbeb; border-left:2px solid #d97706;";
                     let textStyle = hasNote ? "color: #dc2626;" : "color: inherit;";
@@ -1508,9 +1548,7 @@
             printAreaContainer.innerHTML += pageHtml;
         }
 
-        setTimeout(() => {
-            window.print();
-        }, 300);
+        window.print();
     }
 
     window.onload = loadDataFromServer;
